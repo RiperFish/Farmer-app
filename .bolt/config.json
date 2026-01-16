@@ -1,0 +1,6 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist/browser",
+  "installCommand": "npm install",
+  "devCommand": "npm start"
+}
