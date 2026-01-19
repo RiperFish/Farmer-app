@@ -313,6 +313,20 @@ import { AuthService } from '../core/auth.service';
       pointer-events: auto;
     }
 
+    @media (max-width: 767px) {
+      .app-header {
+        display: none;
+      }
+
+      .mobile-nav {
+        display: none;
+      }
+
+      .nav-overlay {
+        display: none;
+      }
+    }
+
     @media (min-width: 768px) {
       .app-title {
         font-size: 24px;

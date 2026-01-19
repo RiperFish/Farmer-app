@@ -49,12 +49,13 @@ npm run build
 
 ### Features Ready for Production
 
-- Mobile-first responsive design
+- Mobile-first responsive design with native app-like bottom navigation
+- Adaptive UI: Bottom nav on mobile (< 768px), header on desktop
 - Public access pages (home, calendar, weather, resources)
 - Authentication with login/register flows
 - Private farmer area with dashboard, profile, e-ID, and farm records
 - Dummy data for all features
-- PWA capabilities
+- PWA capabilities with manifest and offline support
 
 ### Login Credentials (Demo)
 
