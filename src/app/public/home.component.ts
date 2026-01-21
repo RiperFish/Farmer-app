@@ -13,7 +13,7 @@ import { WeatherData, NewsItem, SeasonalTip } from '../models/public.model';
       <div class="hero-section">
         <h1 class="hero-title">Welcome to Belize Farmer Portal</h1>
         <p class="hero-subtitle">Your gateway to agricultural resources and support</p>
-        <button class="cta-button" routerLink="/register">Register as a Farmer</button>
+        <button class="cta-button" routerLink="/register">Register for an account</button>
       </div>
 
       <div class="weather-snapshot card">

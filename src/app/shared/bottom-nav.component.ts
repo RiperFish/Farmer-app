@@ -15,26 +15,38 @@ import { AuthService } from '../core/auth.service';
           <span class="nav-icon">🏠</span>
           <span class="nav-label">Home</span>
         </a>
-        <a routerLink="/calendar" routerLinkActive="active" class="nav-item">
-          <span class="nav-icon">📅</span>
-          <span class="nav-label">Calendar</span>
-        </a>
         <a routerLink="/weather" routerLinkActive="active" class="nav-item">
           <span class="nav-icon">🌤️</span>
           <span class="nav-label">Weather</span>
         </a>
         <a routerLink="/resources" routerLinkActive="active" class="nav-item">
-          <span class="nav-icon">📚</span>
-          <span class="nav-label">Resources</span>
-        </a>
-        <a routerLink="/login" routerLinkActive="active" class="nav-item">
-          <span class="nav-icon">👤</span>
-          <span class="nav-label">Login</span>
+          <span class="nav-icon">📞</span>
+          <span class="nav-label">Contact</span>
         </a>
       </div>
 
-      <!-- Authenticated Navigation -->
-      <div class="nav-items" *ngIf="currentUser()">
+      <!-- Verified Farmer Navigation -->
+      <div class="nav-items" *ngIf="currentUser() && isVerified()">
+        <a routerLink="/farmer-id" routerLinkActive="active" class="nav-item">
+          <span class="nav-icon">🪪</span>
+          <span class="nav-label">ID</span>
+        </a>
+        <a routerLink="/profile" routerLinkActive="active" class="nav-item">
+          <span class="nav-icon">👤</span>
+          <span class="nav-label">Profile</span>
+        </a>
+        <a routerLink="/farm-records" routerLinkActive="active" class="nav-item">
+          <span class="nav-icon">🌾</span>
+          <span class="nav-label">Farm</span>
+        </a>
+        <a routerLink="/commodities" routerLinkActive="active" class="nav-item">
+          <span class="nav-icon">📦</span>
+          <span class="nav-label">Commodities</span>
+        </a>
+      </div>
+
+      <!-- Unverified/Pending Farmer Navigation -->
+      <div class="nav-items" *ngIf="currentUser() && !isVerified()">
         <a routerLink="/dashboard" routerLinkActive="active" class="nav-item">
           <span class="nav-icon">🏠</span>
           <span class="nav-label">Dashboard</span>
@@ -43,22 +55,13 @@ import { AuthService } from '../core/auth.service';
           <span class="nav-icon">👤</span>
           <span class="nav-label">Profile</span>
         </a>
-        <a routerLink="/farmer-id" routerLinkActive="active" class="nav-item" *ngIf="isVerified()">
-          <span class="nav-icon">🪪</span>
-          <span class="nav-label">ID</span>
+        <a routerLink="/weather" routerLinkActive="active" class="nav-item">
+          <span class="nav-icon">🌤️</span>
+          <span class="nav-label">Weather</span>
         </a>
-        <a routerLink="/farm-records" routerLinkActive="active" class="nav-item" *ngIf="isVerified()">
-          <span class="nav-icon">📊</span>
-          <span class="nav-label">Records</span>
-        </a>
-        <a routerLink="/calendar" routerLinkActive="active" class="nav-item" *ngIf="!isVerified()">
-          <span class="nav-icon">📅</span>
-          <span class="nav-label">Calendar</span>
-        </a>
-        <a routerLink="/notifications" routerLinkActive="active" class="nav-item">
-          <span class="nav-icon">🔔</span>
-          <span class="nav-label">Alerts</span>
-          <span class="nav-badge" *ngIf="unreadCount() > 0">{{ unreadCount() }}</span>
+        <a routerLink="/resources" routerLinkActive="active" class="nav-item">
+          <span class="nav-icon">📞</span>
+          <span class="nav-label">Contact</span>
         </a>
       </div>
     </nav>
