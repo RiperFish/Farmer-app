@@ -1,7 +1,7 @@
 {
-  "name": "Belize Farmer Portal",
-  "short_name": "Farmer Portal",
-  "description": "Official Farmer Portal for Belize - National Farmer Registry and agricultural resources",
+  "name": "BAIMS Farmer Hub",
+  "short_name": "BAIMS Hub",
+  "description": "Belize Agricultural Information Management System - National Farmer Registry and agricultural resources",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#2e7d32",

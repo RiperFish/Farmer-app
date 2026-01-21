@@ -14,9 +14,15 @@ import { AuthService } from '../core/auth.service';
           <button class="menu-btn" (click)="toggleMenu()" *ngIf="currentUser()">
             <span class="menu-icon">☰</span>
           </button>
-          <h1 class="app-title" [routerLink]="currentUser() ? ['/dashboard'] : ['/']">
-            🌾 Farmer Portal
-          </h1>
+          <div class="logo-container" [routerLink]="currentUser() ? ['/dashboard'] : ['/']">
+            <div class="logo">
+              <span class="logo-icon">🌾</span>
+              <div class="logo-text">
+                <span class="logo-main">BAIMS</span>
+                <span class="logo-sub">Farmer Hub</span>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="header-right" *ngIf="currentUser()">
           <button class="notification-btn">
@@ -112,13 +118,50 @@ import { AuthService } from '../core/auth.service';
       line-height: 24px;
     }
 
-    .app-title {
-      font-size: 20px;
-      font-weight: 700;
-      color: white;
-      margin: 0;
+    .logo-container {
       cursor: pointer;
       user-select: none;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-icon {
+      font-size: 32px;
+      line-height: 1;
+      animation: sway 3s ease-in-out infinite;
+    }
+
+    @keyframes sway {
+      0%, 100% { transform: rotate(-2deg); }
+      50% { transform: rotate(2deg); }
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+
+    .logo-main {
+      font-size: 24px;
+      font-weight: 900;
+      color: white;
+      letter-spacing: 1px;
+      font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .logo-sub {
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.95);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-top: 2px;
     }
 
     .header-right {
@@ -327,9 +370,33 @@ import { AuthService } from '../core/auth.service';
       }
     }
 
+    @media (max-width: 400px) {
+      .logo-main {
+        font-size: 20px;
+      }
+
+      .logo-sub {
+        font-size: 10px;
+        letter-spacing: 1.5px;
+      }
+
+      .logo-icon {
+        font-size: 28px;
+      }
+    }
+
     @media (min-width: 768px) {
-      .app-title {
-        font-size: 24px;
+      .logo-main {
+        font-size: 28px;
+      }
+
+      .logo-sub {
+        font-size: 12px;
+        letter-spacing: 2.5px;
+      }
+
+      .logo-icon {
+        font-size: 36px;
       }
     }
   `]

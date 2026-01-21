@@ -12,7 +12,7 @@ import { AuthService } from '../core/auth.service';
     <div class="login-container">
       <div class="login-header">
         <div class="logo">🌾</div>
-        <h1 class="login-title">Belize Farmer Portal</h1>
+        <h1 class="login-title">BAIMS Farmer Hub</h1>
         <p class="login-subtitle">Login to access your farmer account</p>
       </div>
 
