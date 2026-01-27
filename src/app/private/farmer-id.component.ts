@@ -9,107 +9,102 @@ import { AuthService } from '../core/auth.service';
   template: `
     <div class="page-container">
       <div class="page-header">
-        <h1 class="page-title">Electronic Farmer ID</h1>
+        <h1 class="page-title">National Farmer Identification Card</h1>
         <p class="page-subtitle">Official Government of Belize</p>
       </div>
 
       <div class="id-card-wrapper">
         <div class="id-card">
           <div class="id-card-header">
-            <div class="header-flag">🇧🇿</div>
-            <div class="header-text">
-              <div class="header-country">BELIZE</div>
-              <div class="header-title">FARMER IDENTIFICATION CARD</div>
-              <div class="header-ministry">Ministry of Agriculture, Fisheries, Forestry & Sustainable Development</div>
+            <div class="logo-placeholder">
+              <div class="logo-circle">
+                <span class="logo-text">BAIMS</span>
+              </div>
+            </div>
+            <div class="header-content">
+              <h1 class="header-title">NATIONAL FARMER IDENTIFICATION CARD</h1>
+              <p class="header-subtitle">Government Of Belize</p>
             </div>
           </div>
 
           <div class="id-card-body">
-            <div class="id-left-section">
-              <div class="id-photo-container">
-                <div class="id-photo">
+            <div class="body-left">
+              <div class="photo-section">
+                <div class="photo-frame">
                   <div class="photo-initials">{{ getUserInitials() }}</div>
                 </div>
-                <div class="verified-stamp">
-                  <div class="stamp-text">VERIFIED</div>
-                  <div class="stamp-icon">✓</div>
-                </div>
+              </div>
+              <div class="id-number-section">
+                <div class="id-label">ID#</div>
+                <div class="id-value">{{ currentUser()?.farmerId }}</div>
               </div>
             </div>
 
-            <div class="id-right-section">
-              <div class="id-details">
-                <div class="detail-group">
-                  <div class="detail-label">FULL NAME</div>
-                  <div class="detail-value">{{ currentUser()?.name?.toUpperCase() }}</div>
+            <div class="body-center">
+              <div class="diagonal-accent"></div>
+              <div class="info-section">
+                <h2 class="farmer-name">{{ currentUser()?.name }}</h2>
+                <div class="info-grid">
+                  <div class="info-row">
+                    <span class="info-label">DOB:</span>
+                    <span class="info-value">{{ formatDOB() }}</span>
+                  </div>
+                  <div class="info-row">
+                    <span class="info-label">Gender:</span>
+                    <span class="info-value">Male</span>
+                  </div>
+                  <div class="info-row">
+                    <span class="info-label">Location:</span>
+                    <span class="info-value">{{ currentUser()?.village }}</span>
+                  </div>
+                  <div class="info-row">
+                    <span class="info-label">District:</span>
+                    <span class="info-value">{{ currentUser()?.district }}</span>
+                  </div>
+                  <div class="info-row">
+                    <span class="info-label">Issued:</span>
+                    <span class="info-value">{{ currentUser()?.verificationDate | date:'MMM dd, yyyy' }}</span>
+                  </div>
                 </div>
-                <div class="detail-group">
-                  <div class="detail-label">FARMER ID NUMBER</div>
-                  <div class="detail-value highlight">{{ currentUser()?.farmerId }}</div>
+              </div>
+
+              <div class="signature-section">
+                <div class="signature-placeholder">
+                  <svg viewBox="0 0 120 40" class="signature-svg">
+                    <path d="M10,30 Q20,10 30,25 Q40,35 50,20 Q60,10 70,25 Q80,35 90,15 Q100,5 110,20"
+                          stroke="#333" stroke-width="2" fill="none"/>
+                  </svg>
                 </div>
-                <div class="detail-group">
-                  <div class="detail-label">DISTRICT</div>
-                  <div class="detail-value">{{ currentUser()?.district?.toUpperCase() }}</div>
-                </div>
-                <div class="detail-group">
-                  <div class="detail-label">VILLAGE/TOWN</div>
-                  <div class="detail-value">{{ currentUser()?.village?.toUpperCase() }}</div>
-                </div>
-                <div class="detail-group">
-                  <div class="detail-label">DATE VERIFIED</div>
-                  <div class="detail-value">{{ currentUser()?.verificationDate | date:'dd MMM yyyy' }}</div>
-                </div>
+                <div class="signature-title">Chief Agriculture Officer</div>
+              </div>
+            </div>
+
+            <div class="body-right">
+              <div class="map-placeholder">
+                <svg viewBox="0 0 100 200" class="map-svg">
+                  <ellipse cx="50" cy="100" rx="35" ry="85" fill="#d4d4d4" opacity="0.3"/>
+                  <path d="M30,30 L35,50 L25,70 L30,90 L40,110 L35,130 L45,150 L50,170 L55,185
+                           L60,170 L65,150 L70,130 L65,110 L70,90 L65,70 L70,50 L65,30 Z"
+                        fill="none" stroke="#999" stroke-width="1" stroke-dasharray="2,2"/>
+                  <circle cx="45" cy="80" r="2" fill="#2e7d32"/>
+                  <circle cx="52" cy="95" r="2" fill="#2e7d32"/>
+                  <circle cx="48" cy="110" r="2" fill="#2e7d32"/>
+                </svg>
               </div>
             </div>
           </div>
 
           <div class="id-card-footer">
-            <div class="qr-section-large">
-              <div class="qr-title">SCAN TO VERIFY</div>
-              <div class="qr-code-large">
-                <svg viewBox="0 0 200 200" class="qr-svg">
-                  <rect x="0" y="0" width="200" height="200" fill="white"/>
-                  <rect x="20" y="20" width="50" height="50" fill="black"/>
-                  <rect x="130" y="20" width="50" height="50" fill="black"/>
-                  <rect x="20" y="130" width="50" height="50" fill="black"/>
-                  <rect x="30" y="30" width="30" height="30" fill="white"/>
-                  <rect x="140" y="30" width="30" height="30" fill="white"/>
-                  <rect x="30" y="140" width="30" height="30" fill="white"/>
-                  <rect x="85" y="20" width="15" height="15" fill="black"/>
-                  <rect x="105" y="20" width="15" height="15" fill="black"/>
-                  <rect x="85" y="40" width="15" height="15" fill="black"/>
-                  <rect x="105" y="40" width="15" height="15" fill="black"/>
-                  <rect x="20" y="85" width="15" height="15" fill="black"/>
-                  <rect x="40" y="85" width="15" height="15" fill="black"/>
-                  <rect x="85" y="85" width="30" height="30" fill="black"/>
-                  <rect x="90" y="90" width="20" height="20" fill="white"/>
-                  <rect x="130" y="85" width="15" height="15" fill="black"/>
-                  <rect x="150" y="85" width="15" height="15" fill="black"/>
-                  <rect x="170" y="85" width="15" height="15" fill="black"/>
-                  <rect x="85" y="130" width="15" height="15" fill="black"/>
-                  <rect x="105" y="130" width="15" height="15" fill="black"/>
-                  <rect x="85" y="150" width="15" height="15" fill="black"/>
-                  <rect x="105" y="150" width="15" height="15" fill="black"/>
-                  <rect x="130" y="130" width="15" height="15" fill="black"/>
-                  <rect x="150" y="130" width="15" height="15" fill="black"/>
-                  <rect x="170" y="130" width="15" height="15" fill="black"/>
-                  <rect x="130" y="150" width="15" height="15" fill="black"/>
-                  <rect x="170" y="150" width="15" height="15" fill="black"/>
-                  <rect x="85" y="170" width="15" height="15" fill="black"/>
-                  <rect x="130" y="170" width="15" height="15" fill="black"/>
-                  <rect x="150" y="170" width="15" height="15" fill="black"/>
-                </svg>
-              </div>
-              <div class="qr-id">ID: {{ currentUser()?.farmerId }}</div>
-            </div>
-            <div class="footer-signature">
-              <div class="signature-line"></div>
-              <div class="signature-label">Authorized Signature</div>
-              <div class="issue-info">
-                <div class="issue-label">ISSUED:</div>
-                <div class="issue-date">{{ currentUser()?.verificationDate | date:'dd/MM/yyyy' }}</div>
+            <div class="footer-left">
+              <div class="issue-badge">
+                <span class="badge-label">Issue #:</span>
+                <span class="badge-value">1</span>
               </div>
             </div>
+            <div class="footer-center">
+              <p class="footer-text">Belize Agriculture Information Management System</p>
+            </div>
+            <div class="footer-right"></div>
           </div>
         </div>
       </div>
@@ -155,234 +150,284 @@ import { AuthService } from '../core/auth.service';
     }
 
     .id-card-wrapper {
-      max-width: 600px;
+      max-width: 900px;
       margin: 0 auto 24px;
+      overflow-x: auto;
+      padding: 10px;
     }
 
     .id-card {
-      background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-      border-radius: 16px;
+      background: white;
+      border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-      border: 3px solid #2e7d32;
-      position: relative;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      border: 2px solid #2e7d32;
+      min-width: 800px;
+      aspect-ratio: 16/10;
     }
 
     .id-card-header {
-      background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
-      padding: 16px 20px;
+      background: linear-gradient(135deg, #4CAF50 0%, #2e7d32 100%);
+      padding: 16px 24px;
       display: flex;
       align-items: center;
-      gap: 12px;
-      border-bottom: 2px solid #ffd700;
+      gap: 16px;
+      height: 80px;
     }
 
-    .header-flag {
-      font-size: 40px;
+    .logo-placeholder {
       flex-shrink: 0;
     }
 
-    .header-text {
-      flex: 1;
+    .logo-circle {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: white;
+      border: 3px solid #1b5e20;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
 
-    .header-country {
-      font-size: 18px;
-      font-weight: 800;
-      color: #ffd700;
-      letter-spacing: 2px;
-      line-height: 1;
-      margin-bottom: 4px;
+    .logo-text {
+      font-size: 16px;
+      font-weight: 900;
+      color: #2e7d32;
+      letter-spacing: 1px;
+    }
+
+    .header-content {
+      flex: 1;
+      text-align: center;
     }
 
     .header-title {
-      font-size: 14px;
-      font-weight: 700;
+      font-size: 22px;
+      font-weight: 800;
       color: white;
-      line-height: 1.2;
-      margin-bottom: 4px;
+      margin: 0 0 4px 0;
+      letter-spacing: 2px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
     }
 
-    .header-ministry {
-      font-size: 9px;
-      color: rgba(255,255,255,0.9);
-      line-height: 1.3;
+    .header-subtitle {
+      font-size: 14px;
+      color: rgba(255,255,255,0.95);
+      margin: 0;
+      font-weight: 600;
     }
 
     .id-card-body {
       display: flex;
-      padding: 24px 20px;
+      padding: 20px;
       gap: 20px;
-      background: white;
-    }
-
-    .id-left-section {
-      flex-shrink: 0;
-    }
-
-    .id-photo-container {
+      background: linear-gradient(135deg, white 0%, #f8fff9 50%, white 100%);
+      min-height: 280px;
       position: relative;
     }
 
-    .id-photo {
-      width: 140px;
-      height: 160px;
+    .body-left {
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 200px;
+    }
+
+    .photo-section {
+      flex: 1;
+    }
+
+    .photo-frame {
+      width: 100%;
+      height: 220px;
       background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+      border: 4px solid #4CAF50;
       border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 3px solid #2e7d32;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
 
     .photo-initials {
-      font-size: 48px;
-      font-weight: 800;
+      font-size: 64px;
+      font-weight: 900;
       color: #2e7d32;
     }
 
-    .verified-stamp {
-      position: absolute;
-      bottom: -12px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #4caf50;
-      color: white;
-      padding: 6px 16px;
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
-      border: 2px solid white;
-    }
-
-    .stamp-text {
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 1px;
-    }
-
-    .stamp-icon {
-      font-size: 14px;
-    }
-
-    .id-right-section {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .id-details {
-      display: grid;
-      gap: 14px;
-    }
-
-    .detail-group {
-      border-bottom: 1px solid #e0e0e0;
-      padding-bottom: 8px;
-    }
-
-    .detail-label {
-      font-size: 10px;
-      font-weight: 700;
-      color: #666;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 4px;
-    }
-
-    .detail-value {
-      font-size: 14px;
-      font-weight: 600;
-      color: #333;
-      word-break: break-word;
-    }
-
-    .detail-value.highlight {
-      font-size: 16px;
-      color: #2e7d32;
-      font-weight: 800;
-    }
-
-    .id-card-footer {
-      background: #f8f9fa;
-      padding: 20px;
-      display: flex;
-      gap: 20px;
-      align-items: center;
-      border-top: 2px solid #e0e0e0;
-    }
-
-    .qr-section-large {
-      flex-shrink: 0;
+    .id-number-section {
+      background: white;
+      border: 2px solid #2e7d32;
+      border-radius: 6px;
+      padding: 8px 12px;
       text-align: center;
     }
 
-    .qr-title {
+    .id-label {
       font-size: 11px;
+      font-weight: 700;
+      color: #666;
+      margin-bottom: 2px;
+    }
+
+    .id-value {
+      font-size: 15px;
       font-weight: 800;
       color: #2e7d32;
-      margin-bottom: 8px;
-      letter-spacing: 1px;
+      font-family: 'Courier New', monospace;
     }
 
-    .qr-code-large {
-      width: 120px;
-      height: 120px;
-      background: white;
-      padding: 8px;
-      border-radius: 8px;
-      border: 3px solid #2e7d32;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      margin: 0 auto 8px;
+    .body-center {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      padding-left: 20px;
     }
 
-    .qr-svg {
+    .diagonal-accent {
+      position: absolute;
+      left: 0;
+      top: -20px;
+      bottom: -20px;
+      width: 60px;
+      background: linear-gradient(135deg, rgba(76, 175, 80, 0.1) 0%, transparent 100%);
+      transform: skewX(-15deg);
+      border-left: 3px solid rgba(76, 175, 80, 0.3);
+    }
+
+    .info-section {
+      flex: 1;
+      position: relative;
+      z-index: 1;
+    }
+
+    .farmer-name {
+      font-size: 28px;
+      font-weight: 900;
+      color: #1a1a1a;
+      margin: 0 0 16px 0;
+      text-transform: capitalize;
+    }
+
+    .info-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .info-row {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .info-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: #666;
+    }
+
+    .info-value {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1a1a1a;
+    }
+
+    .signature-section {
+      margin-top: auto;
+      padding-top: 12px;
+    }
+
+    .signature-placeholder {
+      height: 40px;
+      margin-bottom: 4px;
+    }
+
+    .signature-svg {
       width: 100%;
       height: 100%;
     }
 
-    .qr-id {
-      font-size: 10px;
-      font-weight: 700;
+    .signature-title {
+      font-size: 11px;
       color: #666;
-      font-family: monospace;
+      font-weight: 600;
+      text-align: center;
     }
 
-    .footer-signature {
-      flex: 1;
-    }
-
-    .signature-line {
-      width: 100%;
-      height: 2px;
-      background: #333;
-      margin-bottom: 4px;
-    }
-
-    .signature-label {
-      font-size: 10px;
-      color: #666;
-      margin-bottom: 12px;
-    }
-
-    .issue-info {
+    .body-right {
+      flex-shrink: 0;
+      width: 140px;
       display: flex;
-      gap: 8px;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.7;
+    }
+
+    .map-placeholder {
+      width: 100%;
+      height: 100%;
+    }
+
+    .map-svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .id-card-footer {
+      background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 50px;
+    }
+
+    .footer-left {
+      flex-shrink: 0;
+    }
+
+    .issue-badge {
+      background: white;
+      padding: 6px 12px;
+      border-radius: 6px;
+      display: flex;
+      gap: 6px;
       align-items: center;
     }
 
-    .issue-label {
-      font-size: 10px;
+    .badge-label {
+      font-size: 11px;
       font-weight: 700;
       color: #666;
     }
 
-    .issue-date {
-      font-size: 11px;
+    .badge-value {
+      font-size: 13px;
+      font-weight: 800;
+      color: #2e7d32;
+    }
+
+    .footer-center {
+      flex: 1;
+      text-align: center;
+    }
+
+    .footer-text {
+      margin: 0;
+      font-size: 12px;
+      color: white;
       font-weight: 600;
-      color: #333;
+      letter-spacing: 0.5px;
+    }
+
+    .footer-right {
+      flex-shrink: 0;
+      width: 100px;
     }
 
     .action-buttons {
@@ -454,52 +499,39 @@ import { AuthService } from '../core/auth.service';
       margin-bottom: 8px;
     }
 
-    @media (max-width: 600px) {
-      .id-card-body {
-        flex-direction: column;
-        align-items: center;
-        padding: 20px 16px;
+    @media (max-width: 900px) {
+      .id-card-wrapper {
+        overflow-x: scroll;
       }
 
-      .id-photo {
-        width: 120px;
-        height: 140px;
-      }
-
-      .photo-initials {
-        font-size: 40px;
-      }
-
-      .id-details {
-        width: 100%;
-      }
-
-      .id-card-footer {
-        flex-direction: column;
-        gap: 16px;
-      }
-
-      .qr-code-large {
-        width: 140px;
-        height: 140px;
-      }
-
-      .footer-signature {
-        width: 100%;
+      .id-card {
+        min-width: 750px;
       }
     }
 
-    @media (max-width: 480px) {
-      .header-country {
-        font-size: 16px;
+    @media (max-width: 600px) {
+      .id-card {
+        min-width: 700px;
       }
 
       .header-title {
-        font-size: 12px;
+        font-size: 18px;
       }
 
-      .header-ministry {
-        font-size: 8px;
+      .farmer-name {
+        font-size: 24px;
+      }
+
+      .body-left {
+        width: 160px;
+      }
+
+      .photo-frame {
+        height: 180px;
+      }
+
+      .photo-initials {
+        font-size: 52px;
       }
     }
   `]
@@ -512,6 +544,17 @@ export class FarmerIdComponent {
   getUserInitials(): string {
     const name = this.currentUser()?.name || '';
     return name.split(' ').map(n => n[0]).join('').toUpperCase();
+  }
+
+  formatDOB(): string {
+    const user = this.currentUser();
+    if (!user) return 'N/A';
+
+    const birthYear = 1959;
+    const birthMonth = 'Jun';
+    const birthDay = 30;
+
+    return `${birthMonth} ${birthDay}, ${birthYear}`;
   }
 
   downloadId() {
