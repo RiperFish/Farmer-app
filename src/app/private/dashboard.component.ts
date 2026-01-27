@@ -21,19 +21,19 @@ import { WeatherData } from '../models/public.model';
 
       <div class="quick-actions">
         <a routerLink="/profile" class="action-card card">
-          <div class="action-icon">👤</div>
+          <img src="assets/img/user-black.svg" alt="Logo" style="width:44px"/>
           <div class="action-text">My Profile</div>
         </a>
         <a routerLink="/farmer-id" class="action-card card" *ngIf="currentUser()?.status === 'verified'">
-          <div class="action-icon">🪪</div>
+          <img src="assets/img/id.svg" alt="Logo" style="width:44px"/>
           <div class="action-text">Farmer ID</div>
         </a>
         <a routerLink="/farm-records" class="action-card card" *ngIf="currentUser()?.status === 'verified'">
-          <div class="action-icon">📊</div>
+         <img src="assets/img/chart.svg" alt="Logo" style="width:44px"/>
           <div class="action-text">Farm Records</div>
         </a>
         <a routerLink="/notifications" class="action-card card">
-          <div class="action-icon">🔔</div>
+          <img src="assets/img/bell.svg" alt="Logo" style="width:44px"/>
           <div class="action-text">Notifications</div>
           <span class="action-badge" *ngIf="unreadCount > 0">{{ unreadCount }}</span>
         </a>
@@ -41,7 +41,10 @@ import { WeatherData } from '../models/public.model';
 
       <div class="weather-widget card">
         <div class="widget-header">
-          <h2 class="widget-title">🌤️ Today's Weather</h2>
+         <h2 class="card-title">
+            <img src="assets/img/weather.svg" style="width:25px"/> 
+            Today's Weather
+          </h2>
           <a routerLink="/weather" class="widget-link">Full Forecast →</a>
         </div>
         <div class="weather-display" *ngIf="weather">
@@ -55,7 +58,10 @@ import { WeatherData } from '../models/public.model';
 
       <div class="notifications-widget card" *ngIf="recentNotifications.length > 0">
         <div class="widget-header">
-          <h2 class="widget-title">🔔 Recent Notifications</h2>
+          <h2 class="card-title">
+            <img src="assets/img/bell.svg" alt="Logo" style="width:25px"/>
+            Recent Notifications
+           </h2>
           <a routerLink="/notifications" class="widget-link">View All →</a>
         </div>
         <div class="notification-list">
@@ -77,15 +83,15 @@ import { WeatherData } from '../models/public.model';
         <h2 class="widget-title">Quick Links</h2>
         <div class="links-grid">
           <a routerLink="/calendar" class="link-card card">
-            <span class="link-icon">📅</span>
+            <img src="assets/img/calendar.svg" style="width:44px"/> 
             <span class="link-text">Planting Calendar</span>
           </a>
           <a routerLink="/weather" class="link-card card">
-            <span class="link-icon">🌤️</span>
+            <img src="assets/img/weather.svg" style="width:44px"/> 
             <span class="link-text">Weather</span>
           </a>
           <a routerLink="/resources" class="link-card card">
-            <span class="link-icon">📚</span>
+            <img src="assets/img/resources.svg" style="width:44px"/> 
             <span class="link-text">Resources</span>
           </a>
         </div>
@@ -282,10 +288,15 @@ import { WeatherData } from '../models/public.model';
     }
 
     .link-card {
-      padding: 16px;
+      padding: 20px;
       text-align: center;
       text-decoration: none;
-      transition: transform 0.2s;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
     }
 
     .link-card:hover {
@@ -320,7 +331,7 @@ export class DashboardComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private dataService: DataService
-  ) {}
+  ) { }
 
   ngOnInit() {
     const forecast = this.dataService.getWeatherForecast();

@@ -18,7 +18,10 @@ import { WeatherData, NewsItem, SeasonalTip } from '../models/public.model';
 
       <div class="weather-snapshot card">
         <div class="card-header">
-          <h2 class="card-title">🌤️ Today's Weather</h2>
+          <h2 class="card-title">
+            <img src="assets/img/weather.svg" style="width:25px"/> 
+            Today's Weather
+          </h2>
           <a routerLink="/weather" class="view-more">View Forecast →</a>
         </div>
         <div class="weather-current" *ngIf="currentWeather">
@@ -36,7 +39,7 @@ import { WeatherData, NewsItem, SeasonalTip } from '../models/public.model';
       </div>
 
       <div class="seasonal-tips">
-        <h2 class="section-title">🌱 Seasonal Tips</h2>
+        <h2 class="section-title">Seasonal Tips</h2>
         <div class="tips-grid">
           <div class="tip-card card" *ngFor="let tip of seasonalTips">
             <h3 class="tip-title">{{ tip.title }}</h3>
@@ -49,7 +52,7 @@ import { WeatherData, NewsItem, SeasonalTip } from '../models/public.model';
       </div>
 
       <div class="news-section">
-        <h2 class="section-title">📰 Latest News</h2>
+        <h2 class="section-title">Latest News</h2>
         <div class="news-list">
           <div class="news-item card" *ngFor="let item of news">
             <div class="news-category">{{ item.category }}</div>
@@ -64,19 +67,19 @@ import { WeatherData, NewsItem, SeasonalTip } from '../models/public.model';
         <h2 class="section-title">Quick Access</h2>
         <div class="links-grid">
           <a routerLink="/calendar" class="quick-link-card card">
-            <div class="link-icon">📅</div>
+            <img src="assets/img/calendar.svg" alt="Logo" style="width:44px"/> 
             <div class="link-title">Planting Calendar</div>
           </a>
           <a routerLink="/weather" class="quick-link-card card">
-            <div class="link-icon">🌤️</div>
+            <img src="assets/img/weather.svg" alt="Logo" style="width:44px"/> 
             <div class="link-title">Weather Forecast</div>
           </a>
           <a routerLink="/resources" class="quick-link-card card">
-            <div class="link-icon">📚</div>
+            <img src="assets/img/resources.svg" alt="Logo" style="width:44px"/> 
             <div class="link-title">Resources</div>
           </a>
           <a routerLink="/register" class="quick-link-card card featured">
-            <div class="link-icon">✍️</div>
+            <img src="assets/img/user-white.svg" alt="Logo" style="width:44px"/> 
             <div class="link-title">Register Now</div>
           </a>
         </div>
@@ -130,7 +133,7 @@ import { WeatherData, NewsItem, SeasonalTip } from '../models/public.model';
       display: flex;
       align-items: center;
       gap: 20px;
-      padding: 16px 0 0 0;
+      padding: 16px;
     }
 
     .weather-icon {
@@ -266,10 +269,15 @@ import { WeatherData, NewsItem, SeasonalTip } from '../models/public.model';
     }
 
     .quick-link-card {
-      padding: 24px;
+      padding: 20px;
       text-align: center;
       text-decoration: none;
       transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
     }
 
     .quick-link-card:hover {

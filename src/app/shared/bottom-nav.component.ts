@@ -12,36 +12,34 @@ import { AuthService } from '../core/auth.service';
       <!-- Public Navigation -->
       <div class="nav-items" *ngIf="!currentUser()">
         <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item">
-          <span class="nav-icon">🏠</span>
-          <span class="nav-label">Home</span>
+          <img src="assets/img/home.svg" alt="Logo" style="width:28px"/> 
+          <!-- <span class="nav-label">Home</span> -->
         </a>
         <a routerLink="/weather" routerLinkActive="active" class="nav-item">
-          <span class="nav-icon">🌤️</span>
-          <span class="nav-label">Weather</span>
+         <img src="assets/img/weather.svg" alt="Logo" style="width:28px"/> 
         </a>
         <a routerLink="/resources" routerLinkActive="active" class="nav-item">
-          <span class="nav-icon">📞</span>
-          <span class="nav-label">Contact</span>
+          <img src="assets/img/phone.svg" alt="Logo" style="width:28px"/> 
         </a>
       </div>
 
       <!-- Verified Farmer Navigation -->
       <div class="nav-items" *ngIf="currentUser() && isVerified()">
         <a routerLink="/farmer-id" routerLinkActive="active" class="nav-item">
-          <span class="nav-icon">🪪</span>
-          <span class="nav-label">ID</span>
+          <img src="assets/img/id.svg" alt="Logo" style="width:28px"/> 
+          <!-- <span class="nav-label">ID</span> -->
         </a>
         <a routerLink="/profile" routerLinkActive="active" class="nav-item">
-          <span class="nav-icon">👤</span>
-          <span class="nav-label">Profile</span>
+          <img src="assets/img/user-black.svg" alt="Logo" style="width:28px"/> 
+          <!-- <span class="nav-label">Profile</span> -->
         </a>
         <a routerLink="/farm-records" routerLinkActive="active" class="nav-item">
-          <span class="nav-icon">🌾</span>
-          <span class="nav-label">Farm</span>
+          <img src="assets/img/farm.svg" alt="Logo" style="width:28px"/> 
+          <!-- <span class="nav-label">Farm</span> -->
         </a>
         <a routerLink="/commodities" routerLinkActive="active" class="nav-item">
-          <span class="nav-icon">📦</span>
-          <span class="nav-label">Commodities</span>
+          <img src="assets/img/commodities.svg" style="width:28px"/> 
+          <!-- <span class="nav-label">Commodities</span> -->
         </a>
       </div>
 
@@ -173,7 +171,7 @@ export class BottomNavComponent {
   constructor(
     private authService: AuthService,
     private router: Router
-  ) {}
+  ) { }
 
   isAuthPage(): boolean {
     const path = this.router.url;
