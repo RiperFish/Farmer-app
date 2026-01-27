@@ -44,52 +44,47 @@ import { AuthService } from '../core/auth.service';
               <div class="diagonal-accent"></div>
               <div class="info-section">
                 <h2 class="farmer-name">{{ currentUser()?.name }}</h2>
-                <div class="info-grid">
-                  <div class="info-row">
-                    <span class="info-label">DOB:</span>
-                    <span class="info-value">{{ formatDOB() }}</span>
-                  </div>
-                  <div class="info-row">
-                    <span class="info-label">Gender:</span>
-                    <span class="info-value">Male</span>
-                  </div>
-                  <div class="info-row">
-                    <span class="info-label">Location:</span>
-                    <span class="info-value">{{ currentUser()?.village }}</span>
-                  </div>
-                  <div class="info-row">
-                    <span class="info-label">District:</span>
-                    <span class="info-value">{{ currentUser()?.district }}</span>
-                  </div>
-                  <div class="info-row">
-                    <span class="info-label">Issued:</span>
-                    <span class="info-value">{{ currentUser()?.verificationDate | date:'MMM dd, yyyy' }}</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="signature-section">
-                <div class="signature-placeholder">
-                  <svg viewBox="0 0 120 40" class="signature-svg">
-                    <path d="M10,30 Q20,10 30,25 Q40,35 50,20 Q60,10 70,25 Q80,35 90,15 Q100,5 110,20"
-                          stroke="#333" stroke-width="2" fill="none"/>
-                  </svg>
-                </div>
-                <div class="signature-title">Chief Agriculture Officer</div>
               </div>
             </div>
 
             <div class="body-right">
-              <div class="map-placeholder">
-                <svg viewBox="0 0 100 200" class="map-svg">
-                  <ellipse cx="50" cy="100" rx="35" ry="85" fill="#d4d4d4" opacity="0.3"/>
-                  <path d="M30,30 L35,50 L25,70 L30,90 L40,110 L35,130 L45,150 L50,170 L55,185
-                           L60,170 L65,150 L70,130 L65,110 L70,90 L65,70 L70,50 L65,30 Z"
-                        fill="none" stroke="#999" stroke-width="1" stroke-dasharray="2,2"/>
-                  <circle cx="45" cy="80" r="2" fill="#2e7d32"/>
-                  <circle cx="52" cy="95" r="2" fill="#2e7d32"/>
-                  <circle cx="48" cy="110" r="2" fill="#2e7d32"/>
-                </svg>
+              <div class="qr-section">
+                <div class="qr-label">Electronic ID</div>
+                <div class="qr-code">
+                  <svg viewBox="0 0 200 200" class="qr-svg">
+                    <rect x="0" y="0" width="200" height="200" fill="white"/>
+                    <rect x="20" y="20" width="50" height="50" fill="black"/>
+                    <rect x="130" y="20" width="50" height="50" fill="black"/>
+                    <rect x="20" y="130" width="50" height="50" fill="black"/>
+                    <rect x="30" y="30" width="30" height="30" fill="white"/>
+                    <rect x="140" y="30" width="30" height="30" fill="white"/>
+                    <rect x="30" y="140" width="30" height="30" fill="white"/>
+                    <rect x="85" y="20" width="15" height="15" fill="black"/>
+                    <rect x="105" y="20" width="15" height="15" fill="black"/>
+                    <rect x="85" y="40" width="15" height="15" fill="black"/>
+                    <rect x="105" y="40" width="15" height="15" fill="black"/>
+                    <rect x="20" y="85" width="15" height="15" fill="black"/>
+                    <rect x="40" y="85" width="15" height="15" fill="black"/>
+                    <rect x="85" y="85" width="30" height="30" fill="black"/>
+                    <rect x="90" y="90" width="20" height="20" fill="white"/>
+                    <rect x="130" y="85" width="15" height="15" fill="black"/>
+                    <rect x="150" y="85" width="15" height="15" fill="black"/>
+                    <rect x="170" y="85" width="15" height="15" fill="black"/>
+                    <rect x="85" y="130" width="15" height="15" fill="black"/>
+                    <rect x="105" y="130" width="15" height="15" fill="black"/>
+                    <rect x="85" y="150" width="15" height="15" fill="black"/>
+                    <rect x="105" y="150" width="15" height="15" fill="black"/>
+                    <rect x="130" y="130" width="15" height="15" fill="black"/>
+                    <rect x="150" y="130" width="15" height="15" fill="black"/>
+                    <rect x="170" y="130" width="15" height="15" fill="black"/>
+                    <rect x="130" y="150" width="15" height="15" fill="black"/>
+                    <rect x="170" y="150" width="15" height="15" fill="black"/>
+                    <rect x="85" y="170" width="15" height="15" fill="black"/>
+                    <rect x="130" y="170" width="15" height="15" fill="black"/>
+                    <rect x="150" y="170" width="15" height="15" fill="black"/>
+                  </svg>
+                </div>
+                <div class="qr-description">Scan to Verify</div>
               </div>
             </div>
           </div>
@@ -286,6 +281,7 @@ import { AuthService } from '../core/auth.service';
       flex-direction: column;
       position: relative;
       padding-left: 20px;
+      justify-content: center;
     }
 
     .diagonal-accent {
@@ -303,79 +299,62 @@ import { AuthService } from '../core/auth.service';
       flex: 1;
       position: relative;
       z-index: 1;
+      display: flex;
+      align-items: center;
     }
 
     .farmer-name {
-      font-size: 28px;
+      font-size: 36px;
       font-weight: 900;
       color: #1a1a1a;
-      margin: 0 0 16px 0;
+      margin: 0;
       text-transform: capitalize;
-    }
-
-    .info-grid {
-      display: grid;
-      gap: 10px;
-    }
-
-    .info-row {
-      display: grid;
-      grid-template-columns: 90px 1fr;
-      align-items: baseline;
-      gap: 8px;
-    }
-
-    .info-label {
-      font-size: 13px;
-      font-weight: 700;
-      color: #666;
-    }
-
-    .info-value {
-      font-size: 15px;
-      font-weight: 700;
-      color: #1a1a1a;
-    }
-
-    .signature-section {
-      margin-top: auto;
-      padding-top: 12px;
-    }
-
-    .signature-placeholder {
-      height: 40px;
-      margin-bottom: 4px;
-    }
-
-    .signature-svg {
-      width: 100%;
-      height: 100%;
-    }
-
-    .signature-title {
-      font-size: 11px;
-      color: #666;
-      font-weight: 600;
-      text-align: center;
+      line-height: 1.2;
     }
 
     .body-right {
       flex-shrink: 0;
-      width: 140px;
+      width: 200px;
       display: flex;
       align-items: center;
       justify-content: center;
-      opacity: 0.7;
     }
 
-    .map-placeholder {
+    .qr-section {
+      text-align: center;
+    }
+
+    .qr-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: #2e7d32;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .qr-code {
+      width: 150px;
+      height: 150px;
+      background: white;
+      padding: 8px;
+      border-radius: 8px;
+      border: 3px solid #2e7d32;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      margin: 0 auto 8px;
+    }
+
+    .qr-svg {
       width: 100%;
       height: 100%;
     }
 
-    .map-svg {
-      width: 100%;
-      height: 100%;
+    .qr-description {
+      font-size: 10px;
+      font-weight: 600;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     .id-card-footer {
@@ -507,6 +486,11 @@ import { AuthService } from '../core/auth.service';
       .id-card {
         min-width: 750px;
       }
+
+      .qr-code {
+        width: 130px;
+        height: 130px;
+      }
     }
 
     @media (max-width: 600px) {
@@ -519,10 +503,14 @@ import { AuthService } from '../core/auth.service';
       }
 
       .farmer-name {
-        font-size: 24px;
+        font-size: 28px;
       }
 
       .body-left {
+        width: 160px;
+      }
+
+      .body-right {
         width: 160px;
       }
 
@@ -532,6 +520,11 @@ import { AuthService } from '../core/auth.service';
 
       .photo-initials {
         font-size: 52px;
+      }
+
+      .qr-code {
+        width: 120px;
+        height: 120px;
       }
     }
   `]
@@ -544,17 +537,6 @@ export class FarmerIdComponent {
   getUserInitials(): string {
     const name = this.currentUser()?.name || '';
     return name.split(' ').map(n => n[0]).join('').toUpperCase();
-  }
-
-  formatDOB(): string {
-    const user = this.currentUser();
-    if (!user) return 'N/A';
-
-    const birthYear = 1959;
-    const birthMonth = 'Jun';
-    const birthDay = 30;
-
-    return `${birthMonth} ${birthDay}, ${birthYear}`;
   }
 
   downloadId() {
