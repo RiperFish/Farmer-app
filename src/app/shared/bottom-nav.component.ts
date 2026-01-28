@@ -12,14 +12,17 @@ import { AuthService } from '../core/auth.service';
       <!-- Public Navigation -->
       <div class="nav-items" *ngIf="!currentUser()">
         <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item">
-          <img src="assets/img/home.svg" alt="Logo" style="width:28px"/> 
+          <img src="assets/img/home.svg" alt="Logo" style="width:28px"/>
           <!-- <span class="nav-label">Home</span> -->
         </a>
         <a routerLink="/weather" routerLinkActive="active" class="nav-item">
-         <img src="assets/img/weather.svg" alt="Logo" style="width:28px"/> 
+         <img src="assets/img/weather.svg" alt="Logo" style="width:28px"/>
         </a>
         <a routerLink="/resources" routerLinkActive="active" class="nav-item">
-          <img src="assets/img/phone.svg" alt="Logo" style="width:28px"/> 
+          <img src="assets/img/phone.svg" alt="Logo" style="width:28px"/>
+        </a>
+        <a routerLink="/login" routerLinkActive="active" class="nav-item">
+          <img src="assets/img/user-black.svg" alt="Login" style="width:28px"/>
         </a>
       </div>
 
