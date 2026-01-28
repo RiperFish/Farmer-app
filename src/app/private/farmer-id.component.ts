@@ -153,12 +153,6 @@ import { AuthService } from '../core/auth.service';
                 </div>
                 <div class="id-text">ID: {{ currentUser()?.farmerId }}</div>
               </div>
-
-              <div class="signature-container">
-                <div class="signature-line"></div>
-                <div class="signature-label">Authorized Signature</div>
-                <div class="issue-date">ISSUED: {{ getIssuedDate() }}</div>
-              </div>
             </div>
           </div>
         </div>
@@ -348,37 +342,34 @@ import { AuthService } from '../core/auth.service';
     }
 
     .bottom-section {
-      display: grid;
-      grid-template-columns: 280px 1fr;
-      gap: 0;
-      padding: 32px;
+      display: flex;
+      justify-content: center;
+      padding: 40px 32px;
     }
 
     .qr-container {
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding-right: 32px;
-      border-right: 2px solid #e0e0e0;
     }
 
     .qr-label {
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 700;
       color: #2d7a3e;
-      margin-bottom: 12px;
+      margin-bottom: 16px;
       text-transform: uppercase;
       letter-spacing: 1.5px;
     }
 
     .qr-code {
-      width: 160px;
-      height: 160px;
+      width: 220px;
+      height: 220px;
       background: white;
-      padding: 10px;
+      padding: 12px;
       border-radius: 8px;
       border: 3px solid #2d7a3e;
-      margin-bottom: 12px;
+      margin-bottom: 16px;
     }
 
     .qr-svg {
@@ -387,38 +378,11 @@ import { AuthService } from '../core/auth.service';
     }
 
     .id-text {
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 700;
       color: #666;
       font-family: 'Courier New', monospace;
       letter-spacing: 1px;
-    }
-
-    .signature-container {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding-left: 32px;
-    }
-
-    .signature-line {
-      width: 100%;
-      height: 2px;
-      background: #333;
-      margin-bottom: 8px;
-    }
-
-    .signature-label {
-      font-size: 12px;
-      color: #888;
-      margin-bottom: 20px;
-    }
-
-    .issue-date {
-      font-size: 13px;
-      font-weight: 700;
-      color: #333;
-      letter-spacing: 0.5px;
     }
 
     .action-buttons {
@@ -463,13 +427,11 @@ import { AuthService } from '../core/auth.service';
     }
 
     @media (max-width: 768px) {
-      .main-content,
-      .bottom-section {
+      .main-content {
         grid-template-columns: 1fr;
       }
 
-      .left-section,
-      .qr-container {
+      .left-section {
         border-right: none;
         border-bottom: 2px solid #e0e0e0;
         padding-right: 0;
@@ -477,10 +439,13 @@ import { AuthService } from '../core/auth.service';
         margin-bottom: 24px;
       }
 
-      .right-section,
-      .signature-container {
+      .right-section {
         padding-left: 0;
         padding-top: 24px;
+      }
+
+      .bottom-section {
+        padding: 32px 20px;
       }
     }
 
@@ -517,9 +482,12 @@ import { AuthService } from '../core/auth.service';
         font-size: 10px;
       }
 
-      .main-content,
-      .bottom-section {
+      .main-content {
         padding: 20px;
+      }
+
+      .bottom-section {
+        padding: 24px 20px;
       }
 
       .photo-frame {
@@ -545,8 +513,8 @@ import { AuthService } from '../core/auth.service';
       }
 
       .qr-code {
-        width: 140px;
-        height: 140px;
+        width: 200px;
+        height: 200px;
       }
 
       .action-buttons {
@@ -571,14 +539,6 @@ export class FarmerIdComponent {
     const month = date.toLocaleString('en-US', { month: 'short' });
     const year = date.getFullYear();
     return `${day} ${month} ${year}`;
-  }
-
-  getIssuedDate(): string {
-    const date = new Date();
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const year = date.getFullYear();
-    return `${day}/${month}/${year}`;
   }
 
   downloadId() {
