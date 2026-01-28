@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Commodities - BAIMS Farmer Hub</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .summary-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .summary-card {
+      padding: 20px;
+      text-align: center;
+    }
+    .summary-icon {
+      font-size: 40px;
+      margin-bottom: 12px;
+    }
+    .summary-value {
+      font-size: 32px;
+      font-weight: 700;
+      color: #2e7d32;
+      margin-bottom: 4px;
+    }
+    .summary-label {
+      font-size: 13px;
+      color: #666;
+      font-weight: 600;
+    }
+    .commodities-section { margin-bottom: 32px; }
+    .commodities-grid {
+      display: grid;
+      gap: 16px;
+    }
+    .commodity-card { padding: 20px; }
+    .commodity-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .commodity-icon {
+      font-size: 36px;
+      flex-shrink: 0;
+    }
+    .commodity-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .commodity-name {
+      font-size: 18px;
+      font-weight: 700;
+      color: #333;
+      margin: 0 0 4px 0;
+    }
+    .commodity-category {
+      font-size: 12px;
+      color: #666;
+      font-weight: 600;
+    }
+    .commodity-status {
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+    .status-growing { background: #4caf50; color: white; }
+    .status-harvested { background: #ff9800; color: white; }
+    .status-planted { background: #2196f3; color: white; }
+    .commodity-details {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+    }
+    .detail-label {
+      color: #666;
+      font-weight: 600;
+    }
+    .detail-value {
+      color: #333;
+      font-weight: 500;
+    }
+    .commodity-progress {
+      padding: 16px;
+      background: #f5f5f5;
+      border-radius: 8px;
+    }
+    .progress-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #666;
+      margin-bottom: 8px;
+    }
+    .progress-bar {
+      height: 8px;
+      background: #e0e0e0;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #4caf50 0%, #8bc34a 100%);
+      transition: width 0.3s ease;
+    }
+    .progress-text {
+      font-size: 12px;
+      color: #666;
+      text-align: center;
+    }
+    .historical-section { margin-bottom: 32px; }
+    .history-list {
+      display: grid;
+      gap: 12px;
+    }
+    .history-item {
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .history-icon {
+      font-size: 32px;
+      flex-shrink: 0;
+    }
+    .history-details { flex: 1; }
+    .history-crop {
+      font-size: 16px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 4px;
+    }
+    .history-season {
+      font-size: 13px;
+      color: #666;
+    }
+    .history-yield { text-align: right; }
+    .yield-label {
+      font-size: 11px;
+      color: #666;
+      margin-bottom: 4px;
+    }
+    .yield-value {
+      font-size: 16px;
+      font-weight: 700;
+      color: #2e7d32;
+    }
+    .info-card {
+      padding: 20px;
+      background: #e3f2fd;
+      border: 1px solid #90caf9;
+      display: flex;
+      gap: 16px;
+    }
+    .info-icon {
+      font-size: 32px;
+      flex-shrink: 0;
+    }
+    .info-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1976d2;
+      margin: 0 0 8px 0;
+    }
+    .info-text {
+      font-size: 14px;
+      color: #333;
+      line-height: 1.6;
+      margin: 0;
+    }
+    @media (max-width: 640px) {
+      .summary-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (min-width: 768px) {
+      .commodities-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-content">
+      <div class="header-left">
+        <button class="menu-btn" aria-label="Open menu">
+          <span>&#x2630;</span>
+        </button>
+        <a href="dashboard.html" class="logo-container">
+          <div class="logo">
+            <span class="logo-icon">&#x1F33E;</span>
+            <div class="logo-text">
+              <span class="logo-main">BAIMS</span>
+              <span class="logo-sub">Farmer Hub</span>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="header-right">
+        <a href="notifications.html" class="notification-btn" aria-label="Notifications">
+          <span>&#x1F514;</span>
+          <span class="notification-badge">2</span>
+        </a>
+        <button class="logout-btn" onclick="App.logout()">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="mobile-nav" aria-label="Mobile navigation">
+    <div class="nav-header">
+      <div class="user-info">
+        <div class="user-avatar" id="navAvatar">JM</div>
+        <div class="user-details">
+          <div class="user-name" id="navName">John Martinez</div>
+          <div class="user-status status-verified" id="navStatus">verified</div>
+        </div>
+      </div>
+      <button class="close-btn" aria-label="Close menu">&times;</button>
+    </div>
+    <ul class="nav-links">
+      <li><a href="dashboard.html"><img src="assets/img/home.svg" alt=""> Dashboard</a></li>
+      <li><a href="profile.html"><img src="assets/img/user-black.svg" alt=""> My Profile</a></li>
+      <li><a href="farmer-id.html"><img src="assets/img/id.svg" alt=""> Farmer ID</a></li>
+      <li><a href="farm-records.html"><img src="assets/img/chart.svg" alt=""> Farm Records</a></li>
+      <li><a href="notifications.html"><img src="assets/img/bell.svg" alt=""> Notifications</a></li>
+      <li class="nav-divider"></li>
+      <li><a href="calendar.html"><img src="assets/img/calendar.svg" alt=""> Planting Calendar</a></li>
+      <li><a href="weather.html"><img src="assets/img/weather.svg" alt=""> Weather</a></li>
+      <li><a href="resources.html"><img src="assets/img/resources.svg" alt=""> Resources</a></li>
+    </ul>
+  </nav>
+  <div class="nav-overlay"></div>
+
+  <main class="page-container">
+    <div class="page-header">
+      <h1 class="page-title">
+        <img src="assets/img/commodities.svg" alt="">
+        Commodities Produced
+      </h1>
+      <p class="page-subtitle">Your registered farm commodities and production</p>
+    </div>
+
+    <section class="summary-cards">
+      <div class="summary-card card">
+        <div class="summary-icon">&#x1F33E;</div>
+        <div class="summary-value">3</div>
+        <div class="summary-label">Total Commodities</div>
+      </div>
+      <div class="summary-card card">
+        <div class="summary-icon">&#x1F4E6;</div>
+        <div class="summary-value">3</div>
+        <div class="summary-label">Active Crops</div>
+      </div>
+      <div class="summary-card card">
+        <div class="summary-icon">&#x1F331;</div>
+        <div class="summary-value">23</div>
+        <div class="summary-label">Total Acres</div>
+      </div>
+    </section>
+
+    <section class="commodities-section">
+      <h2 class="section-title">Current Production</h2>
+      <div class="commodities-grid">
+        <article class="commodity-card card">
+          <div class="commodity-header">
+            <div class="commodity-icon">&#x1F33D;</div>
+            <div class="commodity-info">
+              <h3 class="commodity-name">Corn</h3>
+              <span class="commodity-category">Grains</span>
+            </div>
+            <span class="commodity-status status-growing">growing</span>
+          </div>
+          <div class="commodity-details">
+            <div class="detail-row">
+              <span class="detail-label">Area Planted:</span>
+              <span class="detail-value">10 acres</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Planting Date:</span>
+              <span class="detail-value">Jun 15, 2024</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Expected Yield:</span>
+              <span class="detail-value">8,000 lbs</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Est. Harvest:</span>
+              <span class="detail-value">Oct 15, 2024</span>
+            </div>
+          </div>
+          <div class="commodity-progress">
+            <div class="progress-label">Growth Progress</div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 65%;"></div>
+            </div>
+            <div class="progress-text">65% Complete</div>
+          </div>
+        </article>
+
+        <article class="commodity-card card">
+          <div class="commodity-header">
+            <div class="commodity-icon">&#x1FAD8;</div>
+            <div class="commodity-info">
+              <h3 class="commodity-name">Red Kidney Beans</h3>
+              <span class="commodity-category">Legumes</span>
+            </div>
+            <span class="commodity-status status-planted">planted</span>
+          </div>
+          <div class="commodity-details">
+            <div class="detail-row">
+              <span class="detail-label">Area Planted:</span>
+              <span class="detail-value">8 acres</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Planting Date:</span>
+              <span class="detail-value">Nov 1, 2024</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Expected Yield:</span>
+              <span class="detail-value">6,000 lbs</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Est. Harvest:</span>
+              <span class="detail-value">Feb 15, 2025</span>
+            </div>
+          </div>
+          <div class="commodity-progress">
+            <div class="progress-label">Growth Progress</div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 25%;"></div>
+            </div>
+            <div class="progress-text">25% Complete</div>
+          </div>
+        </article>
+
+        <article class="commodity-card card">
+          <div class="commodity-header">
+            <div class="commodity-icon">&#x1F96C;</div>
+            <div class="commodity-info">
+              <h3 class="commodity-name">Vegetables (Mixed)</h3>
+              <span class="commodity-category">Vegetables</span>
+            </div>
+            <span class="commodity-status status-growing">growing</span>
+          </div>
+          <div class="commodity-details">
+            <div class="detail-row">
+              <span class="detail-label">Area Planted:</span>
+              <span class="detail-value">5 acres</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Planting Date:</span>
+              <span class="detail-value">Oct 1, 2024</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Expected Yield:</span>
+              <span class="detail-value">2,500 lbs</span>
+            </div>
+          </div>
+          <div class="commodity-progress">
+            <div class="progress-label">Growth Progress</div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 50%;"></div>
+            </div>
+            <div class="progress-text">50% Complete</div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="historical-section">
+      <h2 class="section-title">Production History</h2>
+      <div class="history-list">
+        <article class="history-item card">
+          <div class="history-icon">&#x1F33D;</div>
+          <div class="history-details">
+            <div class="history-crop">Corn</div>
+            <div class="history-season">2024 Season 1</div>
+          </div>
+          <div class="history-yield">
+            <div class="yield-label">Total Yield</div>
+            <div class="yield-value">7,500 lbs</div>
+          </div>
+        </article>
+        <article class="history-item card">
+          <div class="history-icon">&#x1FAD8;</div>
+          <div class="history-details">
+            <div class="history-crop">Red Kidney Beans</div>
+            <div class="history-season">2023-2024</div>
+          </div>
+          <div class="history-yield">
+            <div class="yield-label">Total Yield</div>
+            <div class="yield-value">5,800 lbs</div>
+          </div>
+        </article>
+        <article class="history-item card">
+          <div class="history-icon">&#x1F96C;</div>
+          <div class="history-details">
+            <div class="history-crop">Vegetables</div>
+            <div class="history-season">2024 Season 1</div>
+          </div>
+          <div class="history-yield">
+            <div class="yield-label">Total Yield</div>
+            <div class="yield-value">2,200 lbs</div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="info-card card">
+      <div class="info-icon">&#x2139;&#xFE0F;</div>
+      <div class="info-content">
+        <h3 class="info-title">Commodity Reporting</h3>
+        <p class="info-text">
+          Your commodity data is used for national agricultural planning and to provide you with targeted support programs. Keep your information up to date by contacting your local extension officer.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <nav class="bottom-nav" aria-label="Main navigation"></nav>
+
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      if (!App.currentUser) {
+        window.location.href = 'login.html';
+        return;
+      }
+
+      if (!App.isVerified()) {
+        App.showToast('Access Restricted', 'Commodities page is only available for verified accounts.', 'warning');
+        setTimeout(() => window.location.href = 'dashboard.html', 1500);
+        return;
+      }
+
+      const user = App.currentUser;
+      document.getElementById('navAvatar').textContent = App.getUserInitials();
+      document.getElementById('navName').textContent = user.name;
+      document.getElementById('navStatus').textContent = user.status;
+      document.getElementById('navStatus').className = 'user-status status-' + user.status;
+
+      App.updateUI();
+    });
+  </script>
+</body>
+</html>

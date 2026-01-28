@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - BAIMS Farmer Hub</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    body {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+    .register-container {
+      min-height: 100vh;
+      padding: 20px;
+      background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+    }
+    .register-header {
+      text-align: center;
+      margin-bottom: 32px;
+      padding-top: 20px;
+    }
+    .logo {
+      font-size: 64px;
+      margin-bottom: 16px;
+    }
+    .register-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: #2e7d32;
+      margin: 0 0 8px 0;
+    }
+    .register-subtitle {
+      font-size: 15px;
+      color: #666;
+      margin: 0;
+    }
+    .register-card {
+      max-width: 540px;
+      margin: 0 auto;
+      padding: 32px 24px;
+      width: 100%;
+    }
+    .progress-steps {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 32px;
+    }
+    .step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .step-number {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #e0e0e0;
+      color: #999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+      transition: all 0.3s;
+    }
+    .step.active .step-number {
+      background: #2e7d32;
+      color: white;
+    }
+    .step.completed .step-number {
+      background: #4caf50;
+      color: white;
+    }
+    .step-label {
+      font-size: 11px;
+      color: #999;
+      font-weight: 600;
+    }
+    .step.active .step-label {
+      color: #2e7d32;
+    }
+    .step-line {
+      width: 40px;
+      height: 2px;
+      background: #e0e0e0;
+      margin: 0 8px;
+    }
+    .form-checkbox {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .form-checkbox input[type="checkbox"] {
+      margin-top: 4px;
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+      flex-shrink: 0;
+      accent-color: #2e7d32;
+    }
+    .checkbox-label {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.5;
+      cursor: pointer;
+    }
+    .register-btn {
+      width: 100%;
+      padding: 16px;
+      background: #2e7d32;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .register-btn:hover:not(:disabled) {
+      background: #1b5e20;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(46,125,50,0.3);
+    }
+    .register-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .info-box {
+      margin-top: 24px;
+      padding: 16px;
+      background: #e3f2fd;
+      border-radius: 8px;
+      border: 1px solid #90caf9;
+      display: flex;
+      gap: 12px;
+    }
+    .info-icon {
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+    .info-content {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.5;
+    }
+    .info-content strong {
+      color: #1976d2;
+    }
+    .register-footer {
+      text-align: center;
+      margin-top: 24px;
+    }
+    .footer-text {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 8px;
+    }
+    .login-link {
+      font-size: 16px;
+      font-weight: 600;
+      color: #2e7d32;
+      text-decoration: none;
+    }
+    .login-link:hover {
+      text-decoration: underline;
+    }
+    .public-access {
+      text-align: center;
+      margin-top: 24px;
+      padding-bottom: 40px;
+    }
+    .public-link {
+      font-size: 14px;
+      color: #666;
+      text-decoration: none;
+    }
+    .public-link:hover {
+      color: #2e7d32;
+    }
+    @media (min-width: 768px) {
+      .register-card {
+        padding: 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="register-container">
+    <div class="register-header">
+      <div class="logo">&#x1F33E;</div>
+      <h1 class="register-title">Register as a Farmer</h1>
+      <p class="register-subtitle">Join the National Farmer Registry</p>
+    </div>
+
+    <div class="register-card card">
+      <div class="progress-steps">
+        <div class="step active">
+          <div class="step-number">1</div>
+          <div class="step-label">Personal Info</div>
+        </div>
+        <div class="step-line"></div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <div class="step-label">Verification</div>
+        </div>
+        <div class="step-line"></div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <div class="step-label">Complete</div>
+        </div>
+      </div>
+
+      <form id="registerForm" onsubmit="handleRegister(event)">
+        <div class="form-group">
+          <label class="form-label" for="name">Full Name</label>
+          <input
+            type="text"
+            id="name"
+            class="form-control"
+            placeholder="Enter your full name"
+            required
+            autocomplete="name"
+          >
+          <div class="form-error" id="nameError">
+            <span>&#x26A0;</span> Please enter your full name
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="email">Email Address</label>
+          <input
+            type="email"
+            id="email"
+            class="form-control"
+            placeholder="your@email.com"
+            required
+            autocomplete="email"
+          >
+          <div class="form-error" id="emailError">
+            <span>&#x26A0;</span> Please enter a valid email address
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="phone">Phone Number</label>
+          <input
+            type="tel"
+            id="phone"
+            class="form-control"
+            placeholder="501-xxx-xxxx"
+            required
+            autocomplete="tel"
+          >
+          <div class="form-error" id="phoneError">
+            <span>&#x26A0;</span> Please enter a valid phone number
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="district">District</label>
+          <select id="district" class="form-control" required>
+            <option value="">Select your district</option>
+            <option value="Belize">Belize</option>
+            <option value="Cayo">Cayo</option>
+            <option value="Corozal">Corozal</option>
+            <option value="Orange Walk">Orange Walk</option>
+            <option value="Stann Creek">Stann Creek</option>
+            <option value="Toledo">Toledo</option>
+          </select>
+          <div class="form-error" id="districtError">
+            <span>&#x26A0;</span> Please select your district
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="village">Village/Town</label>
+          <input
+            type="text"
+            id="village"
+            class="form-control"
+            placeholder="Enter your village or town"
+            required
+          >
+          <div class="form-error" id="villageError">
+            <span>&#x26A0;</span> Please enter your village or town
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            class="form-control"
+            placeholder="Create a password (min 6 characters)"
+            required
+            autocomplete="new-password"
+            minlength="6"
+          >
+          <div class="form-hint">Password must be at least 6 characters</div>
+          <div class="form-error" id="passwordError">
+            <span>&#x26A0;</span> Password must be at least 6 characters
+          </div>
+        </div>
+
+        <div class="form-checkbox">
+          <input type="checkbox" id="terms" required>
+          <label for="terms" class="checkbox-label">
+            I agree to the terms and conditions and authorize the Ministry of Agriculture to process my information
+          </label>
+        </div>
+
+        <button type="submit" class="register-btn" id="registerBtn">
+          Register Now
+        </button>
+      </form>
+
+      <div class="info-box">
+        <div class="info-icon">&#x2139;&#xFE0F;</div>
+        <div class="info-content">
+          <strong>Next Steps:</strong> After registration, an extension officer will verify your information. You'll receive a notification once verified and can access your full farmer profile.
+        </div>
+      </div>
+    </div>
+
+    <div class="register-footer">
+      <div class="footer-text">Already have an account?</div>
+      <a href="login.html" class="login-link">Login Here</a>
+    </div>
+
+    <div class="public-access">
+      <a href="index.html" class="public-link">&#x2190; Back to Home</a>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script>
+    function handleRegister(e) {
+      e.preventDefault();
+
+      document.querySelectorAll('.form-error').forEach(el => el.classList.remove('show'));
+      document.querySelectorAll('.form-control').forEach(el => el.classList.remove('error'));
+
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const district = document.getElementById('district').value;
+      const village = document.getElementById('village').value;
+      const password = document.getElementById('password').value;
+      const terms = document.getElementById('terms').checked;
+
+      let hasError = false;
+
+      if (!name) {
+        document.getElementById('name').classList.add('error');
+        document.getElementById('nameError').classList.add('show');
+        hasError = true;
+      }
+
+      if (!email || !email.includes('@')) {
+        document.getElementById('email').classList.add('error');
+        document.getElementById('emailError').classList.add('show');
+        hasError = true;
+      }
+
+      if (!phone) {
+        document.getElementById('phone').classList.add('error');
+        document.getElementById('phoneError').classList.add('show');
+        hasError = true;
+      }
+
+      if (!district) {
+        document.getElementById('district').classList.add('error');
+        document.getElementById('districtError').classList.add('show');
+        hasError = true;
+      }
+
+      if (!village) {
+        document.getElementById('village').classList.add('error');
+        document.getElementById('villageError').classList.add('show');
+        hasError = true;
+      }
+
+      if (!password || password.length < 6) {
+        document.getElementById('password').classList.add('error');
+        document.getElementById('passwordError').classList.add('show');
+        hasError = true;
+      }
+
+      if (!hasError && terms) {
+        App.register({ name, email, phone, district, village, password });
+      }
+    }
+
+    document.querySelectorAll('.form-control').forEach(input => {
+      input.addEventListener('input', function() {
+        this.classList.remove('error');
+        const errorEl = document.getElementById(this.id + 'Error');
+        if (errorEl) errorEl.classList.remove('show');
+      });
+    });
+  </script>
+</body>
+</html>

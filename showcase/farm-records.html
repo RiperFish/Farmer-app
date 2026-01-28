@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Farm Records - BAIMS Farmer Hub</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .farm-overview {
+      padding: 24px;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+    }
+    .overview-grid {
+      display: grid;
+      gap: 16px;
+      margin-top: 20px;
+    }
+    .overview-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px;
+      background: white;
+      border-radius: 12px;
+    }
+    .overview-icon {
+      font-size: 36px;
+      flex-shrink: 0;
+    }
+    .overview-label {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 4px;
+    }
+    .overview-value {
+      font-size: 18px;
+      font-weight: 700;
+      color: #2e7d32;
+    }
+    .plots-section { margin-bottom: 24px; }
+    .plots-list {
+      display: grid;
+      gap: 16px;
+    }
+    .plot-card { padding: 20px; }
+    .plot-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .plot-name {
+      font-size: 18px;
+      font-weight: 700;
+      color: #333;
+      margin: 0;
+    }
+    .plot-status {
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    .status-active { background: #4caf50; color: white; }
+    .status-fallow { background: #ff9800; color: white; }
+    .status-harvested { background: #2196f3; color: white; }
+    .plot-info {
+      display: grid;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .info-item {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    .info-icon {
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+    .info-label {
+      font-size: 12px;
+      color: #666;
+      margin-bottom: 2px;
+    }
+    .info-value {
+      font-size: 15px;
+      font-weight: 600;
+      color: #333;
+    }
+    .plot-timeline {
+      padding: 16px;
+      background: #f5f5f5;
+      border-radius: 8px;
+      margin-top: 16px;
+    }
+    .timeline-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #666;
+      margin-bottom: 8px;
+    }
+    .timeline-bar {
+      height: 8px;
+      background: #e0e0e0;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+    .timeline-progress {
+      height: 100%;
+      background: linear-gradient(90deg, #4caf50 0%, #8bc34a 100%);
+      transition: width 0.3s ease;
+    }
+    .timeline-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #666;
+    }
+    .records-note {
+      padding: 16px;
+      background: #fff3e0;
+      border: 1px solid #ffb74d;
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .note-icon {
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+    .note-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #f57c00;
+      margin: 0 0 6px 0;
+    }
+    .note-text {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.5;
+      margin: 0;
+    }
+    .statistics-section { margin-bottom: 24px; }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .stat-card {
+      padding: 20px;
+      text-align: center;
+    }
+    .stat-value {
+      font-size: 32px;
+      font-weight: 700;
+      color: #2e7d32;
+      margin-bottom: 6px;
+    }
+    .stat-label {
+      font-size: 12px;
+      color: #666;
+      font-weight: 600;
+    }
+    @media (min-width: 768px) {
+      .overview-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-content">
+      <div class="header-left">
+        <button class="menu-btn" aria-label="Open menu">
+          <span>&#x2630;</span>
+        </button>
+        <a href="dashboard.html" class="logo-container">
+          <div class="logo">
+            <span class="logo-icon">&#x1F33E;</span>
+            <div class="logo-text">
+              <span class="logo-main">BAIMS</span>
+              <span class="logo-sub">Farmer Hub</span>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="header-right">
+        <a href="notifications.html" class="notification-btn" aria-label="Notifications">
+          <span>&#x1F514;</span>
+          <span class="notification-badge">2</span>
+        </a>
+        <button class="logout-btn" onclick="App.logout()">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="mobile-nav" aria-label="Mobile navigation">
+    <div class="nav-header">
+      <div class="user-info">
+        <div class="user-avatar" id="navAvatar">JM</div>
+        <div class="user-details">
+          <div class="user-name" id="navName">John Martinez</div>
+          <div class="user-status status-verified" id="navStatus">verified</div>
+        </div>
+      </div>
+      <button class="close-btn" aria-label="Close menu">&times;</button>
+    </div>
+    <ul class="nav-links">
+      <li><a href="dashboard.html"><img src="assets/img/home.svg" alt=""> Dashboard</a></li>
+      <li><a href="profile.html"><img src="assets/img/user-black.svg" alt=""> My Profile</a></li>
+      <li><a href="farmer-id.html"><img src="assets/img/id.svg" alt=""> Farmer ID</a></li>
+      <li><a href="farm-records.html"><img src="assets/img/chart.svg" alt=""> Farm Records</a></li>
+      <li><a href="notifications.html"><img src="assets/img/bell.svg" alt=""> Notifications</a></li>
+      <li class="nav-divider"></li>
+      <li><a href="calendar.html"><img src="assets/img/calendar.svg" alt=""> Planting Calendar</a></li>
+      <li><a href="weather.html"><img src="assets/img/weather.svg" alt=""> Weather</a></li>
+      <li><a href="resources.html"><img src="assets/img/resources.svg" alt=""> Resources</a></li>
+    </ul>
+  </nav>
+  <div class="nav-overlay"></div>
+
+  <main class="page-container">
+    <div class="page-header">
+      <h1 class="page-title">
+        <img src="assets/img/chart.svg" alt="">
+        Farm Records
+      </h1>
+      <p class="page-subtitle">View your registered farm and plot information</p>
+    </div>
+
+    <section class="farm-overview card">
+      <h2 class="section-title">&#x1F3E1; Martinez Family Farm</h2>
+      <div class="overview-grid">
+        <div class="overview-item">
+          <div class="overview-icon">&#x1F4CD;</div>
+          <div class="overview-content">
+            <div class="overview-label">Location</div>
+            <div class="overview-value">San Ignacio, Cayo</div>
+          </div>
+        </div>
+        <div class="overview-item">
+          <div class="overview-icon">&#x1F33E;</div>
+          <div class="overview-content">
+            <div class="overview-label">Total Area</div>
+            <div class="overview-value">25 acres</div>
+          </div>
+        </div>
+        <div class="overview-item">
+          <div class="overview-icon">&#x1F4E6;</div>
+          <div class="overview-content">
+            <div class="overview-label">Total Plots</div>
+            <div class="overview-value">3 plots</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="plots-section">
+      <h2 class="section-title">&#x1F5FA;&#xFE0F; Plot Details</h2>
+      <div class="plots-list">
+        <article class="plot-card card">
+          <div class="plot-header">
+            <h3 class="plot-name">North Field</h3>
+            <span class="plot-status status-active">active</span>
+          </div>
+          <div class="plot-info">
+            <div class="info-item">
+              <span class="info-icon">&#x1F33E;</span>
+              <div class="info-content">
+                <div class="info-label">Crop Type</div>
+                <div class="info-value">Corn</div>
+              </div>
+            </div>
+            <div class="info-item">
+              <span class="info-icon">&#x1F4CF;</span>
+              <div class="info-content">
+                <div class="info-label">Area</div>
+                <div class="info-value">10 acres</div>
+              </div>
+            </div>
+            <div class="info-item">
+              <span class="info-icon">&#x1F331;</span>
+              <div class="info-content">
+                <div class="info-label">Planting Date</div>
+                <div class="info-value">Jun 15, 2024</div>
+              </div>
+            </div>
+            <div class="info-item">
+              <span class="info-icon">&#x1F69C;</span>
+              <div class="info-content">
+                <div class="info-label">Expected Harvest</div>
+                <div class="info-value">Oct 15, 2024</div>
+              </div>
+            </div>
+          </div>
+          <div class="plot-timeline">
+            <div class="timeline-label">Growing Progress</div>
+            <div class="timeline-bar">
+              <div class="timeline-progress" style="width: 75%;"></div>
+            </div>
+            <div class="timeline-info">
+              <span>92 days</span>
+              <span>30 days remaining</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="plot-card card">
+          <div class="plot-header">
+            <h3 class="plot-name">South Field</h3>
+            <span class="plot-status status-active">active</span>
+          </div>
+          <div class="plot-info">
+            <div class="info-item">
+              <span class="info-icon">&#x1F33E;</span>
+              <div class="info-content">
+                <div class="info-label">Crop Type</div>
+                <div class="info-value">Red Kidney Beans</div>
+              </div>
+            </div>
+            <div class="info-item">
+              <span class="info-icon">&#x1F4CF;</span>
+              <div class="info-content">
+                <div class="info-label">Area</div>
+                <div class="info-value">8 acres</div>
+              </div>
+            </div>
+            <div class="info-item">
+              <span class="info-icon">&#x1F331;</span>
+              <div class="info-content">
+                <div class="info-label">Planting Date</div>
+                <div class="info-value">Nov 1, 2024</div>
+              </div>
+            </div>
+            <div class="info-item">
+              <span class="info-icon">&#x1F69C;</span>
+              <div class="info-content">
+                <div class="info-label">Expected Harvest</div>
+                <div class="info-value">Feb 15, 2025</div>
+              </div>
+            </div>
+          </div>
+          <div class="plot-timeline">
+            <div class="timeline-label">Growing Progress</div>
+            <div class="timeline-bar">
+              <div class="timeline-progress" style="width: 40%;"></div>
+            </div>
+            <div class="timeline-info">
+              <span>45 days</span>
+              <span>62 days remaining</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="plot-card card">
+          <div class="plot-header">
+            <h3 class="plot-name">East Field</h3>
+            <span class="plot-status status-fallow">fallow</span>
+          </div>
+          <div class="plot-info">
+            <div class="info-item">
+              <span class="info-icon">&#x1F33E;</span>
+              <div class="info-content">
+                <div class="info-label">Crop Type</div>
+                <div class="info-value">Vegetables</div>
+              </div>
+            </div>
+            <div class="info-item">
+              <span class="info-icon">&#x1F4CF;</span>
+              <div class="info-content">
+                <div class="info-label">Area</div>
+                <div class="info-value">7 acres</div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="records-note card">
+      <div class="note-icon">&#x2139;&#xFE0F;</div>
+      <div class="note-content">
+        <h3 class="note-title">View Only Access</h3>
+        <p class="note-text">
+          This is a view-only display of your registered farm records. To update plot information or add new plots, please contact your local extension officer.
+        </p>
+      </div>
+    </section>
+
+    <section class="statistics-section">
+      <h2 class="section-title">&#x1F4C8; Summary Statistics</h2>
+      <div class="stats-grid">
+        <div class="stat-card card">
+          <div class="stat-value">2</div>
+          <div class="stat-label">Active Plots</div>
+        </div>
+        <div class="stat-card card">
+          <div class="stat-value">18</div>
+          <div class="stat-label">Acres in Production</div>
+        </div>
+        <div class="stat-card card">
+          <div class="stat-value">3</div>
+          <div class="stat-label">Crop Types</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <nav class="bottom-nav" aria-label="Main navigation"></nav>
+
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      if (!App.currentUser) {
+        window.location.href = 'login.html';
+        return;
+      }
+
+      if (!App.isVerified()) {
+        App.showToast('Access Restricted', 'Farm Records are only available for verified accounts.', 'warning');
+        setTimeout(() => window.location.href = 'dashboard.html', 1500);
+        return;
+      }
+
+      const user = App.currentUser;
+      document.getElementById('navAvatar').textContent = App.getUserInitials();
+      document.getElementById('navName').textContent = user.name;
+      document.getElementById('navStatus').textContent = user.status;
+      document.getElementById('navStatus').className = 'user-status status-' + user.status;
+
+      App.updateUI();
+    });
+  </script>
+</body>
+</html>

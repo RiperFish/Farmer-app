@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resources & Contacts - BAIMS Farmer Hub</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .filter-section {
+      padding: 16px;
+      margin-bottom: 24px;
+    }
+    .filter-select {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 15px;
+      background: white;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .filter-select:focus {
+      border-color: #2e7d32;
+      outline: none;
+    }
+    .resources-list {
+      display: grid;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .resource-card {
+      padding: 20px;
+      transition: transform 0.2s;
+    }
+    .resource-card:hover {
+      transform: translateY(-2px);
+    }
+    .resource-header {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .resource-icon {
+      font-size: 36px;
+      flex-shrink: 0;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #e8f5e9;
+      border-radius: 12px;
+    }
+    .resource-info { flex: 1; }
+    .resource-name {
+      font-size: 18px;
+      font-weight: 700;
+      color: #333;
+      margin: 0 0 6px 0;
+    }
+    .resource-category {
+      display: inline-block;
+      background: #e8f5e9;
+      color: #2e7d32;
+      padding: 4px 12px;
+      border-radius: 16px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .resource-details {
+      display: grid;
+      gap: 12px;
+    }
+    .detail-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+    }
+    .detail-icon {
+      font-size: 18px;
+      flex-shrink: 0;
+      width: 24px;
+      text-align: center;
+    }
+    .detail-text { color: #666; }
+    .detail-link {
+      color: #1976d2;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .detail-link:hover {
+      text-decoration: underline;
+    }
+    .emergency-banner {
+      padding: 20px;
+      background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+      border: 2px solid #ef5350;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+    .banner-icon {
+      font-size: 48px;
+      flex-shrink: 0;
+    }
+    .banner-content { flex: 1; }
+    .banner-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #c62828;
+      margin: 0 0 4px 0;
+    }
+    .banner-text {
+      font-size: 14px;
+      color: #d32f2f;
+      margin: 0;
+      font-weight: 500;
+    }
+    .banner-phone {
+      color: #c62828;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .banner-phone:hover {
+      text-decoration: underline;
+    }
+    @media (min-width: 768px) {
+      .resources-list {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-content">
+      <div class="header-left">
+        <a href="index.html" class="logo-container">
+          <div class="logo">
+            <span class="logo-icon">&#x1F33E;</span>
+            <div class="logo-text">
+              <span class="logo-main">BAIMS</span>
+              <span class="logo-sub">Farmer Hub</span>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="header-right">
+        <a href="login.html" class="login-btn">Login</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-container">
+    <div class="page-header">
+      <h1 class="page-title">
+        <img src="assets/img/resources.svg" alt="">
+        Resources & Contacts
+      </h1>
+      <p class="page-subtitle">Find support and information for your farming needs</p>
+    </div>
+
+    <div class="filter-section card">
+      <select class="filter-select" id="categoryFilter" onchange="filterResources()">
+        <option value="all">All Resources</option>
+        <option value="Extension Services">Extension Services</option>
+        <option value="Financial Support">Financial Support</option>
+        <option value="Marketing">Marketing</option>
+        <option value="Emergency">Emergency</option>
+      </select>
+    </div>
+
+    <div class="resources-list" id="resourceList">
+      <article class="resource-card card" data-category="Extension Services">
+        <div class="resource-header">
+          <div class="resource-icon">&#x1F33E;</div>
+          <div class="resource-info">
+            <h3 class="resource-name">Belize Agricultural Health Authority</h3>
+            <span class="resource-category">Extension Services</span>
+          </div>
+        </div>
+        <div class="resource-details">
+          <div class="detail-row">
+            <span class="detail-icon">&#x1F3E2;</span>
+            <span class="detail-text">Belmopan, Cayo District</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-icon">&#x1F4DE;</span>
+            <a href="tel:501-824-3773" class="detail-link">501-824-3773</a>
+          </div>
+          <div class="detail-row">
+            <span class="detail-icon">&#x2709;&#xFE0F;</span>
+            <a href="mailto:info@baha.org.bz" class="detail-link">info@baha.org.bz</a>
+          </div>
+          <div class="detail-row">
+            <span class="detail-icon">&#x1F310;</span>
+            <a href="http://www.baha.org.bz" target="_blank" class="detail-link">www.baha.org.bz</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="resource-card card" data-category="Extension Services">
+        <div class="resource-header">
+          <div class="resource-icon">&#x1F33E;</div>
+          <div class="resource-info">
+            <h3 class="resource-name">Cayo District Extension Office</h3>
+            <span class="resource-category">Extension Services</span>
+          </div>
+        </div>
+        <div class="resource-details">
+          <div class="detail-row">
+            <span class="detail-icon">&#x1F4CD;</span>
+            <span class="detail-text">Cayo District</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-icon">&#x1F3E2;</span>
+            <span class="detail-text">San Ignacio Town</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-icon">&#x1F4DE;</span>
+            <a href="tel:501-824-2210" class="detail-link">501-824-2210</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="resource-card card" data-category="Extension Services">
+        <div class="resource-header">
+          <div class="resource-icon">&#x1F33E;</div>
+          <div class="resource-info">
+            <h3 class="resource-name">Orange Walk District Extension Office</h3>
+            <span class="resource-category">Extension Services</span>
+          </div>
+        </div>
+        <div class="resource-details">
+          <div class="detail-row">
+            <span class="detail-icon">&#x1F4CD;</span>
+            <span class="detail-text">Orange Walk District</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-icon">&#x1F3E2;</span>
+            <span class="detail-text">Orange Walk Town</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-icon">&#x1F4DE;</span>
+            <a href="tel:501-322-2877" class="detail-link">501-322-2877</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="resource-card card" data-category="Extension Services">
+        <div class="resource-header">
+          <div class="resource-icon">&#x1F33E;</div>
+          <div class="resource-info">
+            <h3 class="resource-name">Toledo District Extension Office</h3>
+            <span class="resource-category">Extension Services</span>
+          </div>
+        </div>
+        <div class="resource-details">
+          <div class="detail-row">
+            <span class="detail-icon">&#x1F4CD;</span>
+            <span class="detail-text">Toledo District</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-icon">&#x1F3E2;</span>
+            <span class="detail-text">Punta Gorda</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-icon">&#x1F4DE;</span>
+            <a href="tel:501-722-2707" class="detail-link">501-722-2707</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="resource-card card" data-category="Financial Support">
+        <div class="resource-header">
+          <div class="resource-icon">&#x1F4B0;</div>
+          <div class="resource-info">
+            <h3 class="resource-name">Development Finance Corporation</h3>
+            <span class="resource-category">Financial Support</span>
+          </div>
+        </div>
+        <div class="resource-details">
+          <div class="detail-row">
+            <span class="detail-icon">&#x1F3E2;</span>
+            <span class="detail-text">Belize City</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-icon">&#x1F4DE;</span>
+            <a href="tel:501-227-2892" class="detail-link">501-227-2892</a>
+          </div>
+          <div class="detail-row">
+            <span class="detail-icon">&#x2709;&#xFE0F;</span>
+            <a href="mailto:info@dfc.bz" class="detail-link">info@dfc.bz</a>
+          </div>
+          <div class="detail-row">
+            <span class="detail-icon">&#x1F310;</span>
+            <a href="http://www.dfc.bz" target="_blank" class="detail-link">www.dfc.bz</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="resource-card card" data-category="Marketing">
+        <div class="resource-header">
+          <div class="resource-icon">&#x1F6D2;</div>
+          <div class="resource-info">
+            <h3 class="resource-name">Belize Marketing & Development Corporation</h3>
+            <span class="resource-category">Marketing</span>
+          </div>
+        </div>
+        <div class="resource-details">
+          <div class="detail-row">
+            <span class="detail-icon">&#x1F3E2;</span>
+            <span class="detail-text">Belmopan</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-icon">&#x1F4DE;</span>
+            <a href="tel:501-203-0333" class="detail-link">501-203-0333</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="resource-card card" data-category="Emergency">
+        <div class="resource-header">
+          <div class="resource-icon">&#x1F6A8;</div>
+          <div class="resource-info">
+            <h3 class="resource-name">National Emergency Management Organization</h3>
+            <span class="resource-category">Emergency</span>
+          </div>
+        </div>
+        <div class="resource-details">
+          <div class="detail-row">
+            <span class="detail-icon">&#x1F3E2;</span>
+            <span class="detail-text">Belmopan</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-icon">&#x1F4DE;</span>
+            <a href="tel:501-822-2054" class="detail-link">501-822-2054</a>
+          </div>
+          <div class="detail-row">
+            <span class="detail-icon">&#x1F310;</span>
+            <a href="http://www.nemo.org.bz" target="_blank" class="detail-link">www.nemo.org.bz</a>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <section class="emergency-banner card">
+      <div class="banner-icon">&#x1F6A8;</div>
+      <div class="banner-content">
+        <h3 class="banner-title">Emergency Contact</h3>
+        <p class="banner-text">For agricultural emergencies, contact NEMO at <a href="tel:501-822-2054" class="banner-phone">501-822-2054</a></p>
+      </div>
+    </section>
+  </main>
+
+  <nav class="bottom-nav" aria-label="Main navigation">
+    <div class="nav-items">
+      <a href="index.html" class="nav-item" aria-label="Home">
+        <img src="assets/img/home.svg" alt="">
+        <span class="nav-label">Home</span>
+      </a>
+      <a href="weather.html" class="nav-item" aria-label="Weather">
+        <img src="assets/img/weather.svg" alt="">
+        <span class="nav-label">Weather</span>
+      </a>
+      <a href="resources.html" class="nav-item active" aria-label="Resources">
+        <img src="assets/img/phone.svg" alt="">
+        <span class="nav-label">Contact</span>
+      </a>
+      <a href="login.html" class="nav-item" aria-label="Login">
+        <img src="assets/img/user-black.svg" alt="">
+        <span class="nav-label">Login</span>
+      </a>
+    </div>
+  </nav>
+
+  <script src="js/app.js"></script>
+  <script>
+    function filterResources() {
+      const filter = document.getElementById('categoryFilter').value;
+      const resources = document.querySelectorAll('.resource-card');
+      resources.forEach(resource => {
+        if (filter === 'all' || resource.dataset.category === filter) {
+          resource.style.display = 'block';
+        } else {
+          resource.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
