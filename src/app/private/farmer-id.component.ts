@@ -62,37 +62,93 @@ import { AuthService } from '../core/auth.service';
               <div class="qr-container">
                 <div class="qr-label">SCAN TO VERIFY</div>
                 <div class="qr-code">
-                  <svg viewBox="0 0 200 200" class="qr-svg">
-                    <rect x="0" y="0" width="200" height="200" fill="white"/>
-                    <rect x="20" y="20" width="50" height="50" fill="black"/>
-                    <rect x="130" y="20" width="50" height="50" fill="black"/>
-                    <rect x="20" y="130" width="50" height="50" fill="black"/>
-                    <rect x="30" y="30" width="30" height="30" fill="white"/>
-                    <rect x="140" y="30" width="30" height="30" fill="white"/>
-                    <rect x="30" y="140" width="30" height="30" fill="white"/>
-                    <rect x="85" y="20" width="15" height="15" fill="black"/>
-                    <rect x="105" y="20" width="15" height="15" fill="black"/>
-                    <rect x="85" y="40" width="15" height="15" fill="black"/>
-                    <rect x="105" y="40" width="15" height="15" fill="black"/>
-                    <rect x="20" y="85" width="15" height="15" fill="black"/>
-                    <rect x="40" y="85" width="15" height="15" fill="black"/>
-                    <rect x="85" y="85" width="30" height="30" fill="black"/>
-                    <rect x="90" y="90" width="20" height="20" fill="white"/>
-                    <rect x="130" y="85" width="15" height="15" fill="black"/>
-                    <rect x="150" y="85" width="15" height="15" fill="black"/>
-                    <rect x="170" y="85" width="15" height="15" fill="black"/>
-                    <rect x="85" y="130" width="15" height="15" fill="black"/>
-                    <rect x="105" y="130" width="15" height="15" fill="black"/>
-                    <rect x="85" y="150" width="15" height="15" fill="black"/>
-                    <rect x="105" y="150" width="15" height="15" fill="black"/>
-                    <rect x="130" y="130" width="15" height="15" fill="black"/>
-                    <rect x="150" y="130" width="15" height="15" fill="black"/>
-                    <rect x="170" y="130" width="15" height="15" fill="black"/>
-                    <rect x="130" y="150" width="15" height="15" fill="black"/>
-                    <rect x="170" y="150" width="15" height="15" fill="black"/>
-                    <rect x="85" y="170" width="15" height="15" fill="black"/>
-                    <rect x="130" y="170" width="15" height="15" fill="black"/>
-                    <rect x="150" y="170" width="15" height="15" fill="black"/>
+                  <svg viewBox="0 0 210 210" class="qr-svg">
+                    <rect x="0" y="0" width="210" height="210" fill="white"/>
+
+                    <!-- Top-left position marker -->
+                    <rect x="10" y="10" width="60" height="60" fill="#1a3a52"/>
+                    <rect x="20" y="20" width="40" height="40" fill="white"/>
+                    <rect x="30" y="30" width="20" height="20" fill="#1a3a52"/>
+
+                    <!-- Top-right position marker -->
+                    <rect x="140" y="10" width="60" height="60" fill="#1a3a52"/>
+                    <rect x="150" y="20" width="40" height="40" fill="white"/>
+                    <rect x="160" y="30" width="20" height="20" fill="#1a3a52"/>
+
+                    <!-- Bottom-left position marker -->
+                    <rect x="10" y="140" width="60" height="60" fill="#1a3a52"/>
+                    <rect x="20" y="150" width="40" height="40" fill="white"/>
+                    <rect x="30" y="160" width="20" height="20" fill="#1a3a52"/>
+
+                    <!-- Data pattern - row 1 (between top markers) -->
+                    <rect x="80" y="10" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="100" y="10" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="110" y="20" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="90" y="30" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="120" y="30" width="10" height="10" fill="#1a3a52"/>
+
+                    <!-- Data pattern - left side -->
+                    <rect x="10" y="80" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="30" y="90" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="50" y="90" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="20" y="100" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="10" y="110" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="40" y="120" width="10" height="10" fill="#1a3a52"/>
+
+                    <!-- Data pattern - center area -->
+                    <rect x="80" y="80" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="90" y="70" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="100" y="80" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="110" y="70" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="120" y="80" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="90" y="90" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="110" y="100" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="100" y="110" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="80" y="100" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="120" y="110" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="130" y="90" width="10" height="10" fill="#1a3a52"/>
+
+                    <!-- Data pattern - right side -->
+                    <rect x="150" y="80" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="170" y="90" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="180" y="100" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="160" y="110" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="190" y="120" width="10" height="10" fill="#1a3a52"/>
+
+                    <!-- Data pattern - bottom center -->
+                    <rect x="80" y="140" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="100" y="150" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="120" y="140" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="90" y="160" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="110" y="170" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="130" y="160" width="10" height="10" fill="#1a3a52"/>
+
+                    <!-- Data pattern - bottom right -->
+                    <rect x="150" y="140" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="170" y="150" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="160" y="170" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="180" y="160" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="190" y="180" width="10" height="10" fill="#1a3a52"/>
+
+                    <!-- Additional data dots for density -->
+                    <rect x="85" y="50" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="105" y="50" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="125" y="60" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="75" y="120" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="95" y="130" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="115" y="125" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="135" y="115" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="145" y="105" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="155" y="125" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="175" y="135" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="185" y="145" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="195" y="155" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="80" y="190" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="100" y="190" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="120" y="180" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="140" y="190" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="160" y="190" width="10" height="10" fill="#1a3a52"/>
+                    <rect x="180" y="190" width="10" height="10" fill="#1a3a52"/>
                   </svg>
                 </div>
                 <div class="id-text">ID: {{ currentUser()?.farmerId }}</div>
