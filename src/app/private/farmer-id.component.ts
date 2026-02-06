@@ -648,15 +648,25 @@ import { AuthService } from '../core/auth.service';
     }
 
     @media (max-width: 480px) {
-      .mob-banner { height: 140px; }
-
+      .page-container{
+        padding:0px;
+      }
+      .mob-banner { height: 100px; }
+      .id-card{
+        border-radius:0px;
+        box-shadow: none;
+        background: transparent;
+      }
+      .id-card-body{
+        background: transparent;
+      }
       .mob-profile-section { margin-top: -55px; }
 
       .mob-avatar {
         width: 110px;
         height: 110px;
       }
-
+    
       .mob-avatar-initials { font-size: 36px; }
 
       .mob-name { font-size: 22px; }
