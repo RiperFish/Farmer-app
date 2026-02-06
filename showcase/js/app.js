@@ -28,10 +28,26 @@ const App = {
     }
   },
 
+  pageTitles: {
+    'index.html': 'BAIMS Farmer Hub',
+    'weather.html': 'Weather',
+    'calendar.html': 'Planting Calendar',
+    'resources.html': 'Resources',
+    'login.html': 'Login',
+    'register.html': 'Register',
+    'dashboard.html': 'Dashboard',
+    'profile.html': 'My Profile',
+    'farmer-id.html': 'Farmer ID',
+    'farm-records.html': 'Farm Records',
+    'notifications.html': 'Notifications',
+    'commodities.html': 'Commodities'
+  },
+
   init() {
     this.checkAuthState();
     this.setupEventListeners();
     this.updateUI();
+    this.updateTopNav();
   },
 
   checkAuthState() {
@@ -162,6 +178,10 @@ const App = {
       if (this.currentUser.status === 'verified') {
         bottomNav.innerHTML = `
           <div class="nav-items">
+            <a href="dashboard.html" class="nav-item ${currentPage === 'dashboard.html' ? 'active' : ''}" aria-label="Home">
+              <img src="assets/img/home.svg" alt="">
+              <span class="nav-label">Home</span>
+            </a>
             <a href="farmer-id.html" class="nav-item ${currentPage === 'farmer-id.html' ? 'active' : ''}" aria-label="Farmer ID">
               <img src="assets/img/id.svg" alt="">
               <span class="nav-label">ID</span>
@@ -224,6 +244,30 @@ const App = {
         </div>
       `;
     }
+  },
+
+  updateTopNav() {
+    const topNav = document.querySelector('.top-nav');
+    if (!topNav) return;
+
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    const title = this.pageTitles[currentPage] || 'BAIMS Farmer Hub';
+    const rootPages = this.currentUser ? ['dashboard.html'] : ['index.html'];
+    const isRoot = rootPages.includes(currentPage);
+
+    const backButton = isRoot
+      ? '<div class="top-nav-placeholder"></div>'
+      : `<button class="top-nav-back" onclick="history.back()" aria-label="Go back">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>`;
+
+    topNav.innerHTML = `
+      ${backButton}
+      <h1 class="top-nav-title">${title}</h1>
+      <div class="top-nav-placeholder"></div>
+    `;
   },
 
   showToast(title, message, type = 'info') {

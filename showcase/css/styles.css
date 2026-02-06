@@ -615,6 +615,61 @@ img {
   pointer-events: auto;
 }
 
+.top-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  background: linear-gradient(135deg, #2e7d32 0%, #388e3c 100%);
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4px;
+  z-index: 1001;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.top-nav-back {
+  background: none;
+  border: none;
+  color: white;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background 0.2s;
+  flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.top-nav-back:active {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.top-nav-placeholder {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+}
+
+.top-nav-title {
+  flex: 1;
+  text-align: center;
+  font-size: 17px;
+  font-weight: 600;
+  color: white;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 4px;
+  letter-spacing: 0.2px;
+}
+
 .bottom-nav {
   position: fixed;
   bottom: 0;
@@ -953,6 +1008,44 @@ select:focus {
   border: 0;
 }
 
+@media (max-width: 767px) {
+  .top-nav {
+    display: flex;
+  }
+
+  .app-header {
+    display: none;
+  }
+
+  .mobile-nav {
+    display: none;
+  }
+
+  .nav-overlay {
+    display: none;
+  }
+
+  body {
+    padding-top: 56px;
+    padding-bottom: 80px;
+  }
+
+  body.no-header {
+    padding-top: 0;
+  }
+
+  .toast-container {
+    top: 72px;
+    right: 12px;
+    left: 12px;
+  }
+
+  .toast {
+    min-width: auto;
+    max-width: 100%;
+  }
+}
+
 @media (max-width: 640px) {
   .page-container {
     padding: 16px;
@@ -961,15 +1054,15 @@ select:focus {
   .card {
     border-radius: var(--radius-md);
   }
-
-  body {
-    padding-bottom: 80px;
-  }
 }
 
 @media (min-width: 768px) {
   body {
     padding-bottom: 0;
+  }
+
+  .top-nav {
+    display: none !important;
   }
 
   .bottom-nav {
@@ -1011,6 +1104,7 @@ select:focus {
   }
 
   .app-header,
+  .top-nav,
   .bottom-nav {
     display: none !important;
   }
