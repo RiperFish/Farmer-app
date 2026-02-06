@@ -265,7 +265,7 @@ import { AuthService } from '../core/auth.service';
       grid-template-columns: 280px 1fr;
       gap: 0;
       padding: 32px;
-      border-bottom: 3px solid #FFD700;
+      /* border-bottom: 3px solid #FFD700; */
     }
 
     .left-section {
@@ -602,6 +602,7 @@ import { AuthService } from '../core/auth.service';
       .id-card {
         border-width: 3px;
         border-radius: 16px;
+        border-width:1px;
       }
 
       .main-content {
