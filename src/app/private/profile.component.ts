@@ -73,6 +73,8 @@ import { DataService } from '../core/data.service';
           <label class="form-label">Field to Update</label>
           <select class="form-control" [(ngModel)]="updateField">
             <option value="">Select a field</option>
+            <option value="first_name">First Name</option>
+            <option value="last_name">Last Name</option>
             <option value="phone">Phone Number</option>
             <option value="email">Email Address</option>
             <option value="village">Village</option>
