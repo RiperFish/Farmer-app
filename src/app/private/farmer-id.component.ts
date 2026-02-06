@@ -544,12 +544,8 @@ import { AuthService } from '../core/auth.service';
       .mob-cell-value {
         font-size: 17px;
         font-weight: 500;
-        color: #2d7a3e;
       }
 
-      .mob-cell-value.dark {
-        color: #2d7a3e;
-      }
 
       .bottom-section {
         padding: 24px 20px 16px;
@@ -616,7 +612,7 @@ import { AuthService } from '../core/auth.service';
 
       .mob-cell-label { font-size: 12px; }
 
-      .mob-cell-value { font-size: 15px; }
+      .mob-cell-value { font-size: 14px; }
 
       .qr-code {
         width: 160px;
