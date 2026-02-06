@@ -33,7 +33,6 @@ import { AuthService } from '../core/auth.service';
       justify-content: space-between;
       padding: 0 4px;
       z-index: 1000;
-      
     }
 
     .back-btn {
