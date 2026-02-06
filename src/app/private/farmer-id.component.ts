@@ -485,7 +485,7 @@ import { AuthService } from '../core/auth.service';
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
         flex-shrink: 0;
       }
 
