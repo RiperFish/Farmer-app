@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../core/auth.service';
 
@@ -8,27 +8,10 @@ import { AuthService } from '../core/auth.service';
   imports: [CommonModule],
   template: `
     <div class="page-container">
-      <div class="mobile-page-header">
-        <div class="mobile-headline">
-          <h1 class="mobile-title">BELIZE</h1>
-          <h2 class="mobile-subtitle">Farmer Identification Card</h2>
-          <p class="mobile-ministry">Ministry of Agriculture, Fisheries, Forestry & Sustainable Development</p>
-        </div>
-        <div class="mobile-profile">
-          <div class="mobile-photo">
-            <div class="mobile-initials">{{ getUserInitials() }}</div>
-          </div>
-          <div class="mobile-profile-details">
-            <div class="mobile-name">{{ currentUser()?.name?.toUpperCase() }}</div>
-            <div class="mobile-badge">VERIFIED &#x2713;</div>
-          </div>
-        </div>
-      </div>
-
       <div class="id-card-wrapper">
         <div class="id-card">
+
           <div class="id-card-header">
-            <!-- <div class="flag-emblem">BZ</div> -->
             <div class="header-content">
               <h1 class="belize-text">BELIZE</h1>
               <h2 class="card-title">FARMER IDENTIFICATION CARD</h2>
@@ -36,14 +19,39 @@ import { AuthService } from '../core/auth.service';
             </div>
           </div>
 
+          <div class="mob-banner"></div>
+
+          <div class="mob-profile-section">
+            <div class="mob-avatar">
+              <img
+                *ngIf="currentUser()?.profileImageUrl && !imageError()"
+                [src]="currentUser()!.profileImageUrl"
+                alt="Profile photo"
+                class="mob-avatar-img"
+                (error)="onImageError()">
+              <span
+                *ngIf="!currentUser()?.profileImageUrl || imageError()"
+                class="mob-avatar-initials">{{ getUserInitials() }}</span>
+            </div>
+            <div class="mob-name">{{ getTitleCaseName() }}</div>
+          </div>
+
           <div class="id-card-body">
             <div class="main-content">
               <div class="left-section">
                 <div class="photo-container">
                   <div class="photo-frame">
-                    <div class="photo-initials">{{ getUserInitials() }}</div>
+                    <img
+                      *ngIf="currentUser()?.profileImageUrl && !imageError()"
+                      [src]="currentUser()!.profileImageUrl"
+                      alt="Profile photo"
+                      class="desktop-photo-img"
+                      (error)="onImageError()">
+                    <div
+                      *ngIf="!currentUser()?.profileImageUrl || imageError()"
+                      class="photo-initials">{{ getUserInitials() }}</div>
                   </div>
-                  <div class="verified-badge">VERIFIED ✓</div>
+                  <div class="verified-badge">VERIFIED</div>
                 </div>
               </div>
 
@@ -52,22 +60,18 @@ import { AuthService } from '../core/auth.service';
                   <div class="info-label">FULL NAME</div>
                   <div class="info-value name-value">{{ currentUser()?.name?.toUpperCase() }}</div>
                 </div>
-
                 <div class="info-row">
                   <div class="info-label">FARMER ID NUMBER</div>
                   <div class="info-value id-value">{{ currentUser()?.farmerId }}</div>
                 </div>
-
                 <div class="info-row">
                   <div class="info-label">DISTRICT</div>
                   <div class="info-value">CAYO</div>
                 </div>
-
                 <div class="info-row">
                   <div class="info-label">VILLAGE/TOWN</div>
                   <div class="info-value">SAN IGNACIO</div>
                 </div>
-
                 <div class="info-row">
                   <div class="info-label">DATE VERIFIED</div>
                   <div class="info-value">{{ getFormattedDate() }}</div>
@@ -75,44 +79,54 @@ import { AuthService } from '../core/auth.service';
               </div>
             </div>
 
+            <div class="mob-info-grid">
+              <div class="mob-cell">
+                <div class="mob-cell-label">Farmer ID</div>
+                <div class="mob-cell-value">{{ currentUser()?.farmerId }}</div>
+              </div>
+              <div class="mob-cell">
+                <div class="mob-cell-label">District</div>
+                <div class="mob-cell-value dark">{{ currentUser()?.district }}</div>
+              </div>
+              <div class="mob-cell">
+                <div class="mob-cell-label">Village/Town</div>
+                <div class="mob-cell-value dark">{{ currentUser()?.village }}</div>
+              </div>
+              <div class="mob-cell">
+                <div class="mob-cell-label">Date Verified</div>
+                <div class="mob-cell-value dark">{{ getFormattedDate() }}</div>
+              </div>
+            </div>
+
             <div class="bottom-section">
               <div class="qr-container">
-                <div class="qr-label">SCAN TO VERIFY</div>
+                <div class="qr-label">
+                  <span class="qr-label-desktop">SCAN TO VERIFY</span>
+                  <span class="qr-label-mobile">Scan QR Code</span>
+                </div>
                 <div class="qr-code">
                   <svg viewBox="0 0 210 210" class="qr-svg">
                     <rect x="0" y="0" width="210" height="210" fill="white"/>
-
-                    <!-- Top-left position marker -->
                     <rect x="10" y="10" width="60" height="60" fill="#1a3a52"/>
                     <rect x="20" y="20" width="40" height="40" fill="white"/>
                     <rect x="30" y="30" width="20" height="20" fill="#1a3a52"/>
-
-                    <!-- Top-right position marker -->
                     <rect x="140" y="10" width="60" height="60" fill="#1a3a52"/>
                     <rect x="150" y="20" width="40" height="40" fill="white"/>
                     <rect x="160" y="30" width="20" height="20" fill="#1a3a52"/>
-
-                    <!-- Bottom-left position marker -->
                     <rect x="10" y="140" width="60" height="60" fill="#1a3a52"/>
                     <rect x="20" y="150" width="40" height="40" fill="white"/>
                     <rect x="30" y="160" width="20" height="20" fill="#1a3a52"/>
-
-                    <!-- Data pattern - row 1 (between top markers) -->
                     <rect x="80" y="10" width="10" height="10" fill="#1a3a52"/>
                     <rect x="100" y="10" width="10" height="10" fill="#1a3a52"/>
                     <rect x="110" y="20" width="10" height="10" fill="#1a3a52"/>
                     <rect x="90" y="30" width="10" height="10" fill="#1a3a52"/>
                     <rect x="120" y="30" width="10" height="10" fill="#1a3a52"/>
-
-                    <!-- Data pattern - left side -->
                     <rect x="10" y="80" width="10" height="10" fill="#1a3a52"/>
                     <rect x="30" y="90" width="10" height="10" fill="#1a3a52"/>
                     <rect x="50" y="90" width="10" height="10" fill="#1a3a52"/>
                     <rect x="20" y="100" width="10" height="10" fill="#1a3a52"/>
                     <rect x="10" y="110" width="10" height="10" fill="#1a3a52"/>
                     <rect x="40" y="120" width="10" height="10" fill="#1a3a52"/>
-
-                    <!-- Data pattern - center area -->
                     <rect x="80" y="80" width="10" height="10" fill="#1a3a52"/>
                     <rect x="90" y="70" width="10" height="10" fill="#1a3a52"/>
                     <rect x="100" y="80" width="10" height="10" fill="#1a3a52"/>
@@ -124,30 +138,22 @@ import { AuthService } from '../core/auth.service';
                     <rect x="80" y="100" width="10" height="10" fill="#1a3a52"/>
                     <rect x="120" y="110" width="10" height="10" fill="#1a3a52"/>
                     <rect x="130" y="90" width="10" height="10" fill="#1a3a52"/>
-
-                    <!-- Data pattern - right side -->
                     <rect x="150" y="80" width="10" height="10" fill="#1a3a52"/>
                     <rect x="170" y="90" width="10" height="10" fill="#1a3a52"/>
                     <rect x="180" y="100" width="10" height="10" fill="#1a3a52"/>
                     <rect x="160" y="110" width="10" height="10" fill="#1a3a52"/>
                     <rect x="190" y="120" width="10" height="10" fill="#1a3a52"/>
-
-                    <!-- Data pattern - bottom center -->
                     <rect x="80" y="140" width="10" height="10" fill="#1a3a52"/>
                     <rect x="100" y="150" width="10" height="10" fill="#1a3a52"/>
                     <rect x="120" y="140" width="10" height="10" fill="#1a3a52"/>
                     <rect x="90" y="160" width="10" height="10" fill="#1a3a52"/>
                     <rect x="110" y="170" width="10" height="10" fill="#1a3a52"/>
                     <rect x="130" y="160" width="10" height="10" fill="#1a3a52"/>
-
-                    <!-- Data pattern - bottom right -->
                     <rect x="150" y="140" width="10" height="10" fill="#1a3a52"/>
                     <rect x="170" y="150" width="10" height="10" fill="#1a3a52"/>
                     <rect x="160" y="170" width="10" height="10" fill="#1a3a52"/>
                     <rect x="180" y="160" width="10" height="10" fill="#1a3a52"/>
                     <rect x="190" y="180" width="10" height="10" fill="#1a3a52"/>
-
-                    <!-- Additional data dots for density -->
                     <rect x="85" y="50" width="10" height="10" fill="#1a3a52"/>
                     <rect x="105" y="50" width="10" height="10" fill="#1a3a52"/>
                     <rect x="125" y="60" width="10" height="10" fill="#1a3a52"/>
@@ -168,10 +174,72 @@ import { AuthService } from '../core/auth.service';
                     <rect x="180" y="190" width="10" height="10" fill="#1a3a52"/>
                   </svg>
                 </div>
-                <div class="id-text">ID: {{ currentUser()?.farmerId }}</div>
+                <div class="id-text">{{ currentUser()?.farmerId }}</div>
               </div>
             </div>
           </div>
+
+          <div class="mob-farm-footer">
+            <svg viewBox="0 0 400 120" preserveAspectRatio="none" class="mob-farm-svg">
+              <defs>
+                <linearGradient id="hillGrad1" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#a5d6a7"/>
+                  <stop offset="100%" stop-color="#81c784"/>
+                </linearGradient>
+                <linearGradient id="hillGrad2" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#81c784"/>
+                  <stop offset="100%" stop-color="#66bb6a"/>
+                </linearGradient>
+              </defs>
+              <path d="M0,55 C40,35 80,60 140,42 C200,24 260,52 320,38 C360,28 400,48 400,48 L400,120 L0,120 Z" fill="url(#hillGrad1)"/>
+              <path d="M0,70 C50,55 110,72 170,58 C230,44 290,68 350,54 C380,48 400,58 400,58 L400,120 L0,120 Z" fill="url(#hillGrad2)"/>
+              <path d="M0,85 C80,76 160,88 240,80 C320,72 400,84 400,84 L400,120 L0,120 Z" fill="#4caf50"/>
+              <path d="M0,95 C100,90 200,97 300,92 C400,87 400,95 400,95 L400,120 L0,120 Z" fill="#388e3c"/>
+              <g class="plant left-plant-1">
+                <path d="M35,92 Q37,62 33,28" stroke="#2e7d32" stroke-width="2.5" fill="none"/>
+                <path d="M33,28 Q24,40 33,45" fill="#4caf50"/>
+                <path d="M33,45 Q26,54 35,58" fill="#66bb6a"/>
+                <path d="M35,58 Q30,64 37,68" fill="#81c784"/>
+                <path d="M33,28 Q31,20 35,12" stroke="#a5d6a7" stroke-width="1.5" fill="none"/>
+                <path d="M33,28 Q37,20 33,12" stroke="#a5d6a7" stroke-width="1.5" fill="none"/>
+                <ellipse cx="34" cy="10" rx="3" ry="5" fill="#c8a96e" opacity="0.8"/>
+              </g>
+              <g class="plant left-plant-2">
+                <path d="M65,88 Q63,64 67,38" stroke="#2e7d32" stroke-width="2" fill="none"/>
+                <path d="M67,38 Q60,46 67,50" fill="#4caf50"/>
+                <path d="M67,50 Q62,56 67,60" fill="#66bb6a"/>
+                <path d="M67,38 Q65,30 69,22" stroke="#a5d6a7" stroke-width="1.2" fill="none"/>
+                <ellipse cx="69" cy="20" rx="3" ry="6" fill="#c8a96e" opacity="0.8"/>
+              </g>
+              <g class="plant left-plant-3">
+                <path d="M90,86 Q88,70 92,48" stroke="#388e3c" stroke-width="1.8" fill="none"/>
+                <path d="M92,48 Q86,54 92,57" fill="#66bb6a"/>
+                <path d="M92,57 Q88,62 92,66" fill="#81c784"/>
+              </g>
+              <g class="plant right-plant-1">
+                <path d="M365,88 Q363,58 367,24" stroke="#2e7d32" stroke-width="2.5" fill="none"/>
+                <path d="M367,24 Q376,36 367,40" fill="#4caf50"/>
+                <path d="M367,40 Q374,48 367,52" fill="#66bb6a"/>
+                <path d="M367,52 Q372,58 365,62" fill="#81c784"/>
+                <path d="M367,24 Q369,16 365,8" stroke="#a5d6a7" stroke-width="1.5" fill="none"/>
+                <path d="M367,24 Q363,16 367,8" stroke="#a5d6a7" stroke-width="1.5" fill="none"/>
+                <ellipse cx="366" cy="6" rx="3" ry="5" fill="#c8a96e" opacity="0.8"/>
+              </g>
+              <g class="plant right-plant-2">
+                <path d="M335,84 Q337,62 333,34" stroke="#2e7d32" stroke-width="2" fill="none"/>
+                <path d="M333,34 Q340,42 333,46" fill="#4caf50"/>
+                <path d="M333,46 Q338,52 333,56" fill="#66bb6a"/>
+                <path d="M333,34 Q331,26 335,18" stroke="#a5d6a7" stroke-width="1.2" fill="none"/>
+                <ellipse cx="335" cy="16" rx="3" ry="6" fill="#c8a96e" opacity="0.8"/>
+              </g>
+              <g class="plant right-plant-3">
+                <path d="M310,80 Q312,66 308,48" stroke="#388e3c" stroke-width="1.8" fill="none"/>
+                <path d="M308,48 Q314,54 308,57" fill="#66bb6a"/>
+                <path d="M308,57 Q312,62 308,66" fill="#81c784"/>
+              </g>
+            </svg>
+          </div>
+
         </div>
       </div>
 
@@ -186,10 +254,6 @@ import { AuthService } from '../core/auth.service';
     </div>
   `,
   styles: [`
-    .mobile-page-header {
-      display: none;
-    }
-
     .id-card-wrapper {
       max-width: 800px;
       margin: 0 auto 24px;
@@ -212,24 +276,7 @@ import { AuthService } from '../core/auth.service';
       gap: 16px;
     }
 
-    .flag-emblem {
-      width: 60px;
-      height: 60px;
-      background: #003f87;
-      border: 3px solid #FFD700;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      font-weight: 900;
-      color: white;
-      flex-shrink: 0;
-    }
-
-    .header-content {
-      flex: 1;
-    }
+    .header-content { flex: 1; }
 
     .belize-text {
       font-size: 32px;
@@ -265,7 +312,6 @@ import { AuthService } from '../core/auth.service';
       grid-template-columns: 280px 1fr;
       gap: 0;
       padding: 32px;
-      /* border-bottom: 3px solid #FFD700; */
     }
 
     .left-section {
@@ -294,6 +340,13 @@ import { AuthService } from '../core/auth.service';
       justify-content: center;
       margin-bottom: -20px;
       z-index: 1;
+      overflow: hidden;
+    }
+
+    .desktop-photo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .photo-initials {
@@ -329,9 +382,7 @@ import { AuthService } from '../core/auth.service';
       padding-bottom: 12px;
     }
 
-    .info-row:last-child {
-      border-bottom: none;
-    }
+    .info-row:last-child { border-bottom: none; }
 
     .info-label {
       font-size: 11px;
@@ -377,6 +428,8 @@ import { AuthService } from '../core/auth.service';
       text-transform: uppercase;
       letter-spacing: 1.5px;
     }
+
+    .qr-label-mobile { display: none; }
 
     .qr-code {
       width: 220px;
@@ -442,196 +495,190 @@ import { AuthService } from '../core/auth.service';
       transform: translateY(-2px);
     }
 
+    .mob-banner,
+    .mob-profile-section,
+    .mob-info-grid,
+    .mob-farm-footer {
+      display: none;
+    }
+
     @media (max-width: 768px) {
-      .mobile-page-header {
+      .id-card-wrapper {
+        padding: 0;
+        margin: 0 auto 16px;
+      }
+
+      .id-card {
+        border: none;
+        border-radius: 20px;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+      }
+
+      .id-card-header { display: none; }
+      .main-content { display: none; }
+
+      .mob-banner {
         display: block;
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 0 16px 20px;
+        height: 160px;
+        background: linear-gradient(180deg, #8fbc8f 0%, #a5c9a0 40%, #b8d8b4 100%);
+        position: relative;
       }
 
-      .mobile-headline {
-        text-align: center;
-        margin-bottom: 20px;
-      }
-
-      .mobile-title {
-        font-size: 26px;
-        font-weight: 900;
-        color: #2d7a3e;
-        letter-spacing: 4px;
-        margin: 0 0 4px;
-      }
-
-      .mobile-subtitle {
-        font-size: 13px;
-        font-weight: 700;
-        color: #1e5d2f;
-        letter-spacing: 1px;
-        margin: 0 0 6px;
-        text-transform: uppercase;
-      }
-
-      .mobile-ministry {
-        font-size: 11px;
-        color: #666;
-        margin: 0;
-        font-weight: 500;
-        line-height: 1.4;
-      }
-
-      .mobile-profile {
+      .mob-profile-section {
         display: flex;
+        flex-direction: column;
         align-items: center;
-        gap: 16px;
-        background: white;
-        padding: 16px 20px;
-        border-radius: 16px;
-        box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        margin-top: -60px;
+        position: relative;
+        z-index: 2;
+        padding: 0 20px;
       }
 
-      .mobile-photo {
-        width: 75px;
-        height: 75px;
-        background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
-        border: 2px solid #2d7a3e;
-        border-radius: 10px;
+      .mob-avatar {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: 4px solid white;
+        overflow: hidden;
+        background: linear-gradient(135deg, #d4edda, #c3e6cb);
         display: flex;
         align-items: center;
         justify-content: center;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.15);
         flex-shrink: 0;
       }
 
-      .mobile-initials {
-        font-size: 28px;
+      .mob-avatar-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .mob-avatar-initials {
+        font-size: 40px;
         font-weight: 900;
         color: #2d7a3e;
         letter-spacing: 2px;
       }
 
-      .mobile-profile-details {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
+      .mob-name {
+        font-size: 24px;
+        font-weight: 800;
+        color: #1a3a1a;
+        margin-top: 12px;
+        margin-bottom: 20px;
+        text-align: center;
       }
 
-      .mobile-name {
-        font-size: 16px;
+      .mob-info-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        border: 1px solid #e0e0e0;
+        border-radius: 12px;
+        margin: 0 20px 8px;
+        overflow: hidden;
+        background: white;
+      }
+
+      .mob-cell {
+        padding: 16px 18px;
+      }
+
+      .mob-cell:nth-child(odd) {
+        border-right: 1px solid #e0e0e0;
+      }
+
+      .mob-cell:nth-child(1),
+      .mob-cell:nth-child(2) {
+        border-bottom: 1px solid #e0e0e0;
+      }
+
+      .mob-cell-label {
+        font-size: 13px;
+        color: #888;
+        margin-bottom: 6px;
         font-weight: 500;
-        color: #2a2a2a;
-        letter-spacing: 0.5px;
       }
 
-      .mobile-badge {
-        background: #28a745;
-        color: white;
-        font-size: 11px;
+      .mob-cell-value {
+        font-size: 17px;
         font-weight: 700;
-        padding: 5px 14px;
-        border-radius: 14px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        align-self: flex-start;
-        box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
+        color: #2d7a3e;
       }
 
-      .id-card-header {
-        display: none;
-      }
-
-      .left-section {
-        display: none;
-      }
-
-      .name-row {
-        display: none;
-      }
-
-      .main-content {
-        grid-template-columns: 1fr;
-      }
-
-      .right-section {
-        padding-left: 0;
-        padding-top: 0;
-        gap: 12px;
+      .mob-cell-value.dark {
+        color: #2d7a3e;
       }
 
       .bottom-section {
-        padding: 32px 20px;
+        padding: 24px 20px 16px;
       }
+
+      .qr-label {
+        font-size: 18px;
+        font-weight: 700;
+        color: #1a3a1a;
+        text-transform: none;
+        letter-spacing: 0;
+      }
+
+      .qr-label-desktop { display: none; }
+      .qr-label-mobile { display: inline; }
+
+      .qr-code {
+        width: 180px;
+        height: 180px;
+        border: 2px solid #ddd;
+        border-radius: 12px;
+      }
+
+      .mob-farm-footer {
+        display: block;
+        height: 120px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .mob-farm-svg {
+        width: 100%;
+        height: 100%;
+      }
+
+      .action-buttons { display: none; }
     }
 
     @media (max-width: 480px) {
-      .mobile-page-header {
-        padding: 0;
-        margin-bottom:12px;
+      .mob-banner { height: 140px; }
+
+      .mob-profile-section { margin-top: -55px; }
+
+      .mob-avatar {
+        width: 110px;
+        height: 110px;
       }
 
-      .mobile-title {
-        font-size: 22px;
-        letter-spacing: 3px;
-      }
+      .mob-avatar-initials { font-size: 36px; }
 
-      .mobile-subtitle {
-        font-size: 12px;
-      }
+      .mob-name { font-size: 22px; }
 
-      .mobile-profile {
-        padding: 14px 16px;
-        gap: 14px;
-      }
+      .mob-cell { padding: 14px 16px; }
 
-      .mobile-photo {
-        width: 60px;
-        height: 60px;
-      }
+      .mob-cell-label { font-size: 12px; }
 
-      .mobile-initials {
-        font-size: 24px;
-      }
-
-      .mobile-name {
-        font-size: 14px;
-      }
-
-      .id-card-wrapper {
-        padding: 0;
-      }
-
-      .id-card {
-        border-width: 3px;
-        border-radius: 16px;
-        border-width:0px;
-      }
-
-      .main-content {
-        padding: 20px;
-      }
-
-      .bottom-section {
-        padding: 24px 20px;
-      }
-
-      .info-value,
-      .info-value.name-value,
-      .info-value.id-value {
-        font-size: 14px;
-      }
+      .mob-cell-value { font-size: 15px; }
 
       .qr-code {
-        width: 200px;
-        height: 200px;
+        width: 160px;
+        height: 160px;
       }
 
-      .action-buttons {
-        grid-template-columns: 1fr;
-      }
+      .mob-farm-footer { height: 100px; }
     }
   `]
 })
 export class FarmerIdComponent {
   currentUser = this.authService.currentUser;
+  imageError = signal(false);
 
   constructor(private authService: AuthService) {}
 
@@ -640,12 +687,23 @@ export class FarmerIdComponent {
     return name.split(' ').map(n => n[0]).join('').toUpperCase();
   }
 
+  getTitleCaseName(): string {
+    const name = this.currentUser()?.name || '';
+    return name.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ');
+  }
+
   getFormattedDate(): string {
-    const date = new Date();
+    const date = this.currentUser()?.verificationDate
+      ? new Date(this.currentUser()!.verificationDate!)
+      : new Date();
     const day = date.getDate();
     const month = date.toLocaleString('en-US', { month: 'short' });
     const year = date.getFullYear();
     return `${day} ${month} ${year}`;
+  }
+
+  onImageError() {
+    this.imageError.set(true);
   }
 
   downloadId() {

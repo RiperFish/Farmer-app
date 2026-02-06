@@ -18,6 +18,7 @@ export class AuthService {
       village: 'San Ignacio',
       status: 'verified',
       farmerId: 'BZ-001234',
+      profileImageUrl: 'https://images.pexels.com/photos/2382325/pexels-photo-2382325.jpeg?auto=compress&cs=tinysrgb&w=300',
       registrationDate: new Date('2024-01-15'),
       verificationDate: new Date('2024-01-20')
     },

@@ -7,6 +7,7 @@ export interface User {
   village: string;
   status: 'unverified' | 'pending' | 'verified';
   farmerId?: string;
+  profileImageUrl?: string;
   registrationDate: Date;
   verificationDate?: Date;
 }

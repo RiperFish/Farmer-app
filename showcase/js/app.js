@@ -11,6 +11,7 @@ const App = {
       village: 'San Ignacio',
       status: 'verified',
       farmerId: 'BZ-CAYO-2024-001234',
+      profileImageUrl: 'https://images.pexels.com/photos/2382325/pexels-photo-2382325.jpeg?auto=compress&cs=tinysrgb&w=300',
       registrationDate: new Date('2024-01-15'),
       verificationDate: new Date('2024-02-01')
     },
