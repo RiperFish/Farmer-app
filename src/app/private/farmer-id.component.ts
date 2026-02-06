@@ -564,7 +564,8 @@ import { AuthService } from '../core/auth.service';
 
     @media (max-width: 480px) {
       .mobile-page-header {
-        padding: 0 12px 16px;
+        padding: 0;
+        margin-bottom:12px;
       }
 
       .mobile-title {
