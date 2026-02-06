@@ -479,7 +479,7 @@ import { AuthService } from '../core/auth.service';
         width: 120px;
         height: 120px;
         border-radius: 50%;
-        border: 2px solid white;
+        border: 3px solid white;
         overflow: hidden;
         background: linear-gradient(135deg, #d4edda, #c3e6cb);
         display: flex;
