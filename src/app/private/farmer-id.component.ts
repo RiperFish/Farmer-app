@@ -11,7 +11,7 @@ import { AuthService } from '../core/auth.service';
       <div class="id-card-wrapper">
         <div class="id-card">
           <div class="id-card-header">
-            <div class="flag-emblem">BZ</div>
+            <!-- <div class="flag-emblem">BZ</div> -->
             <div class="header-content">
               <h1 class="belize-text">BELIZE</h1>
               <h2 class="card-title">FARMER IDENTIFICATION CARD</h2>
@@ -266,7 +266,7 @@ import { AuthService } from '../core/auth.service';
       width: 200px;
       height: 240px;
       background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
-      border: 4px solid #2d7a3e;
+      border: 1px solid #2d7a3e;
       border-radius: 12px;
       display: flex;
       align-items: center;
@@ -322,15 +322,10 @@ import { AuthService } from '../core/auth.service';
     }
 
     .info-value {
-      font-size: 18px;
-      font-weight: 700;
+      font-size: 16px;
+      font-weight: 500;
       color: #2a2a2a;
       letter-spacing: 0.5px;
-    }
-
-    .info-value.name-value {
-      font-size: 22px;
-      font-weight: 900;
     }
 
     .info-value.id-value {
@@ -441,7 +436,8 @@ import { AuthService } from '../core/auth.service';
 
       .right-section {
         padding-left: 0;
-        padding-top: 24px;
+        padding-top: 0px;
+        gap:12px;
       }
 
       .bottom-section {
@@ -451,7 +447,7 @@ import { AuthService } from '../core/auth.service';
 
     @media (max-width: 480px) {
       .id-card-wrapper {
-        padding: 10px;
+        padding: 0;
       }
 
       .id-card {
@@ -504,12 +500,10 @@ import { AuthService } from '../core/auth.service';
         padding: 8px 20px;
       }
 
-      .info-value.name-value {
-        font-size: 18px;
-      }
-
-      .info-value.id-value {
-        font-size: 16px;
+      .info-value,
+      .info-value.name-value,
+      .info-value.id-value{
+        font-size: 14px;
       }
 
       .qr-code {
