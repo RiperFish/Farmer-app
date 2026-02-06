@@ -461,7 +461,7 @@ import { AuthService } from '../core/auth.service';
       .mob-banner {
         display: block;
         height: 160px;
-        background: linear-gradient(180deg, #8fbc8f 0%, #a5c9a0 40%, #b8d8b4 100%);
+        background: #9fbf83;
         position: relative;
       }
 
@@ -543,7 +543,7 @@ import { AuthService } from '../core/auth.service';
 
       .mob-cell-value {
         font-size: 17px;
-        font-weight: 700;
+        font-weight: 500;
         color: #2d7a3e;
       }
 
