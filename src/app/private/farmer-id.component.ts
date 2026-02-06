@@ -491,8 +491,8 @@ import { AuthService } from '../core/auth.service';
       }
 
       .mobile-photo {
-        width: 72px;
-        height: 88px;
+        width: 75px;
+        height: 75px;
         background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
         border: 2px solid #2d7a3e;
         border-radius: 10px;
@@ -583,8 +583,8 @@ import { AuthService } from '../core/auth.service';
       }
 
       .mobile-photo {
-        width: 64px;
-        height: 78px;
+        width: 60px;
+        height: 60px;
       }
 
       .mobile-initials {
