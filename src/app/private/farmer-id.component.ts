@@ -8,6 +8,23 @@ import { AuthService } from '../core/auth.service';
   imports: [CommonModule],
   template: `
     <div class="page-container">
+      <div class="mobile-page-header">
+        <div class="mobile-headline">
+          <h1 class="mobile-title">BELIZE</h1>
+          <h2 class="mobile-subtitle">Farmer Identification Card</h2>
+          <p class="mobile-ministry">Ministry of Agriculture, Fisheries, Forestry & Sustainable Development</p>
+        </div>
+        <div class="mobile-profile">
+          <div class="mobile-photo">
+            <div class="mobile-initials">{{ getUserInitials() }}</div>
+          </div>
+          <div class="mobile-profile-details">
+            <div class="mobile-name">{{ currentUser()?.name?.toUpperCase() }}</div>
+            <div class="mobile-badge">VERIFIED &#x2713;</div>
+          </div>
+        </div>
+      </div>
+
       <div class="id-card-wrapper">
         <div class="id-card">
           <div class="id-card-header">
@@ -31,7 +48,7 @@ import { AuthService } from '../core/auth.service';
               </div>
 
               <div class="right-section">
-                <div class="info-row">
+                <div class="info-row name-row">
                   <div class="info-label">FULL NAME</div>
                   <div class="info-value name-value">{{ currentUser()?.name?.toUpperCase() }}</div>
                 </div>
@@ -169,6 +186,10 @@ import { AuthService } from '../core/auth.service';
     </div>
   `,
   styles: [`
+    .mobile-page-header {
+      display: none;
+    }
+
     .id-card-wrapper {
       max-width: 800px;
       margin: 0 auto 24px;
@@ -422,22 +443,118 @@ import { AuthService } from '../core/auth.service';
     }
 
     @media (max-width: 768px) {
+      .mobile-page-header {
+        display: block;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 16px 20px;
+      }
+
+      .mobile-headline {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .mobile-title {
+        font-size: 26px;
+        font-weight: 900;
+        color: #2d7a3e;
+        letter-spacing: 4px;
+        margin: 0 0 4px;
+      }
+
+      .mobile-subtitle {
+        font-size: 13px;
+        font-weight: 700;
+        color: #1e5d2f;
+        letter-spacing: 1px;
+        margin: 0 0 6px;
+        text-transform: uppercase;
+      }
+
+      .mobile-ministry {
+        font-size: 11px;
+        color: #666;
+        margin: 0;
+        font-weight: 500;
+        line-height: 1.4;
+      }
+
+      .mobile-profile {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        background: white;
+        padding: 16px 20px;
+        border-radius: 16px;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      }
+
+      .mobile-photo {
+        width: 72px;
+        height: 88px;
+        background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+        border: 2px solid #2d7a3e;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .mobile-initials {
+        font-size: 28px;
+        font-weight: 900;
+        color: #2d7a3e;
+        letter-spacing: 2px;
+      }
+
+      .mobile-profile-details {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .mobile-name {
+        font-size: 18px;
+        font-weight: 800;
+        color: #2a2a2a;
+        letter-spacing: 0.5px;
+      }
+
+      .mobile-badge {
+        background: #28a745;
+        color: white;
+        font-size: 11px;
+        font-weight: 700;
+        padding: 5px 14px;
+        border-radius: 14px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        align-self: flex-start;
+        box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
+      }
+
+      .id-card-header {
+        display: none;
+      }
+
+      .left-section {
+        display: none;
+      }
+
+      .name-row {
+        display: none;
+      }
+
       .main-content {
         grid-template-columns: 1fr;
       }
 
-      .left-section {
-        border-right: none;
-        border-bottom: 2px solid #e0e0e0;
-        padding-right: 0;
-        padding-bottom: 24px;
-        margin-bottom: 24px;
-      }
-
       .right-section {
         padding-left: 0;
-        padding-top: 0px;
-        gap:12px;
+        padding-top: 0;
+        gap: 12px;
       }
 
       .bottom-section {
@@ -446,6 +563,37 @@ import { AuthService } from '../core/auth.service';
     }
 
     @media (max-width: 480px) {
+      .mobile-page-header {
+        padding: 0 12px 16px;
+      }
+
+      .mobile-title {
+        font-size: 22px;
+        letter-spacing: 3px;
+      }
+
+      .mobile-subtitle {
+        font-size: 12px;
+      }
+
+      .mobile-profile {
+        padding: 14px 16px;
+        gap: 14px;
+      }
+
+      .mobile-photo {
+        width: 64px;
+        height: 78px;
+      }
+
+      .mobile-initials {
+        font-size: 24px;
+      }
+
+      .mobile-name {
+        font-size: 16px;
+      }
+
       .id-card-wrapper {
         padding: 0;
       }
@@ -453,29 +601,6 @@ import { AuthService } from '../core/auth.service';
       .id-card {
         border-width: 3px;
         border-radius: 16px;
-      }
-
-      .id-card-header {
-        padding: 16px 20px;
-      }
-
-      .flag-emblem {
-        width: 50px;
-        height: 50px;
-        font-size: 16px;
-      }
-
-      .belize-text {
-        font-size: 24px;
-        letter-spacing: 2px;
-      }
-
-      .card-title {
-        font-size: 14px;
-      }
-
-      .ministry-text {
-        font-size: 10px;
       }
 
       .main-content {
@@ -486,23 +611,9 @@ import { AuthService } from '../core/auth.service';
         padding: 24px 20px;
       }
 
-      .photo-frame {
-        width: 160px;
-        height: 200px;
-      }
-
-      .photo-initials {
-        font-size: 60px;
-      }
-
-      .verified-badge {
-        font-size: 12px;
-        padding: 8px 20px;
-      }
-
       .info-value,
       .info-value.name-value,
-      .info-value.id-value{
+      .info-value.id-value {
         font-size: 14px;
       }
 
