@@ -27,13 +27,13 @@ import { AuthService } from '../core/auth.service';
       left: 0;
       right: 0;
       height: 56px;
-      background: linear-gradient(135deg, #2e7d32 0%, #388e3c 100%);
+      
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0 4px;
       z-index: 1000;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      
     }
 
     .back-btn {
