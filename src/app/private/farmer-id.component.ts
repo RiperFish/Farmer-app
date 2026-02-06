@@ -602,7 +602,7 @@ import { AuthService } from '../core/auth.service';
       .id-card {
         border-width: 3px;
         border-radius: 16px;
-        border-width:1px;
+        border-width:0px;
       }
 
       .main-content {
