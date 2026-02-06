@@ -179,66 +179,7 @@ import { AuthService } from '../core/auth.service';
             </div>
           </div>
 
-          <div class="mob-farm-footer">
-            <svg viewBox="0 0 400 120" preserveAspectRatio="none" class="mob-farm-svg">
-              <defs>
-                <linearGradient id="hillGrad1" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#a5d6a7"/>
-                  <stop offset="100%" stop-color="#81c784"/>
-                </linearGradient>
-                <linearGradient id="hillGrad2" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#81c784"/>
-                  <stop offset="100%" stop-color="#66bb6a"/>
-                </linearGradient>
-              </defs>
-              <path d="M0,55 C40,35 80,60 140,42 C200,24 260,52 320,38 C360,28 400,48 400,48 L400,120 L0,120 Z" fill="url(#hillGrad1)"/>
-              <path d="M0,70 C50,55 110,72 170,58 C230,44 290,68 350,54 C380,48 400,58 400,58 L400,120 L0,120 Z" fill="url(#hillGrad2)"/>
-              <path d="M0,85 C80,76 160,88 240,80 C320,72 400,84 400,84 L400,120 L0,120 Z" fill="#4caf50"/>
-              <path d="M0,95 C100,90 200,97 300,92 C400,87 400,95 400,95 L400,120 L0,120 Z" fill="#388e3c"/>
-              <g class="plant left-plant-1">
-                <path d="M35,92 Q37,62 33,28" stroke="#2e7d32" stroke-width="2.5" fill="none"/>
-                <path d="M33,28 Q24,40 33,45" fill="#4caf50"/>
-                <path d="M33,45 Q26,54 35,58" fill="#66bb6a"/>
-                <path d="M35,58 Q30,64 37,68" fill="#81c784"/>
-                <path d="M33,28 Q31,20 35,12" stroke="#a5d6a7" stroke-width="1.5" fill="none"/>
-                <path d="M33,28 Q37,20 33,12" stroke="#a5d6a7" stroke-width="1.5" fill="none"/>
-                <ellipse cx="34" cy="10" rx="3" ry="5" fill="#c8a96e" opacity="0.8"/>
-              </g>
-              <g class="plant left-plant-2">
-                <path d="M65,88 Q63,64 67,38" stroke="#2e7d32" stroke-width="2" fill="none"/>
-                <path d="M67,38 Q60,46 67,50" fill="#4caf50"/>
-                <path d="M67,50 Q62,56 67,60" fill="#66bb6a"/>
-                <path d="M67,38 Q65,30 69,22" stroke="#a5d6a7" stroke-width="1.2" fill="none"/>
-                <ellipse cx="69" cy="20" rx="3" ry="6" fill="#c8a96e" opacity="0.8"/>
-              </g>
-              <g class="plant left-plant-3">
-                <path d="M90,86 Q88,70 92,48" stroke="#388e3c" stroke-width="1.8" fill="none"/>
-                <path d="M92,48 Q86,54 92,57" fill="#66bb6a"/>
-                <path d="M92,57 Q88,62 92,66" fill="#81c784"/>
-              </g>
-              <g class="plant right-plant-1">
-                <path d="M365,88 Q363,58 367,24" stroke="#2e7d32" stroke-width="2.5" fill="none"/>
-                <path d="M367,24 Q376,36 367,40" fill="#4caf50"/>
-                <path d="M367,40 Q374,48 367,52" fill="#66bb6a"/>
-                <path d="M367,52 Q372,58 365,62" fill="#81c784"/>
-                <path d="M367,24 Q369,16 365,8" stroke="#a5d6a7" stroke-width="1.5" fill="none"/>
-                <path d="M367,24 Q363,16 367,8" stroke="#a5d6a7" stroke-width="1.5" fill="none"/>
-                <ellipse cx="366" cy="6" rx="3" ry="5" fill="#c8a96e" opacity="0.8"/>
-              </g>
-              <g class="plant right-plant-2">
-                <path d="M335,84 Q337,62 333,34" stroke="#2e7d32" stroke-width="2" fill="none"/>
-                <path d="M333,34 Q340,42 333,46" fill="#4caf50"/>
-                <path d="M333,46 Q338,52 333,56" fill="#66bb6a"/>
-                <path d="M333,34 Q331,26 335,18" stroke="#a5d6a7" stroke-width="1.2" fill="none"/>
-                <ellipse cx="335" cy="16" rx="3" ry="6" fill="#c8a96e" opacity="0.8"/>
-              </g>
-              <g class="plant right-plant-3">
-                <path d="M310,80 Q312,66 308,48" stroke="#388e3c" stroke-width="1.8" fill="none"/>
-                <path d="M308,48 Q314,54 308,57" fill="#66bb6a"/>
-                <path d="M308,57 Q312,62 308,66" fill="#81c784"/>
-              </g>
-            </svg>
-          </div>
+          
 
         </div>
       </div>
@@ -501,7 +442,7 @@ import { AuthService } from '../core/auth.service';
     .mob-farm-footer {
       display: none;
     }
-
+    
     @media (max-width: 768px) {
       .id-card-wrapper {
         padding: 0;
