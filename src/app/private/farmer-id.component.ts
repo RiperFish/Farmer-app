@@ -516,8 +516,8 @@ import { AuthService } from '../core/auth.service';
       }
 
       .mobile-name {
-        font-size: 18px;
-        font-weight: 800;
+        font-size: 16px;
+        font-weight: 500;
         color: #2a2a2a;
         letter-spacing: 0.5px;
       }
@@ -591,7 +591,7 @@ import { AuthService } from '../core/auth.service';
       }
 
       .mobile-name {
-        font-size: 16px;
+        font-size: 14px;
       }
 
       .id-card-wrapper {
