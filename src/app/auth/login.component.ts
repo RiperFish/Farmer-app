@@ -11,7 +11,7 @@ import { AuthService } from '../core/auth.service';
   template: `
     <div class="login-container">
       <div class="login-header">
-        <div class="logo">🌾</div>
+        <img src="assets/img/baimsfarmerhub-logo.png" alt="Logo"  style="width:100px;"/>
         <h1 class="login-title">BAIMS Farmer Hub</h1>
         <p class="login-subtitle">Login to access your farmer account</p>
       </div>
