@@ -17,6 +17,7 @@ import { AuthService } from '../core/auth.service';
         </a>
         <a routerLink="/weather" routerLinkActive="active" class="nav-item">
          <img src="assets/img/weather.svg" alt="Logo" style="width:28px"/>
+         <span class="nav-label">Weather</span>
         </a>
         <a routerLink="/resources" routerLinkActive="active" class="nav-item">
           <img src="assets/img/phone.svg" alt="Logo" style="width:28px"/>
