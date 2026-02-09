@@ -56,20 +56,20 @@ import { AuthService } from '../core/auth.service';
       <!-- Unverified/Pending Farmer Navigation -->
       <div class="nav-items" *ngIf="currentUser() && !isVerified()">
         <a routerLink="/dashboard" routerLinkActive="active" class="nav-item">
-          <span class="nav-icon">🏠</span>
-          <span class="nav-label">Dashboard</span>
+          <img src="assets/img/home.svg" alt="Home" style="width:28px"/>
+          <span class="nav-label">Home</span>
         </a>
         <a routerLink="/profile" routerLinkActive="active" class="nav-item">
-          <span class="nav-icon">👤</span>
+          <img src="assets/img/user-black.svg" alt="Profile" style="width:28px"/>
           <span class="nav-label">Profile</span>
         </a>
         <a routerLink="/weather" routerLinkActive="active" class="nav-item">
-          <span class="nav-icon">🌤️</span>
-          <span class="nav-label">Weather</span>
+          <img src="assets/img/weather.svg" alt="Logo" style="width:28px"/>
+         <span class="nav-label">Weather</span>
         </a>
         <a routerLink="/resources" routerLinkActive="active" class="nav-item">
-          <span class="nav-icon">📞</span>
-          <span class="nav-label">Contact</span>
+         <img src="assets/img/phone.svg" alt="Logo" style="width:28px"/>
+           <span class="nav-label">Contact</span>
         </a>
       </div>
     </nav>
