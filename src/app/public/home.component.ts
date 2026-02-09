@@ -17,7 +17,6 @@ import { WeatherData, NewsItem, SeasonalTip } from '../models/public.model';
             <p class="hero-subtitle">Register for an account to gain access to all resources</p>
             <button class="cta-button" routerLink="/register">Register Now</button>     
         </div
-
       </div>
 
       <div class="weather-snapshot card">
