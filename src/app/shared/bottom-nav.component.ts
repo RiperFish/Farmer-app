@@ -35,6 +35,7 @@ import { AuthService } from '../core/auth.service';
         </a>
         <a routerLink="/farmer-id" routerLinkActive="active" class="nav-item">
           <img src="assets/img/id.svg" alt="ID" style="width:28px"/>
+          <span class="nav-label">ID</span>
         </a>
         <a routerLink="/profile" routerLinkActive="active" class="nav-item">
           <img src="assets/img/user-black.svg" alt="Profile" style="width:28px"/>
