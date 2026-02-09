@@ -45,7 +45,7 @@ import { AuthService } from '../core/auth.service';
         </a>
         <a routerLink="/farm-records" routerLinkActive="active" class="nav-item">
           <img src="assets/img/farm.svg" alt="Farm" style="width:28px"/>
-          <span class="nav-label">Farm records</span>
+          <span class="nav-label">Records</span>
         </a>
         <a routerLink="/commodities" routerLinkActive="active" class="nav-item">
           <img src="assets/img/commodities.svg" alt="Commodities" style="width:28px"/>
