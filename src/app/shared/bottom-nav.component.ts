@@ -39,10 +39,6 @@ import { AuthService } from '../core/auth.service';
           <img src="assets/img/id.svg" alt="ID" style="width:28px"/>
           <span class="nav-label">ID</span>
         </a>
-        <a routerLink="/profile" routerLinkActive="active" class="nav-item">
-          <img src="assets/img/user-black.svg" alt="Profile" style="width:28px"/>
-          <span class="nav-label">Profile</span>
-        </a>
         <a routerLink="/farm-records" routerLinkActive="active" class="nav-item">
           <img src="assets/img/farm.svg" alt="Farm" style="width:28px"/>
           <span class="nav-label">Records</span>
@@ -50,6 +46,10 @@ import { AuthService } from '../core/auth.service';
         <a routerLink="/commodities" routerLinkActive="active" class="nav-item">
           <img src="assets/img/commodities.svg" alt="Commodities" style="width:28px"/>
           <span class="nav-label">Commodities</span>
+        </a>
+        <a routerLink="/profile" routerLinkActive="active" class="nav-item">
+          <img src="assets/img/user-black.svg" alt="Profile" style="width:28px"/>
+          <span class="nav-label">Profile</span>
         </a>
       </div>
 
