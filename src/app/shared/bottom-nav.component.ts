@@ -161,7 +161,7 @@ import { AuthService } from '../core/auth.service';
 
     @media (max-width: 374px) {
       .nav-label {
-        font-size: 10px;
+        font-size: 8px;
       }
 
       .nav-icon {
