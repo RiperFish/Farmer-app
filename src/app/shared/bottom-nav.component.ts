@@ -123,7 +123,7 @@ import { AuthService } from '../core/auth.service';
     }
 
     .nav-label {
-      font-size: 9px;
+      font-size: 10px;
       font-weight: 600;
       text-align: center;
       line-height: 1.1;
@@ -161,7 +161,7 @@ import { AuthService } from '../core/auth.service';
 
     @media (max-width: 374px) {
       .nav-label {
-        font-size: 8px;
+        font-size: 10px;
       }
 
       .nav-icon {
