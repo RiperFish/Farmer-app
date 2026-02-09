@@ -13,7 +13,7 @@ import { AuthService } from '../core/auth.service';
       <div class="nav-items" *ngIf="!currentUser()">
         <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item">
           <img src="assets/img/home.svg" alt="Logo" style="width:28px"/>
-          <!-- <span class="nav-label">Home</span> -->
+           <span class="nav-label">Home</span>
         </a>
         <a routerLink="/weather" routerLinkActive="active" class="nav-item">
          <img src="assets/img/weather.svg" alt="Logo" style="width:28px"/>
@@ -95,6 +95,7 @@ import { AuthService } from '../core/auth.service';
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      gap:4px;
       padding: 8px 4px;
       min-height: 56px;
       text-decoration: none;
