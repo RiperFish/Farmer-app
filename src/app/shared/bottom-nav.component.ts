@@ -21,9 +21,11 @@ import { AuthService } from '../core/auth.service';
         </a>
         <a routerLink="/resources" routerLinkActive="active" class="nav-item">
           <img src="assets/img/phone.svg" alt="Logo" style="width:28px"/>
+           <span class="nav-label">Contact</span>
         </a>
         <a routerLink="/login" routerLinkActive="active" class="nav-item">
           <img src="assets/img/user-black.svg" alt="Login" style="width:28px"/>
+           <span class="nav-label">Login</span>
         </a>
       </div>
 
