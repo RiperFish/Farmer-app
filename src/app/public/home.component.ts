@@ -99,7 +99,10 @@ import { WeatherData, NewsItem, SeasonalTip } from '../models/public.model';
       margin-bottom: 24px;
       position:relative;
     }
-
+    .hero-content{
+      position:relative;
+      z-index:1;
+    }
     .hero-section::before {
       content: '';
       position: absolute;
