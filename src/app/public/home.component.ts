@@ -11,10 +11,13 @@ import { WeatherData, NewsItem, SeasonalTip } from '../models/public.model';
   template: `
     <div class="page-container">
       <div class="hero-section">
-        <img src="assets/img/baimsfarmerhub-logo-white.png" alt="Logo"  style="width:100px;"/>
-        <h1 class="hero-title">Welcome to BAIMS Farmer Hub</h1>
-        <p class="hero-subtitle">Register for an account to gain access to all resources</p>
-        <button class="cta-button" routerLink="/register">Register Now</button>
+        <div class="hero-content">
+             <img src="assets/img/baimsfarmerhub-logo-white.png" alt="Logo"  style="width:100px;"/>
+            <h1 class="hero-title">Welcome to BAIMS Farmer Hub</h1>
+            <p class="hero-subtitle">Register for an account to gain access to all resources</p>
+            <button class="cta-button" routerLink="/register">Register Now</button>     
+        </div
+
       </div>
 
       <div class="weather-snapshot card">
