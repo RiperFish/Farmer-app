@@ -30,6 +30,7 @@ import { AuthService } from '../core/auth.service';
       <div class="nav-items" *ngIf="currentUser() && isVerified()">
         <a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item">
           <img src="assets/img/home.svg" alt="Home" style="width:28px"/>
+          <span class="nav-label">Home</span>
         </a>
         <a routerLink="/farmer-id" routerLinkActive="active" class="nav-item">
           <img src="assets/img/id.svg" alt="ID" style="width:28px"/>
