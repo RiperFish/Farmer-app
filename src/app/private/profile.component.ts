@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../core/auth.service';
@@ -10,12 +10,28 @@ import { DataService } from '../core/data.service';
   imports: [CommonModule, FormsModule],
   template: `
     <div class="page-container">
-      <div class="page-header">
+      <!-- <div class="page-header">
         <h1 class="page-title">👤 My Profile</h1>
-      </div>
+      </div> -->
 
       <div class="profile-card card">
-        <div class="profile-header">
+        <div class="mob-banner"></div>
+        <div class="mob-profile-section">
+          <div class="mob-avatar">
+            <img
+              *ngIf="currentUser()?.profileImageUrl && !imageError()"
+              [src]="currentUser()!.profileImageUrl"
+              alt="Profile photo"
+              class="mob-avatar-img"
+              (error)="onImageError()">
+            <span
+              *ngIf="!currentUser()?.profileImageUrl || imageError()"
+              class="mob-avatar-initials">{{ getUserInitials() }}</span>
+          </div>
+          <div class="mob-name">{{ getUserInitials() }}</div>
+        </div>
+
+        <!-- <div class="profile-header">
           <div class="avatar">{{ getUserInitials() }}</div>
           <div class="profile-status">
             <div class="status-badge" [class]="'status-' + currentUser()?.status">
@@ -26,7 +42,7 @@ import { DataService } from '../core/data.service';
             </div>
           </div>
         </div>
-
+        -->
         <div class="profile-info">
           <div class="info-row">
             <span class="info-label">Full Name</span>
@@ -398,10 +414,23 @@ import { DataService } from '../core/data.service';
       line-height: 1.5;
       margin: 0;
     }
+    @media (max-width: 480px) {
+      .page-container {
+        padding: 0px;
+      }
+      .profile-card{
+        padding:0 ;
+      }
+      .profile-info,
+      .profile-actions{
+        margin-inline:20px;
+      }
+    }
   `]
 })
 export class ProfileComponent {
   currentUser = this.authService.currentUser;
+  imageError = signal(false);
   showUpdateForm = false;
   updateField = '';
   updateValue = '';
@@ -427,6 +456,10 @@ export class ProfileComponent {
     if (status === 'verified') return 'Verified Farmer';
     if (status === 'pending') return 'Verification Pending';
     return 'Unverified';
+  }
+
+  onImageError() {
+    this.imageError.set(true);
   }
 
   submitUpdateRequest() {

@@ -461,7 +461,7 @@ import { AuthService } from '../core/auth.service';
       .mob-banner {
         display: block;
         height: 160px;
-        background: #9fbf83;
+        background: #2e7d32;
         position: relative;
       }
 

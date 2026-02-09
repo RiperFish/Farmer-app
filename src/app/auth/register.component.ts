@@ -11,13 +11,13 @@ import { AuthService } from '../core/auth.service';
   template: `
     <div class="register-container">
       <div class="register-header">
-        <div class="logo">🌾</div>
+        <img src="assets/img/baimsfarmerhub-logo.png" alt="Logo"  style="width:100px;"/>
         <h1 class="register-title">Register as a Farmer</h1>
         <p class="register-subtitle">Join the National Farmer Registry</p>
       </div>
 
       <div class="register-card card">
-        <div class="progress-steps">
+        <div class="progress-steps" style="display:none;">
           <div class="step" [class.active]="true">
             <div class="step-number">1</div>
             <div class="step-label">Personal Info</div>
@@ -367,6 +367,14 @@ import { AuthService } from '../core/auth.service';
     @media (min-width: 768px) {
       .register-card {
         padding: 40px;
+      }
+    }
+    @media (max-width: 480px) {
+      .progress-steps {
+        justify-content: space-between;
+      }
+      .step-line {
+        display: none;
       }
     }
   `]

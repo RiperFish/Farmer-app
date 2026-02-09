@@ -27,7 +27,8 @@ import { AuthService } from '../core/auth.service';
       left: 0;
       right: 0;
       height: 56px;
-      background: linear-gradient(135deg, #2e7d32 0%, #388e3c 100%);
+      /* background: linear-gradient(135deg, #2e7d32 0%, #388e3c 100%); */
+      background: #2e7d32;
       display: flex;
       align-items: center;
       justify-content: space-between;

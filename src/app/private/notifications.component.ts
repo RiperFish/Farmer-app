@@ -10,12 +10,12 @@ import { Notification } from '../models/user.model';
   imports: [CommonModule],
   template: `
     <div class="page-container">
-      <div class="page-header">
-        <h1 class="page-title">🔔 Notifications</h1>
+      <!-- <div class="page-header">
+        <h1 class="page-title">🔔 Notifications</h1> 
         <p class="page-subtitle" *ngIf="unreadCount > 0">
           {{ unreadCount }} unread notification{{ unreadCount > 1 ? 's' : '' }}
-        </p>
-      </div>
+        </p> 
+      </div> -->
 
       <div class="filter-tabs">
         <button class="filter-tab"

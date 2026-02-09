@@ -11,7 +11,7 @@ import { Farm } from '../models/user.model';
   template: `
     <div class="page-container">
       <div class="page-header">
-        <h1 class="page-title">📊 Farm Records</h1>
+        <!-- <h1 class="page-title">📊 Farm Records</h1> -->
         <p class="page-subtitle">View your registered farm and plot information</p>
       </div>
 

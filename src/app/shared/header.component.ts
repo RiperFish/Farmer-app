@@ -16,11 +16,12 @@ import { AuthService } from '../core/auth.service';
           </button>
           <div class="logo-container" [routerLink]="currentUser() ? ['/dashboard'] : ['/']">
             <div class="logo">
-              <span class="logo-icon">🌾</span>
-              <div class="logo-text">
+              <img src="assets/img/baimsfarmerhub-logo-white.png" alt="Logo" style="width:60px;" />
+              <!-- <span class="logo-icon">🌾</span>
+               <div class="logo-text">
                 <span class="logo-main">BAIMS</span>
                 <span class="logo-sub">Farmer Hub</span>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -71,7 +72,7 @@ import { AuthService } from '../core/auth.service';
       top: 0;
       left: 0;
       right: 0;
-      height: 60px;
+      height: 80px;
       background: linear-gradient(135deg, #2e7d32 0%, #388e3c 100%);
       box-shadow: 0 2px 8px rgba(0,0,0,0.15);
       z-index: 1000;
