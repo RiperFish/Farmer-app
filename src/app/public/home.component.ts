@@ -97,6 +97,17 @@ import { WeatherData, NewsItem, SeasonalTip } from '../models/public.model';
       margin-bottom: 24px;
     }
 
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('https://images.pexels.com/photos/974314/pexels-photo-974314.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') center/cover;
+      opacity: 0.15;
+    }
+    
     .hero-title {
       font-size: 28px;
       font-weight: 700;
