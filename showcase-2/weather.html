@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather Forecast - BAIMS Farmer Hub</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .current-weather {
+      padding: 24px;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    }
+    .current-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #1976d2;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .current-display {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .current-icon {
+      font-size: 80px;
+      margin-bottom: 12px;
+    }
+    .current-temp {
+      font-size: 48px;
+      font-weight: 700;
+      color: #1976d2;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .current-condition {
+      font-size: 18px;
+      color: #333;
+      font-weight: 500;
+    }
+    .current-details {
+      display: flex;
+      justify-content: space-around;
+      gap: 16px;
+    }
+    .detail-box { text-align: center; }
+    .detail-label {
+      font-size: 12px;
+      color: #666;
+      margin-bottom: 4px;
+    }
+    .detail-value {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1976d2;
+    }
+    .forecast-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #333;
+      margin: 0 0 16px 0;
+    }
+    .forecast-list {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .forecast-card {
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: transform 0.2s;
+    }
+    .forecast-card:hover {
+      transform: translateX(4px);
+    }
+    .forecast-day {
+      flex-shrink: 0;
+      width: 70px;
+    }
+    .day-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+    }
+    .day-date {
+      font-size: 12px;
+      color: #666;
+    }
+    .forecast-icon {
+      font-size: 36px;
+      flex-shrink: 0;
+    }
+    .forecast-temps {
+      flex-shrink: 0;
+      font-size: 18px;
+      font-weight: 600;
+    }
+    .temp-high { color: #d32f2f; }
+    .temp-divider {
+      color: #999;
+      margin: 0 4px;
+    }
+    .temp-low { color: #1976d2; }
+    .forecast-condition {
+      flex: 1;
+      font-size: 14px;
+      color: #666;
+    }
+    .forecast-extra {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+    .humidity-badge, .rain-badge {
+      background: #e3f2fd;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-weight: 600;
+      color: #1976d2;
+    }
+    .weather-tips { padding: 20px; }
+    .tips-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #2e7d32;
+      margin: 0 0 12px 0;
+    }
+    .tips-list {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .tips-list li {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+    @media (min-width: 768px) {
+      .forecast-card { padding: 20px; }
+      .forecast-day { width: 100px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-content">
+      <div class="header-left">
+        <a href="index.html" class="logo-container">
+          <div class="logo">
+            <span class="logo-icon">&#x1F33E;</span>
+            <div class="logo-text">
+              <span class="logo-main">BAIMS</span>
+              <span class="logo-sub">Farmer Hub</span>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="header-right">
+        <a href="login.html" class="login-btn">Login</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="top-nav"></div>
+
+  <main class="page-container">
+    <div class="page-header">
+      <h1 class="page-title">
+        <img src="assets/img/weather.svg" alt="">
+        Weather Forecast
+      </h1>
+      <p class="page-subtitle">7-Day Weather Outlook for Belize</p>
+    </div>
+
+    <section class="current-weather card">
+      <div class="current-label">Current Weather</div>
+      <div class="current-display">
+        <div class="current-icon">&#x2600;&#xFE0F;</div>
+        <div class="current-temp">78&#176;F</div>
+        <div class="current-condition">Partly Cloudy</div>
+      </div>
+      <div class="current-details">
+        <div class="detail-box">
+          <div class="detail-label">High / Low</div>
+          <div class="detail-value">88&#176; / 72&#176;</div>
+        </div>
+        <div class="detail-box">
+          <div class="detail-label">Humidity</div>
+          <div class="detail-value">75%</div>
+        </div>
+        <div class="detail-box">
+          <div class="detail-label">Rainfall</div>
+          <div class="detail-value">0"</div>
+        </div>
+      </div>
+    </section>
+
+    <h2 class="forecast-title">7-Day Forecast</h2>
+    <div class="forecast-list">
+      <article class="forecast-card card">
+        <div class="forecast-day">
+          <div class="day-name">Monday</div>
+          <div class="day-date">Jan 29</div>
+        </div>
+        <div class="forecast-icon">&#x26C5;</div>
+        <div class="forecast-temps">
+          <span class="temp-high">89&#176;</span>
+          <span class="temp-divider">/</span>
+          <span class="temp-low">73&#176;</span>
+        </div>
+        <div class="forecast-condition">Partly Cloudy</div>
+        <div class="forecast-extra">
+          <span class="humidity-badge">&#x1F4A7; 70%</span>
+        </div>
+      </article>
+      <article class="forecast-card card">
+        <div class="forecast-day">
+          <div class="day-name">Tuesday</div>
+          <div class="day-date">Jan 30</div>
+        </div>
+        <div class="forecast-icon">&#x2601;&#xFE0F;</div>
+        <div class="forecast-temps">
+          <span class="temp-high">85&#176;</span>
+          <span class="temp-divider">/</span>
+          <span class="temp-low">71&#176;</span>
+        </div>
+        <div class="forecast-condition">Cloudy</div>
+        <div class="forecast-extra">
+          <span class="humidity-badge">&#x1F4A7; 78%</span>
+        </div>
+      </article>
+      <article class="forecast-card card">
+        <div class="forecast-day">
+          <div class="day-name">Wednesday</div>
+          <div class="day-date">Jan 31</div>
+        </div>
+        <div class="forecast-icon">&#x1F326;&#xFE0F;</div>
+        <div class="forecast-temps">
+          <span class="temp-high">84&#176;</span>
+          <span class="temp-divider">/</span>
+          <span class="temp-low">70&#176;</span>
+        </div>
+        <div class="forecast-condition">Scattered Showers</div>
+        <div class="forecast-extra">
+          <span class="humidity-badge">&#x1F4A7; 82%</span>
+          <span class="rain-badge">&#x1F327;&#xFE0F; 2"</span>
+        </div>
+      </article>
+      <article class="forecast-card card">
+        <div class="forecast-day">
+          <div class="day-name">Thursday</div>
+          <div class="day-date">Feb 1</div>
+        </div>
+        <div class="forecast-icon">&#x1F327;&#xFE0F;</div>
+        <div class="forecast-temps">
+          <span class="temp-high">82&#176;</span>
+          <span class="temp-divider">/</span>
+          <span class="temp-low">69&#176;</span>
+        </div>
+        <div class="forecast-condition">Rain</div>
+        <div class="forecast-extra">
+          <span class="humidity-badge">&#x1F4A7; 88%</span>
+          <span class="rain-badge">&#x1F327;&#xFE0F; 4"</span>
+        </div>
+      </article>
+      <article class="forecast-card card">
+        <div class="forecast-day">
+          <div class="day-name">Friday</div>
+          <div class="day-date">Feb 2</div>
+        </div>
+        <div class="forecast-icon">&#x26C5;</div>
+        <div class="forecast-temps">
+          <span class="temp-high">86&#176;</span>
+          <span class="temp-divider">/</span>
+          <span class="temp-low">72&#176;</span>
+        </div>
+        <div class="forecast-condition">Partly Cloudy</div>
+        <div class="forecast-extra">
+          <span class="humidity-badge">&#x1F4A7; 72%</span>
+        </div>
+      </article>
+      <article class="forecast-card card">
+        <div class="forecast-day">
+          <div class="day-name">Saturday</div>
+          <div class="day-date">Feb 3</div>
+        </div>
+        <div class="forecast-icon">&#x2600;&#xFE0F;</div>
+        <div class="forecast-temps">
+          <span class="temp-high">90&#176;</span>
+          <span class="temp-divider">/</span>
+          <span class="temp-low">74&#176;</span>
+        </div>
+        <div class="forecast-condition">Sunny</div>
+        <div class="forecast-extra">
+          <span class="humidity-badge">&#x1F4A7; 65%</span>
+        </div>
+      </article>
+      <article class="forecast-card card">
+        <div class="forecast-day">
+          <div class="day-name">Sunday</div>
+          <div class="day-date">Feb 4</div>
+        </div>
+        <div class="forecast-icon">&#x2600;&#xFE0F;</div>
+        <div class="forecast-temps">
+          <span class="temp-high">91&#176;</span>
+          <span class="temp-divider">/</span>
+          <span class="temp-low">75&#176;</span>
+        </div>
+        <div class="forecast-condition">Sunny</div>
+        <div class="forecast-extra">
+          <span class="humidity-badge">&#x1F4A7; 62%</span>
+        </div>
+      </article>
+    </div>
+
+    <section class="weather-tips card">
+      <h3 class="tips-title">&#x1F33E; Farming Tips Based on Weather</h3>
+      <ul class="tips-list">
+        <li>Monitor rainfall levels for irrigation planning</li>
+        <li>Protect crops during heavy rain periods on Wednesday and Thursday</li>
+        <li>Take advantage of sunny days on the weekend for field work</li>
+        <li>Watch for temperature drops that may affect sensitive crops</li>
+      </ul>
+    </section>
+  </main>
+
+  <nav class="bottom-nav" aria-label="Main navigation">
+    <div class="nav-items">
+      <a href="index.html" class="nav-item" aria-label="Home">
+        <img src="assets/img/home.svg" alt="">
+        <span class="nav-label">Home</span>
+      </a>
+      <a href="weather.html" class="nav-item active" aria-label="Weather">
+        <img src="assets/img/weather.svg" alt="">
+        <span class="nav-label">Weather</span>
+      </a>
+      <a href="resources.html" class="nav-item" aria-label="Resources">
+        <img src="assets/img/phone.svg" alt="">
+        <span class="nav-label">Contact</span>
+      </a>
+      <a href="login.html" class="nav-item" aria-label="Login">
+        <img src="assets/img/user-black.svg" alt="">
+        <span class="nav-label">Login</span>
+      </a>
+    </div>
+  </nav>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

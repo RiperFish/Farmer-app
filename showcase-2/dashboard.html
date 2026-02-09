@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - BAIMS Farmer Hub</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .welcome-section {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .welcome-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #333;
+      margin: 0 0 12px 0;
+    }
+    .status-badge {
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    .status-verified { background: #4caf50; color: white; }
+    .status-pending { background: #ff9800; color: white; }
+    .status-unverified { background: #9e9e9e; color: white; }
+    .quick-actions {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .action-card {
+      position: relative;
+      padding: 24px;
+      text-align: center;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .action-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    }
+    .action-card img { width: 44px; height: 44px; margin-bottom: 8px; }
+    .action-text {
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+    }
+    .action-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: #f44336;
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 7px;
+      border-radius: 12px;
+      min-width: 20px;
+      text-align: center;
+    }
+    .weather-widget, .notifications-widget {
+      margin-bottom: 24px;
+      padding: 20px;
+    }
+    .widget-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .widget-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #333;
+      margin: 0;
+    }
+    .widget-link {
+      font-size: 13px;
+      color: #1976d2;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .widget-link:hover {
+      text-decoration: underline;
+    }
+    .weather-display {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .weather-icon { font-size: 56px; }
+    .weather-temp {
+      font-size: 32px;
+      font-weight: 700;
+      color: #2e7d32;
+      line-height: 1;
+    }
+    .weather-condition {
+      font-size: 16px;
+      color: #666;
+      margin-top: 4px;
+    }
+    .notification-list {
+      display: grid;
+      gap: 12px;
+    }
+    .notification-item {
+      display: flex;
+      gap: 12px;
+      padding: 12px;
+      border-radius: 8px;
+      background: #f9f9f9;
+      transition: background 0.2s;
+    }
+    .notification-item:hover {
+      background: #f0f0f0;
+    }
+    .notification-item.unread {
+      background: #e3f2fd;
+    }
+    .notif-icon {
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+    .notif-content {
+      flex: 1;
+      min-width: 0;
+    }
+    .notif-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 4px;
+    }
+    .notif-message {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.4;
+      margin-bottom: 4px;
+    }
+    .notif-time {
+      font-size: 12px;
+      color: #999;
+    }
+    .resources-widget { margin-bottom: 24px; }
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .link-card {
+      padding: 20px;
+      text-align: center;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    .link-card:hover {
+      transform: translateY(-2px);
+    }
+    .link-card img { width: 44px; height: 44px; }
+    .link-text {
+      font-size: 12px;
+      font-weight: 600;
+      color: #333;
+    }
+    .restricted-notice {
+      padding: 16px;
+      background: #fff3e0;
+      border: 1px solid #ffb74d;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    .restricted-notice .notice-icon { font-size: 24px; }
+    .restricted-notice .notice-text {
+      font-size: 14px;
+      color: #666;
+    }
+    @media (min-width: 768px) {
+      .quick-actions {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-content">
+      <div class="header-left">
+        <button class="menu-btn" aria-label="Open menu">
+          <span>&#x2630;</span>
+        </button>
+        <a href="dashboard.html" class="logo-container">
+          <div class="logo">
+            <span class="logo-icon">&#x1F33E;</span>
+            <div class="logo-text">
+              <span class="logo-main">BAIMS</span>
+              <span class="logo-sub">Farmer Hub</span>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="header-right">
+        <a href="notifications.html" class="notification-btn" aria-label="Notifications">
+          <span>&#x1F514;</span>
+          <span class="notification-badge">2</span>
+        </a>
+        <button class="logout-btn" onclick="App.logout()">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="top-nav"></div>
+
+  <nav class="mobile-nav" aria-label="Mobile navigation">
+    <div class="nav-header">
+      <div class="user-info">
+        <div class="user-avatar" id="userAvatar">JM</div>
+        <div class="user-details">
+          <div class="user-name" id="userName">John Martinez</div>
+          <div class="user-status status-verified" id="userStatus">verified</div>
+        </div>
+      </div>
+      <button class="close-btn" aria-label="Close menu">&times;</button>
+    </div>
+    <ul class="nav-links">
+      <li><a href="dashboard.html"><img src="assets/img/home.svg" alt=""> Dashboard</a></li>
+      <li><a href="profile.html"><img src="assets/img/user-black.svg" alt=""> My Profile</a></li>
+      <li class="verified-only"><a href="farmer-id.html"><img src="assets/img/id.svg" alt=""> Farmer ID</a></li>
+      <li class="verified-only"><a href="farm-records.html"><img src="assets/img/chart.svg" alt=""> Farm Records</a></li>
+      <li><a href="notifications.html"><img src="assets/img/bell.svg" alt=""> Notifications</a></li>
+      <li class="nav-divider"></li>
+      <li><a href="calendar.html"><img src="assets/img/calendar.svg" alt=""> Planting Calendar</a></li>
+      <li><a href="weather.html"><img src="assets/img/weather.svg" alt=""> Weather</a></li>
+      <li><a href="resources.html"><img src="assets/img/resources.svg" alt=""> Resources</a></li>
+    </ul>
+  </nav>
+  <div class="nav-overlay"></div>
+
+  <main class="page-container">
+    <section class="welcome-section">
+      <h1 class="welcome-title" id="welcomeTitle">Welcome, John Martinez!</h1>
+      <div class="status-badge status-verified" id="statusBadge">Verified Farmer</div>
+    </section>
+
+    <div class="restricted-notice" id="restrictedNotice" style="display: none;">
+      <span class="notice-icon">&#x26A0;&#xFE0F;</span>
+      <span class="notice-text">Your account is pending verification. Some features are restricted until verified by an extension officer.</span>
+    </div>
+
+    <section class="quick-actions" id="quickActions">
+      <a href="profile.html" class="action-card card">
+        <img src="assets/img/user-black.svg" alt="">
+        <div class="action-text">My Profile</div>
+      </a>
+      <a href="farmer-id.html" class="action-card card verified-only">
+        <img src="assets/img/id.svg" alt="">
+        <div class="action-text">Farmer ID</div>
+      </a>
+      <a href="farm-records.html" class="action-card card verified-only">
+        <img src="assets/img/chart.svg" alt="">
+        <div class="action-text">Farm Records</div>
+      </a>
+      <a href="notifications.html" class="action-card card">
+        <img src="assets/img/bell.svg" alt="">
+        <div class="action-text">Notifications</div>
+        <span class="action-badge">2</span>
+      </a>
+    </section>
+
+    <section class="weather-widget card">
+      <div class="widget-header">
+        <h2 class="card-title">
+          <img src="assets/img/weather.svg" alt="" style="width: 25px;">
+          Today's Weather
+        </h2>
+        <a href="weather.html" class="widget-link">Full Forecast &#x2192;</a>
+      </div>
+      <div class="weather-display">
+        <div class="weather-icon">&#x2600;&#xFE0F;</div>
+        <div class="weather-info">
+          <div class="weather-temp">78&#176;F</div>
+          <div class="weather-condition">Partly Cloudy</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="notifications-widget card">
+      <div class="widget-header">
+        <h2 class="card-title">
+          <img src="assets/img/bell.svg" alt="" style="width: 25px;">
+          Recent Notifications
+        </h2>
+        <a href="notifications.html" class="widget-link">View All &#x2192;</a>
+      </div>
+      <div class="notification-list">
+        <article class="notification-item unread">
+          <div class="notif-icon">&#x26A0;&#xFE0F;</div>
+          <div class="notif-content">
+            <div class="notif-title">Weather Alert</div>
+            <div class="notif-message">Heavy rainfall expected in next 48 hours. Secure your crops and equipment.</div>
+            <div class="notif-time">Just now</div>
+          </div>
+        </article>
+        <article class="notification-item unread">
+          <div class="notif-icon">&#x2139;&#xFE0F;</div>
+          <div class="notif-content">
+            <div class="notif-title">New Support Program Available</div>
+            <div class="notif-message">You are eligible for the Small Farmer Support Program. Click to learn more.</div>
+            <div class="notif-time">1 day ago</div>
+          </div>
+        </article>
+        <article class="notification-item">
+          <div class="notif-icon">&#x2705;</div>
+          <div class="notif-content">
+            <div class="notif-title">Profile Verified</div>
+            <div class="notif-message">Your farmer profile has been successfully verified. You now have full access.</div>
+            <div class="notif-time">2 days ago</div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="resources-widget">
+      <h2 class="widget-title">Quick Links</h2>
+      <div class="links-grid">
+        <a href="calendar.html" class="link-card card">
+          <img src="assets/img/calendar.svg" alt="">
+          <span class="link-text">Planting Calendar</span>
+        </a>
+        <a href="weather.html" class="link-card card">
+          <img src="assets/img/weather.svg" alt="">
+          <span class="link-text">Weather</span>
+        </a>
+        <a href="resources.html" class="link-card card">
+          <img src="assets/img/resources.svg" alt="">
+          <span class="link-text">Resources</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <nav class="bottom-nav" aria-label="Main navigation">
+    <div class="nav-items">
+      <a href="farmer-id.html" class="nav-item" aria-label="Farmer ID">
+        <img src="assets/img/id.svg" alt="">
+        <span class="nav-label">ID</span>
+      </a>
+      <a href="profile.html" class="nav-item" aria-label="Profile">
+        <img src="assets/img/user-black.svg" alt="">
+        <span class="nav-label">Profile</span>
+      </a>
+      <a href="farm-records.html" class="nav-item" aria-label="Farm Records">
+        <img src="assets/img/farm.svg" alt="">
+        <span class="nav-label">Farm</span>
+      </a>
+      <a href="commodities.html" class="nav-item" aria-label="Commodities">
+        <img src="assets/img/commodities.svg" alt="">
+        <span class="nav-label">Crops</span>
+      </a>
+    </div>
+  </nav>
+
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      if (!App.currentUser) {
+        window.location.href = 'login.html';
+        return;
+      }
+
+      document.getElementById('welcomeTitle').textContent = 'Welcome, ' + App.currentUser.name + '!';
+      document.getElementById('statusBadge').textContent = App.getStatusText();
+      document.getElementById('statusBadge').className = 'status-badge status-' + App.currentUser.status;
+
+      document.getElementById('userAvatar').textContent = App.getUserInitials();
+      document.getElementById('userName').textContent = App.currentUser.name;
+      document.getElementById('userStatus').textContent = App.currentUser.status;
+      document.getElementById('userStatus').className = 'user-status status-' + App.currentUser.status;
+
+      if (!App.isVerified()) {
+        document.getElementById('restrictedNotice').style.display = 'flex';
+        document.querySelectorAll('.verified-only').forEach(el => {
+          el.style.display = 'none';
+        });
+      }
+
+      App.updateUI();
+    });
+  </script>
+</body>
+</html>

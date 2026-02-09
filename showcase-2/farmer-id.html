@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Farmer ID - BAIMS Farmer Hub</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .id-card-wrapper {
+      max-width: 800px;
+      margin: 0 auto 24px;
+      padding: 20px;
+    }
+    .id-card {
+      background: white;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+      border: 4px solid #2d7a3e;
+    }
+    .id-card-header {
+      background: linear-gradient(135deg, #2d7a3e 0%, #1e5d2f 100%);
+      padding: 24px 32px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .flag-emblem {
+      width: 60px;
+      height: 60px;
+      background: #003f87;
+      border: 3px solid #FFD700;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 900;
+      color: white;
+      flex-shrink: 0;
+    }
+    .header-content { flex: 1; }
+    .belize-text {
+      font-size: 32px;
+      font-weight: 900;
+      color: #FFD700;
+      margin: 0 0 4px 0;
+      letter-spacing: 4px;
+    }
+    .card-title-id {
+      font-size: 18px;
+      font-weight: 700;
+      color: white;
+      margin: 0 0 8px 0;
+      letter-spacing: 1px;
+    }
+    .ministry-text {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.9);
+      margin: 0;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+    .id-card-body {
+      background: white;
+      padding: 0;
+    }
+    .main-content {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 0;
+      padding: 32px;
+      border-bottom: 3px solid #FFD700;
+    }
+    .left-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-right: 32px;
+      border-right: 2px solid #e0e0e0;
+    }
+    .photo-container {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .photo-frame {
+      width: 200px;
+      height: 240px;
+      background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+      border: 4px solid #2d7a3e;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: -20px;
+      z-index: 1;
+      overflow: hidden;
+    }
+    .desktop-photo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .photo-initials {
+      font-size: 80px;
+      font-weight: 900;
+      color: #2d7a3e;
+      letter-spacing: 4px;
+    }
+    .verified-badge {
+      background: #28a745;
+      color: white;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 10px 24px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      z-index: 2;
+      box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
+    }
+    .right-section {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 20px;
+      padding-left: 32px;
+    }
+    .info-row {
+      border-bottom: 1px solid #e8e8e8;
+      padding-bottom: 12px;
+    }
+    .info-row:last-child { border-bottom: none; }
+    .info-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+    .info-value {
+      font-size: 18px;
+      font-weight: 700;
+      color: #2a2a2a;
+      letter-spacing: 0.5px;
+    }
+    .info-value.name-value {
+      font-size: 22px;
+      font-weight: 900;
+    }
+    .info-value.id-value {
+      font-size: 20px;
+      font-weight: 900;
+      color: #2d7a3e;
+      font-family: 'Courier New', monospace;
+      letter-spacing: 2px;
+    }
+    .bottom-section {
+      display: flex;
+      justify-content: center;
+      padding: 40px 32px;
+    }
+    .qr-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .qr-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: #2d7a3e;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+    .qr-label-mobile { display: none; }
+    .qr-code {
+      width: 180px;
+      height: 180px;
+      background: white;
+      padding: 12px;
+      border-radius: 8px;
+      border: 3px solid #2d7a3e;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .qr-placeholder {
+      width: 100%;
+      height: 100%;
+      background:
+        linear-gradient(90deg, #2d7a3e 2px, transparent 2px),
+        linear-gradient(#2d7a3e 2px, transparent 2px);
+      background-size: 16px 16px;
+      opacity: 0.3;
+      border-radius: 4px;
+    }
+    .id-text {
+      font-size: 13px;
+      font-weight: 700;
+      color: #666;
+      font-family: 'Courier New', monospace;
+      letter-spacing: 1px;
+    }
+    .action-buttons {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .action-btn {
+      padding: 16px 24px;
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .action-btn.primary {
+      background: #2d7a3e;
+      color: white;
+    }
+    .action-btn.primary:hover {
+      background: #1e5d2f;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(45, 122, 62, 0.4);
+    }
+    .action-btn.secondary {
+      background: white;
+      color: #2d7a3e;
+      border: 2px solid #2d7a3e;
+    }
+    .action-btn.secondary:hover {
+      background: #e8f5e9;
+      transform: translateY(-2px);
+    }
+
+    .mob-banner,
+    .mob-profile-section,
+    .mob-info-grid {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .id-card-wrapper {
+        padding: 0;
+        margin: 0 auto 16px;
+      }
+      .id-card {
+        border: none;
+        border-radius: 20px;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+      }
+      .id-card-header { display: none; }
+      .main-content { display: none; }
+      .mob-banner {
+        display: block;
+        height: 160px;
+        background: #2e7d32;
+        position: relative;
+      }
+      .mob-profile-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: -60px;
+        position: relative;
+        z-index: 2;
+        padding: 0 20px;
+      }
+      .mob-avatar {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: 3px solid white;
+        overflow: hidden;
+        background: linear-gradient(135deg, #d4edda, #c3e6cb);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+        flex-shrink: 0;
+      }
+      .mob-avatar-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .mob-avatar-initials {
+        font-size: 40px;
+        font-weight: 900;
+        color: #2d7a3e;
+        letter-spacing: 2px;
+      }
+      .mob-name {
+        font-size: 24px;
+        font-weight: 800;
+        color: #1a3a1a;
+        margin-top: 12px;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+      .mob-info-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        border: 1px solid #e0e0e0;
+        border-radius: 12px;
+        margin: 0 20px 8px;
+        overflow: hidden;
+        background: white;
+      }
+      .mob-cell {
+        padding: 16px 18px;
+      }
+      .mob-cell:nth-child(odd) {
+        border-right: 1px solid #e0e0e0;
+      }
+      .mob-cell:nth-child(1),
+      .mob-cell:nth-child(2) {
+        border-bottom: 1px solid #e0e0e0;
+      }
+      .mob-cell-label {
+        font-size: 13px;
+        color: #888;
+        margin-bottom: 6px;
+        font-weight: 500;
+      }
+      .mob-cell-value {
+        font-size: 17px;
+        font-weight: 500;
+      }
+      .bottom-section {
+        padding: 24px 20px 16px;
+      }
+      .qr-label {
+        font-size: 18px;
+        font-weight: 700;
+        color: #1a3a1a;
+        text-transform: none;
+        letter-spacing: 0;
+      }
+      .qr-label-desktop { display: none; }
+      .qr-label-mobile { display: inline; }
+      .qr-code {
+        width: 180px;
+        height: 180px;
+        border: 2px solid #ddd;
+        border-radius: 12px;
+      }
+      .action-buttons { display: none; }
+    }
+    @media (max-width: 480px) {
+      .page-container {
+        padding: 0px;
+      }
+      .mob-banner { height: 100px; }
+      .id-card {
+        border-radius: 0px;
+        box-shadow: none;
+        background: transparent;
+      }
+      .id-card-body {
+        background: transparent;
+      }
+      .mob-profile-section { margin-top: -55px; }
+      .mob-avatar { width: 110px; height: 110px; }
+      .mob-avatar-initials { font-size: 36px; }
+      .mob-name { font-size: 22px; }
+      .mob-cell { padding: 14px 16px; }
+      .mob-cell-label { font-size: 12px; }
+      .mob-cell-value { font-size: 14px; }
+      .qr-code { width: 160px; height: 160px; }
+    }
+    @media print {
+      .action-buttons { display: none; }
+      body { padding: 0; background: white; }
+      .app-header, .bottom-nav { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-content">
+      <div class="header-left">
+        <button class="menu-btn" aria-label="Open menu">
+          <span>&#x2630;</span>
+        </button>
+        <a href="dashboard.html" class="logo-container">
+          <div class="logo">
+            <span class="logo-icon">&#x1F33E;</span>
+            <div class="logo-text">
+              <span class="logo-main">BAIMS</span>
+              <span class="logo-sub">Farmer Hub</span>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="header-right">
+        <a href="notifications.html" class="notification-btn" aria-label="Notifications">
+          <span>&#x1F514;</span>
+          <span class="notification-badge">2</span>
+        </a>
+        <button class="logout-btn" onclick="App.logout()">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="top-nav"></div>
+
+  <nav class="mobile-nav" aria-label="Mobile navigation">
+    <div class="nav-header">
+      <div class="user-info">
+        <div class="user-avatar" id="navAvatar">JM</div>
+        <div class="user-details">
+          <div class="user-name" id="navName">John Martinez</div>
+          <div class="user-status status-verified" id="navStatus">verified</div>
+        </div>
+      </div>
+      <button class="close-btn" aria-label="Close menu">&times;</button>
+    </div>
+    <ul class="nav-links">
+      <li><a href="dashboard.html"><img src="assets/img/home.svg" alt=""> Dashboard</a></li>
+      <li><a href="profile.html"><img src="assets/img/user-black.svg" alt=""> My Profile</a></li>
+      <li><a href="farmer-id.html"><img src="assets/img/id.svg" alt=""> Farmer ID</a></li>
+      <li><a href="farm-records.html"><img src="assets/img/chart.svg" alt=""> Farm Records</a></li>
+      <li><a href="notifications.html"><img src="assets/img/bell.svg" alt=""> Notifications</a></li>
+      <li class="nav-divider"></li>
+      <li><a href="calendar.html"><img src="assets/img/calendar.svg" alt=""> Planting Calendar</a></li>
+      <li><a href="weather.html"><img src="assets/img/weather.svg" alt=""> Weather</a></li>
+      <li><a href="resources.html"><img src="assets/img/resources.svg" alt=""> Resources</a></li>
+    </ul>
+  </nav>
+  <div class="nav-overlay"></div>
+
+  <main class="page-container">
+    <div class="id-card-wrapper">
+      <div class="id-card">
+
+        <div class="id-card-header">
+          <div class="flag-emblem">BZ</div>
+          <div class="header-content">
+            <h1 class="belize-text">BELIZE</h1>
+            <h2 class="card-title-id">FARMER IDENTIFICATION CARD</h2>
+            <p class="ministry-text">Ministry of Agriculture, Fisheries, Forestry & Sustainable Development</p>
+          </div>
+        </div>
+
+        <div class="mob-banner"></div>
+
+        <div class="mob-profile-section">
+          <div class="mob-avatar">
+            <img id="mobAvatarImg" src="" alt="Profile photo" class="mob-avatar-img" style="display:none;" onerror="this.style.display='none'; document.getElementById('mobAvatarInitials').style.display='flex';">
+            <span id="mobAvatarInitials" class="mob-avatar-initials">JM</span>
+          </div>
+          <div class="mob-name" id="mobName">John Martinez</div>
+        </div>
+
+        <div class="id-card-body">
+          <div class="main-content">
+            <div class="left-section">
+              <div class="photo-container">
+                <div class="photo-frame">
+                  <img id="desktopPhotoImg" src="" alt="Profile photo" class="desktop-photo-img" style="display:none;" onerror="this.style.display='none'; document.getElementById('idInitials').style.display='flex';">
+                  <div class="photo-initials" id="idInitials">JM</div>
+                </div>
+                <div class="verified-badge">VERIFIED &#x2713;</div>
+              </div>
+            </div>
+
+            <div class="right-section">
+              <div class="info-row name-row">
+                <div class="info-label">FULL NAME</div>
+                <div class="info-value name-value" id="idName">JOHN MARTINEZ</div>
+              </div>
+              <div class="info-row">
+                <div class="info-label">FARMER ID NUMBER</div>
+                <div class="info-value id-value" id="idNumber">BZ-CAYO-2024-001234</div>
+              </div>
+              <div class="info-row">
+                <div class="info-label">DISTRICT</div>
+                <div class="info-value" id="idDistrict">CAYO</div>
+              </div>
+              <div class="info-row">
+                <div class="info-label">VILLAGE/TOWN</div>
+                <div class="info-value" id="idVillage">SAN IGNACIO</div>
+              </div>
+              <div class="info-row">
+                <div class="info-label">DATE VERIFIED</div>
+                <div class="info-value" id="idVerDate">1 FEB 2024</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mob-info-grid">
+            <div class="mob-cell">
+              <div class="mob-cell-label">Farmer ID</div>
+              <div class="mob-cell-value" id="mobFarmerId">BZ-CAYO-2024-001234</div>
+            </div>
+            <div class="mob-cell">
+              <div class="mob-cell-label">District</div>
+              <div class="mob-cell-value" id="mobDistrict">Cayo</div>
+            </div>
+            <div class="mob-cell">
+              <div class="mob-cell-label">Village/Town</div>
+              <div class="mob-cell-value" id="mobVillage">San Ignacio</div>
+            </div>
+            <div class="mob-cell">
+              <div class="mob-cell-label">Date Verified</div>
+              <div class="mob-cell-value" id="mobVerDate">1 Feb 2024</div>
+            </div>
+          </div>
+
+          <div class="bottom-section">
+            <div class="qr-container">
+              <div class="qr-label">
+                <span class="qr-label-desktop">SCAN TO VERIFY</span>
+                <span class="qr-label-mobile">Scan QR Code</span>
+              </div>
+              <div class="qr-code">
+                <div class="qr-placeholder"></div>
+              </div>
+              <div class="id-text" id="qrIdText">ID: BZ-CAYO-2024-001234</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="action-buttons">
+      <button class="action-btn primary" onclick="downloadId()">
+        Download ID Card
+      </button>
+      <button class="action-btn secondary" onclick="shareId()">
+        Share ID
+      </button>
+    </div>
+  </main>
+
+  <nav class="bottom-nav" aria-label="Main navigation"></nav>
+
+  <script src="js/app.js"></script>
+  <script>
+    function downloadId() {
+      App.showToast('Download Started', 'Your Farmer ID card is being prepared for download.', 'info');
+    }
+
+    function shareId() {
+      if (navigator.share) {
+        navigator.share({
+          title: 'My Farmer ID',
+          text: 'Belize Farmer ID: ' + App.currentUser.farmerId,
+          url: window.location.href
+        });
+      } else {
+        App.showToast('Share ID', 'Share functionality would open native sharing options.', 'info');
+      }
+    }
+
+    function toTitleCase(str) {
+      return str.split(' ').map(function(w) {
+        return w.charAt(0).toUpperCase() + w.slice(1).toLowerCase();
+      }).join(' ');
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      if (!App.currentUser) {
+        window.location.href = 'login.html';
+        return;
+      }
+
+      if (!App.isVerified()) {
+        App.showToast('Access Restricted', 'Farmer ID is only available for verified accounts.', 'warning');
+        setTimeout(function() { window.location.href = 'dashboard.html'; }, 1500);
+        return;
+      }
+
+      var user = App.currentUser;
+
+      document.getElementById('idInitials').textContent = App.getUserInitials();
+      document.getElementById('mobAvatarInitials').textContent = App.getUserInitials();
+      document.getElementById('idName').textContent = user.name.toUpperCase();
+      document.getElementById('mobName').textContent = toTitleCase(user.name);
+      document.getElementById('idNumber').textContent = user.farmerId;
+      document.getElementById('idDistrict').textContent = user.district.toUpperCase();
+      document.getElementById('idVillage').textContent = user.village.toUpperCase();
+      document.getElementById('qrIdText').textContent = 'ID: ' + user.farmerId;
+
+      document.getElementById('mobFarmerId').textContent = user.farmerId;
+      document.getElementById('mobDistrict').textContent = user.district;
+      document.getElementById('mobVillage').textContent = user.village;
+
+      if (user.profileImageUrl) {
+        var mobImg = document.getElementById('mobAvatarImg');
+        mobImg.src = user.profileImageUrl;
+        mobImg.style.display = 'block';
+        document.getElementById('mobAvatarInitials').style.display = 'none';
+
+        var deskImg = document.getElementById('desktopPhotoImg');
+        deskImg.src = user.profileImageUrl;
+        deskImg.style.display = 'block';
+        document.getElementById('idInitials').style.display = 'none';
+      }
+
+      if (user.verificationDate) {
+        var d = new Date(user.verificationDate);
+        var formatted = d.getDate() + ' ' + d.toLocaleString('en-US', { month: 'short' }).toUpperCase() + ' ' + d.getFullYear();
+        document.getElementById('idVerDate').textContent = formatted;
+        document.getElementById('mobVerDate').textContent = d.getDate() + ' ' + d.toLocaleString('en-US', { month: 'short' }) + ' ' + d.getFullYear();
+      }
+
+      document.getElementById('navAvatar').textContent = App.getUserInitials();
+      document.getElementById('navName').textContent = user.name;
+      document.getElementById('navStatus').textContent = user.status;
+      document.getElementById('navStatus').className = 'user-status status-' + user.status;
+
+      App.updateUI();
+    });
+  </script>
+</body>
+</html>

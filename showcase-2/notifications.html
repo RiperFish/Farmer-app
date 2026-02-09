@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notifications - BAIMS Farmer Hub</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .filter-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #f0f0f0;
+    }
+    .filter-tab {
+      padding: 12px 20px;
+      background: none;
+      border: none;
+      color: #666;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s;
+      margin-bottom: -2px;
+    }
+    .filter-tab:hover {
+      color: #2e7d32;
+    }
+    .filter-tab.active {
+      color: #2e7d32;
+      border-bottom-color: #2e7d32;
+    }
+    .notifications-list {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .notification-card {
+      padding: 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+      border-left: 4px solid transparent;
+    }
+    .notification-card:hover {
+      transform: translateX(4px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .notification-card.unread {
+      background: #e3f2fd;
+      border-left-color: #2196f3;
+    }
+    .notification-card.notif-warning { border-left-color: #ff9800; }
+    .notification-card.notif-success { border-left-color: #4caf50; }
+    .notification-card.notif-alert { border-left-color: #f44336; }
+    .notif-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .notif-icon {
+      font-size: 28px;
+      flex-shrink: 0;
+    }
+    .notif-meta {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .notif-type {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: #666;
+    }
+    .notif-date {
+      font-size: 12px;
+      color: #999;
+    }
+    .unread-indicator {
+      width: 10px;
+      height: 10px;
+      background: #2196f3;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .notif-content { margin-bottom: 12px; }
+    .notif-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #333;
+      margin: 0 0 6px 0;
+    }
+    .notif-message {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.5;
+      margin: 0;
+    }
+    .notif-actions {
+      padding-top: 12px;
+      border-top: 1px solid #f0f0f0;
+    }
+    .action-link {
+      background: none;
+      border: none;
+      color: #2196f3;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 0;
+    }
+    .action-link:hover {
+      text-decoration: underline;
+    }
+    .empty-state {
+      text-align: center;
+      padding: 48px 20px;
+    }
+    .empty-icon {
+      font-size: 64px;
+      margin-bottom: 16px;
+    }
+    .empty-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 8px;
+    }
+    .empty-text {
+      font-size: 15px;
+      color: #666;
+    }
+    .notification-settings {
+      padding: 20px;
+    }
+    .settings-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #333;
+      margin: 0 0 6px 0;
+    }
+    .settings-note {
+      font-size: 13px;
+      color: #666;
+      margin: 0 0 20px 0;
+    }
+    .settings-list {
+      display: grid;
+      gap: 16px;
+    }
+    .setting-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 12px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .setting-item:last-child {
+      border-bottom: none;
+    }
+    .setting-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 4px;
+    }
+    .setting-description {
+      font-size: 12px;
+      color: #666;
+    }
+    .toggle {
+      position: relative;
+      display: inline-block;
+      width: 48px;
+      height: 26px;
+      flex-shrink: 0;
+    }
+    .toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .toggle-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: 0.3s;
+      border-radius: 26px;
+    }
+    .toggle-slider:before {
+      position: absolute;
+      content: "";
+      height: 20px;
+      width: 20px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: 0.3s;
+      border-radius: 50%;
+    }
+    .toggle input:checked + .toggle-slider {
+      background-color: #2e7d32;
+    }
+    .toggle input:checked + .toggle-slider:before {
+      transform: translateX(22px);
+    }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-content">
+      <div class="header-left">
+        <button class="menu-btn" aria-label="Open menu">
+          <span>&#x2630;</span>
+        </button>
+        <a href="dashboard.html" class="logo-container">
+          <div class="logo">
+            <span class="logo-icon">&#x1F33E;</span>
+            <div class="logo-text">
+              <span class="logo-main">BAIMS</span>
+              <span class="logo-sub">Farmer Hub</span>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="header-right">
+        <a href="notifications.html" class="notification-btn" aria-label="Notifications">
+          <span>&#x1F514;</span>
+          <span class="notification-badge" id="headerBadge">2</span>
+        </a>
+        <button class="logout-btn" onclick="App.logout()">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="top-nav"></div>
+
+  <nav class="mobile-nav" aria-label="Mobile navigation">
+    <div class="nav-header">
+      <div class="user-info">
+        <div class="user-avatar" id="navAvatar">JM</div>
+        <div class="user-details">
+          <div class="user-name" id="navName">John Martinez</div>
+          <div class="user-status status-verified" id="navStatus">verified</div>
+        </div>
+      </div>
+      <button class="close-btn" aria-label="Close menu">&times;</button>
+    </div>
+    <ul class="nav-links">
+      <li><a href="dashboard.html"><img src="assets/img/home.svg" alt=""> Dashboard</a></li>
+      <li><a href="profile.html"><img src="assets/img/user-black.svg" alt=""> My Profile</a></li>
+      <li class="verified-only"><a href="farmer-id.html"><img src="assets/img/id.svg" alt=""> Farmer ID</a></li>
+      <li class="verified-only"><a href="farm-records.html"><img src="assets/img/chart.svg" alt=""> Farm Records</a></li>
+      <li><a href="notifications.html"><img src="assets/img/bell.svg" alt=""> Notifications</a></li>
+      <li class="nav-divider"></li>
+      <li><a href="calendar.html"><img src="assets/img/calendar.svg" alt=""> Planting Calendar</a></li>
+      <li><a href="weather.html"><img src="assets/img/weather.svg" alt=""> Weather</a></li>
+      <li><a href="resources.html"><img src="assets/img/resources.svg" alt=""> Resources</a></li>
+    </ul>
+  </nav>
+  <div class="nav-overlay"></div>
+
+  <main class="page-container">
+    <div class="page-header">
+      <h1 class="page-title">
+        <img src="assets/img/bell.svg" alt="">
+        Notifications
+      </h1>
+      <p class="page-subtitle" id="unreadCount">2 unread notifications</p>
+    </div>
+
+    <div class="filter-tabs">
+      <button class="filter-tab active" data-filter="all" onclick="filterNotifications('all')">All</button>
+      <button class="filter-tab" data-filter="unread" onclick="filterNotifications('unread')">Unread (2)</button>
+    </div>
+
+    <div class="notifications-list" id="notificationsList">
+      <article class="notification-card card unread notif-warning" data-read="false" onclick="markAsRead(this)">
+        <div class="notif-header">
+          <div class="notif-icon">&#x26A0;&#xFE0F;</div>
+          <div class="notif-meta">
+            <span class="notif-type">warning</span>
+            <span class="notif-date">Just now</span>
+          </div>
+          <div class="unread-indicator"></div>
+        </div>
+        <div class="notif-content">
+          <h3 class="notif-title">Weather Alert</h3>
+          <p class="notif-message">Heavy rainfall expected in next 48 hours. Secure your crops and equipment.</p>
+        </div>
+      </article>
+
+      <article class="notification-card card unread notif-info" data-read="false" onclick="markAsRead(this)">
+        <div class="notif-header">
+          <div class="notif-icon">&#x2139;&#xFE0F;</div>
+          <div class="notif-meta">
+            <span class="notif-type">info</span>
+            <span class="notif-date">1 day ago</span>
+          </div>
+          <div class="unread-indicator"></div>
+        </div>
+        <div class="notif-content">
+          <h3 class="notif-title">New Support Program Available</h3>
+          <p class="notif-message">You are eligible for the Small Farmer Support Program. Click to learn more.</p>
+        </div>
+        <div class="notif-actions">
+          <button class="action-link">Learn More &#x2192;</button>
+        </div>
+      </article>
+
+      <article class="notification-card card notif-success" data-read="true">
+        <div class="notif-header">
+          <div class="notif-icon">&#x2705;</div>
+          <div class="notif-meta">
+            <span class="notif-type">success</span>
+            <span class="notif-date">2 days ago</span>
+          </div>
+        </div>
+        <div class="notif-content">
+          <h3 class="notif-title">Profile Verified</h3>
+          <p class="notif-message">Your farmer profile has been successfully verified. You now have full access.</p>
+        </div>
+        <div class="notif-actions">
+          <button class="action-link">View Profile &#x2192;</button>
+        </div>
+      </article>
+    </div>
+
+    <section class="notification-settings card">
+      <h3 class="settings-title">&#x1F515; Notification Preferences</h3>
+      <p class="settings-note">Configure what notifications you want to receive</p>
+
+      <div class="settings-list">
+        <div class="setting-item">
+          <div class="setting-info">
+            <div class="setting-name">Weather Alerts</div>
+            <div class="setting-description">Receive important weather warnings</div>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="setting-item">
+          <div class="setting-info">
+            <div class="setting-name">Program Updates</div>
+            <div class="setting-description">New support programs and opportunities</div>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="setting-item">
+          <div class="setting-info">
+            <div class="setting-name">Agricultural Tips</div>
+            <div class="setting-description">Seasonal farming advice and best practices</div>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="setting-item">
+          <div class="setting-info">
+            <div class="setting-name">Market Prices</div>
+            <div class="setting-description">Updates on commodity prices</div>
+          </div>
+          <label class="toggle">
+            <input type="checkbox">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <nav class="bottom-nav" aria-label="Main navigation"></nav>
+
+  <script src="js/app.js"></script>
+  <script>
+    let unreadCount = 2;
+
+    function filterNotifications(filter) {
+      document.querySelectorAll('.filter-tab').forEach(tab => {
+        tab.classList.remove('active');
+        if (tab.dataset.filter === filter) {
+          tab.classList.add('active');
+        }
+      });
+
+      document.querySelectorAll('.notification-card').forEach(card => {
+        if (filter === 'all') {
+          card.style.display = 'block';
+        } else if (filter === 'unread') {
+          card.style.display = card.dataset.read === 'false' ? 'block' : 'none';
+        }
+      });
+    }
+
+    function markAsRead(card) {
+      if (card.classList.contains('unread')) {
+        card.classList.remove('unread');
+        card.dataset.read = 'true';
+        const indicator = card.querySelector('.unread-indicator');
+        if (indicator) indicator.remove();
+
+        unreadCount--;
+        updateUnreadDisplay();
+      }
+    }
+
+    function updateUnreadDisplay() {
+      document.getElementById('unreadCount').textContent =
+        unreadCount > 0 ? `${unreadCount} unread notification${unreadCount > 1 ? 's' : ''}` : 'All caught up!';
+
+      const badge = document.getElementById('headerBadge');
+      if (unreadCount > 0) {
+        badge.textContent = unreadCount;
+        badge.style.display = 'block';
+      } else {
+        badge.style.display = 'none';
+      }
+
+      document.querySelector('[data-filter="unread"]').textContent = `Unread (${unreadCount})`;
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      if (!App.currentUser) {
+        window.location.href = 'login.html';
+        return;
+      }
+
+      const user = App.currentUser;
+      document.getElementById('navAvatar').textContent = App.getUserInitials();
+      document.getElementById('navName').textContent = user.name;
+      document.getElementById('navStatus').textContent = user.status;
+      document.getElementById('navStatus').className = 'user-status status-' + user.status;
+
+      if (!App.isVerified()) {
+        document.querySelectorAll('.verified-only').forEach(el => el.style.display = 'none');
+      }
+
+      App.updateUI();
+    });
+  </script>
+</body>
+</html>
