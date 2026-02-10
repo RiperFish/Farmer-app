@@ -269,7 +269,7 @@ import { WeatherData } from '../models/public.model';
       }
       .forecast-temps,.forecast-condition {
         font-size:13px;
-        flex:unset;
+        flex:0;
       }
       .forecast-icon{
         font-size:30px;
