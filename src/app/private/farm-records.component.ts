@@ -16,24 +16,24 @@ import { Farm } from '../models/user.model';
       </div>
 
       <div class="farm-overview card" *ngIf="farm">
-        <h2 class="section-title">🏡 {{ farm.name }}</h2>
+        <h2 class="section-title">{{ farm.name }}</h2>
         <div class="overview-grid">
           <div class="overview-item">
-            <div class="overview-icon">📍</div>
+            <img src="assets/img/pin.svg" style="width:28px;"/>
             <div class="overview-content">
               <div class="overview-label">Location</div>
               <div class="overview-value">{{ farm.village }}, {{ farm.district }}</div>
             </div>
           </div>
           <div class="overview-item">
-            <div class="overview-icon">🌾</div>
+            <img src="assets/img/acres.svg" style="width:28px;"/>
             <div class="overview-content">
               <div class="overview-label">Total Area</div>
               <div class="overview-value">{{ farm.totalAcres }} acres</div>
             </div>
           </div>
           <div class="overview-item">
-            <div class="overview-icon">📦</div>
+            <img src="assets/img/plots.svg" style="width:28px;"/>
             <div class="overview-content">
               <div class="overview-label">Total Plots</div>
               <div class="overview-value">{{ farm.plots.length }} plots</div>
@@ -43,7 +43,7 @@ import { Farm } from '../models/user.model';
       </div>
 
       <div class="plots-section">
-        <h2 class="section-title">🗺️ Plot Details</h2>
+        <h2 class="section-title">Plot Details</h2>
         <div class="plots-list">
           <div class="plot-card card" *ngFor="let plot of farm?.plots">
             <div class="plot-header">
@@ -55,7 +55,7 @@ import { Farm } from '../models/user.model';
 
             <div class="plot-info">
               <div class="info-item">
-                <span class="info-icon">🌾</span>
+                
                 <div class="info-content">
                   <div class="info-label">Crop Type</div>
                   <div class="info-value">{{ plot.cropType }}</div>
@@ -63,7 +63,7 @@ import { Farm } from '../models/user.model';
               </div>
 
               <div class="info-item">
-                <span class="info-icon">📏</span>
+                
                 <div class="info-content">
                   <div class="info-label">Area</div>
                   <div class="info-value">{{ plot.acres }} acres</div>
@@ -71,7 +71,7 @@ import { Farm } from '../models/user.model';
               </div>
 
               <div class="info-item" *ngIf="plot.plantingDate">
-                <span class="info-icon">🌱</span>
+               
                 <div class="info-content">
                   <div class="info-label">Planting Date</div>
                   <div class="info-value">{{ plot.plantingDate | date:'mediumDate' }}</div>
@@ -79,7 +79,7 @@ import { Farm } from '../models/user.model';
               </div>
 
               <div class="info-item" *ngIf="plot.harvestDate">
-                <span class="info-icon">🚜</span>
+                
                 <div class="info-content">
                   <div class="info-label">Expected Harvest</div>
                   <div class="info-value">{{ plot.harvestDate | date:'mediumDate' }}</div>
@@ -102,7 +102,9 @@ import { Farm } from '../models/user.model';
       </div>
 
       <div class="records-note card">
-        <div class="note-icon">ℹ️</div>
+        <div class="note-icon">
+          <img src="assets/img/warning.svg" style="width:20px;"/>
+        </div>
         <div class="note-content">
           <h3 class="note-title">View Only Access</h3>
           <p class="note-text">
@@ -113,7 +115,7 @@ import { Farm } from '../models/user.model';
       </div>
 
       <div class="statistics-section">
-        <h2 class="section-title">📈 Summary Statistics</h2>
+        <h2 class="section-title">Summary Statistics</h2>
         <div class="stats-grid">
           <div class="stat-card card">
             <div class="stat-value">{{ getActivePlots() }}</div>
@@ -321,7 +323,7 @@ import { Farm } from '../models/user.model';
     }
 
     .note-icon {
-      font-size: 24px;
+      font-size: 20px;
       flex-shrink: 0;
     }
 

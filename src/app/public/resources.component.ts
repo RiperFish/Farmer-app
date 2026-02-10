@@ -11,7 +11,7 @@ import { Resource } from '../models/public.model';
   template: `
     <div class="page-container">
       <div class="page-header">
-        <h1 class="page-title">📚 Resources & Contacts</h1>
+        <h1 class="page-title">Resources & Contacts</h1>
         <p class="page-subtitle">Find support and information for your farming needs</p>
       </div>
 
@@ -28,7 +28,6 @@ import { Resource } from '../models/public.model';
       <div class="resources-list">
         <div class="resource-card card" *ngFor="let resource of filteredResources">
           <div class="resource-header">
-            <div class="resource-icon">{{ getCategoryIcon(resource.category) }}</div>
             <div class="resource-info">
               <h3 class="resource-name">{{ resource.name }}</h3>
               <span class="resource-category">{{ resource.category }}</span>
@@ -37,23 +36,23 @@ import { Resource } from '../models/public.model';
 
           <div class="resource-details">
             <div class="detail-row" *ngIf="resource.district">
-              <span class="detail-icon">📍</span>
+              <img src="assets/img/pin.svg" style="width:20px;"/>
               <span class="detail-text">{{ resource.district }} District</span>
             </div>
             <div class="detail-row" *ngIf="resource.address">
-              <span class="detail-icon">🏢</span>
+              <img src="assets/img/point-on-map.svg" style="width:20px;"/>
               <span class="detail-text">{{ resource.address }}</span>
             </div>
             <div class="detail-row" *ngIf="resource.phone">
-              <span class="detail-icon">📞</span>
+              <img src="assets/img/phone2.svg" style="width:20px;"/>
               <a href="tel:{{ resource.phone }}" class="detail-link">{{ resource.phone }}</a>
             </div>
             <div class="detail-row" *ngIf="resource.email">
-              <span class="detail-icon">✉️</span>
+              <img src="assets/img/email.svg" style="width:20px;"/>
               <a href="mailto:{{ resource.email }}" class="detail-link">{{ resource.email }}</a>
             </div>
             <div class="detail-row" *ngIf="resource.website">
-              <span class="detail-icon">🌐</span>
+              <img src="assets/img/link.svg" style="width:20px;"/>
               <a href="http://{{ resource.website }}" target="_blank" class="detail-link">{{ resource.website }}</a>
             </div>
           </div>
@@ -214,6 +213,11 @@ import { Resource } from '../models/public.model';
         grid-template-columns: repeat(2, 1fr);
       }
     }
+    @media (max-width: 480px) {
+      .resource-name {
+        font-size:16px;
+      }
+    }
   `]
 })
 export class ResourcesComponent implements OnInit {
@@ -221,7 +225,7 @@ export class ResourcesComponent implements OnInit {
   filteredResources: Resource[] = [];
   selectedCategory = 'all';
 
-  constructor(private dataService: DataService) {}
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
     this.resources = this.dataService.getResources();
@@ -236,13 +240,13 @@ export class ResourcesComponent implements OnInit {
     }
   }
 
-  getCategoryIcon(category: string): string {
-    const icons: { [key: string]: string } = {
-      'Extension Services': '🌾',
-      'Financial Support': '💰',
-      'Marketing': '🛒',
-      'Emergency': '🚨'
-    };
-    return icons[category] || '📋';
-  }
+  /*   getCategoryIcon(category: string): string {
+      const icons: { [key: string]: string } = {
+        'Extension Services': '🌾',
+        'Financial Support': '💰',
+        'Marketing': '🛒',
+        'Emergency': '🚨'
+      };
+      return icons[category] || '📋';
+    } */
 }

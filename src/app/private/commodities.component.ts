@@ -16,17 +16,14 @@ import { DataService } from '../core/data.service';
 
       <div class="summary-cards">
         <div class="summary-card card">
-          <div class="summary-icon">🌾</div>
           <div class="summary-value">{{ getTotalCommodities() }}</div>
           <div class="summary-label">Total Commodities</div>
         </div>
         <div class="summary-card card">
-          <div class="summary-icon">📦</div>
           <div class="summary-value">{{ getActiveCrops() }}</div>
           <div class="summary-label">Active Crops</div>
         </div>
         <div class="summary-card card">
-          <div class="summary-icon">🌱</div>
           <div class="summary-value">{{ getTotalAcres() }}</div>
           <div class="summary-label">Total Acres</div>
         </div>
@@ -95,7 +92,9 @@ import { DataService } from '../core/data.service';
       </div>
 
       <div class="info-card card">
-        <div class="info-icon">ℹ️</div>
+        <div class="info-icon">
+          <img src="assets/img/warning.svg" style="width:28px;"/>
+        </div>
         <div class="info-content">
           <h3 class="info-title">Commodity Reporting</h3>
           <p class="info-text">
@@ -350,7 +349,6 @@ import { DataService } from '../core/data.service';
     }
 
     .info-icon {
-      font-size: 32px;
       flex-shrink: 0;
     }
 

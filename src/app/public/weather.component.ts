@@ -59,7 +59,7 @@ import { WeatherData } from '../models/public.model';
       </div>
 
       <div class="weather-tips card">
-        <h3 class="tips-title">🌾 Farming Tips Based on Weather</h3>
+        <h3 class="tips-title">Farming Tips Based on Weather</h3>
         <ul class="tips-list">
           <li>Monitor rainfall levels for irrigation planning</li>
           <li>Protect crops during heavy rain periods</li>
@@ -262,12 +262,26 @@ import { WeatherData } from '../models/public.model';
         width: 100px;
       }
     }
+    @media (max-width: 480px) {
+      .forecast-card{
+        gap:unset;
+        justify-content:space-between;
+      }
+      .forecast-temps,.forecast-condition {
+        font-size:13px;
+        flex:unset;
+      }
+      .forecast-icon{
+        font-size:30px;
+      }
+
+    }
   `]
 })
 export class WeatherComponent implements OnInit {
   forecast: WeatherData[] = [];
 
-  constructor(private dataService: DataService) {}
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
     this.forecast = this.dataService.getWeatherForecast();

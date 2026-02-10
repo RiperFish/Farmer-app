@@ -108,7 +108,7 @@ import { DataService } from '../core/data.service';
       </div>
 
       <div class="pending-requests card" *ngIf="pendingRequests.length > 0">
-        <h3 class="section-title">📝 Pending Update Requests</h3>
+        <h3 class="section-title">Pending Update Requests</h3>
         <div class="request-list">
           <div class="request-item" *ngFor="let request of pendingRequests">
             <div class="request-header">

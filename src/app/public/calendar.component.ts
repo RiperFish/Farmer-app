@@ -11,7 +11,7 @@ import { CropCalendar } from '../models/public.model';
   template: `
     <div class="page-container">
       <div class="page-header">
-        <h1 class="page-title">📅 Planting & Harvesting Calendar</h1>
+        <h1 class="page-title">Planting & Harvesting Calendar</h1>
         <p class="page-subtitle">Plan your crops throughout the year</p>
       </div>
 
@@ -33,7 +33,7 @@ import { CropCalendar } from '../models/public.model';
           </div>
           <div class="crop-timeline">
             <div class="timeline-row">
-              <span class="timeline-label">🌱 Planting:</span>
+              <span class="timeline-label">Planting:</span>
               <div class="timeline-months">
                 <span class="month-indicator"
                       *ngFor="let month of months; let i = index"
@@ -44,7 +44,7 @@ import { CropCalendar } from '../models/public.model';
               </div>
             </div>
             <div class="timeline-row">
-              <span class="timeline-label">🌾 Harvest:</span>
+              <span class="timeline-label">Harvest:</span>
               <div class="timeline-months">
                 <span class="month-indicator"
                       *ngFor="let month of months; let i = index"

@@ -37,7 +37,7 @@ import { Notification } from '../models/user.model';
              [class]="'notif-' + notif.type"
              (click)="markAsRead(notif)">
           <div class="notif-header">
-            <div class="notif-icon">{{ getNotifIcon(notif.type) }}</div>
+            <div class="notif-icon"><img src="{{ getNotifIcon(notif.type) }}" style="width:20px;"/></div>
             <div class="notif-meta">
               <span class="notif-type">{{ notif.type }}</span>
               <span class="notif-date">{{ getTimeAgo(notif.date) }}</span>
@@ -68,7 +68,9 @@ import { Notification } from '../models/user.model';
       </div>
 
       <div class="notification-settings card">
-        <h3 class="settings-title">🔕 Notification Preferences</h3>
+        <h3 class="settings-title">
+          Notification Preferences
+        </h3>
         <p class="settings-note">Configure what notifications you want to receive</p>
 
         <div class="settings-list">
@@ -423,9 +425,9 @@ export class NotificationsComponent implements OnInit {
 
   getNotifIcon(type: string): string {
     const icons: { [key: string]: string } = {
-      'info': 'ℹ️',
-      'warning': '⚠️',
-      'success': '✅',
+      'info': 'assets/img/warning.svg',
+      'warning': 'assets/img/danger.svg',
+      'success': 'assets/img/check.svg',
       'alert': '🚨'
     };
     return icons[type] || 'ℹ️';

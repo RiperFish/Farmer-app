@@ -21,19 +21,19 @@ import { WeatherData } from '../models/public.model';
 
       <div class="quick-actions">
         <a routerLink="/profile" class="action-card card">
-          <img src="assets/img/user-black.svg" alt="Logo" style="width:44px"/>
+          <img src="assets/img/user-black.svg" style="width:44px"/>
           <div class="action-text">My Profile</div>
         </a>
         <a routerLink="/farmer-id" class="action-card card" *ngIf="currentUser()?.status === 'verified'">
-          <img src="assets/img/id.svg" alt="Logo" style="width:44px"/>
+          <img src="assets/img/id.svg" style="width:44px"/>
           <div class="action-text">Farmer ID</div>
         </a>
         <a routerLink="/farm-records" class="action-card card" *ngIf="currentUser()?.status === 'verified'">
-         <img src="assets/img/chart.svg" alt="Logo" style="width:44px"/>
+         <img src="assets/img/chart.svg" style="width:44px"/>
           <div class="action-text">Farm Records</div>
         </a>
         <a routerLink="/notifications" class="action-card card">
-          <img src="assets/img/bell.svg" alt="Logo" style="width:44px"/>
+          <img src="assets/img/bell.svg" style="width:44px"/>
           <div class="action-text">Notifications</div>
           <span class="action-badge" *ngIf="unreadCount > 0">{{ unreadCount }}</span>
         </a>
@@ -59,7 +59,7 @@ import { WeatherData } from '../models/public.model';
       <div class="notifications-widget card" *ngIf="recentNotifications.length > 0">
         <div class="widget-header">
           <h2 class="card-title">
-            <img src="assets/img/bell.svg" alt="Logo" style="width:25px"/>
+            <img src="assets/img/bell.svg"  style="width:25px"/>
             Recent Notifications
            </h2>
           <a routerLink="/notifications" class="widget-link">View All →</a>
@@ -69,7 +69,7 @@ import { WeatherData } from '../models/public.model';
                *ngFor="let notif of recentNotifications"
                [class.unread]="!notif.read"
                [class]="'notif-' + notif.type">
-            <div class="notif-icon">{{ getNotifIcon(notif.type) }}</div>
+            <div class="notif-icon"><img src="{{ getNotifIcon(notif.type) }}" style="width:20px;"/></div>
             <div class="notif-content">
               <div class="notif-title">{{ notif.title }}</div>
               <div class="notif-message">{{ notif.message }}</div>
@@ -248,7 +248,7 @@ import { WeatherData } from '../models/public.model';
     }
 
     .notif-icon {
-      font-size: 24px;
+      font-size:18px;
       flex-shrink: 0;
     }
 
@@ -354,9 +354,9 @@ export class DashboardComponent implements OnInit {
 
   getNotifIcon(type: string): string {
     const icons: { [key: string]: string } = {
-      'info': 'ℹ️',
-      'warning': '⚠️',
-      'success': '✅',
+      'info': 'assets/img/warning.svg',
+      'warning': 'assets/img/danger.svg',
+      'success': 'assets/img/check.svg',
       'alert': '🚨'
     };
     return icons[type] || 'ℹ️';
