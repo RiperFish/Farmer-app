@@ -38,7 +38,6 @@ import { AuthService } from '../core/auth.service';
           </div>
         </div>
         <div class="mob-menu-brand" *ngIf="!currentUser()">
-          <span class="mob-menu-brand-icon">&#x1F33E;</span>
           <span class="mob-menu-brand-text">BAIMS Farmer Hub</span>
         </div>
         <button class="mob-menu-close" (click)="closeMenu()" aria-label="Close menu">
