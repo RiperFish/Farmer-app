@@ -202,7 +202,6 @@ import { AuthService } from '../core/auth.service';
       padding: 20px 16px;
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
     }
 
     .mob-menu-user {
