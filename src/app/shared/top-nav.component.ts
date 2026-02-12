@@ -62,7 +62,7 @@ import { AuthService } from '../core/auth.service';
         <li><a routerLink="/dashboard" (click)="closeMenu()"><img src="assets/img/home.svg" alt=""> Dashboard</a></li>
         <li><a routerLink="/profile" (click)="closeMenu()"><img src="assets/img/user-black.svg" alt=""> My Profile</a></li>
         <li><a routerLink="/farmer-id" (click)="closeMenu()"><img src="assets/img/id.svg" alt=""> Farmer ID</a></li>
-        <li><a routerLink="/farm-records" (click)="closeMenu()"><img src="assets/img/farm.svg" alt=""> Farm Records</a></li>
+        <li><a routerLink="/farm-records" (click)="closeMenu()"><img src="assets/img/chart.svg" alt=""> Farm Records</a></li>
         <li><a routerLink="/commodities" (click)="closeMenu()"><img src="assets/img/commodities.svg" alt=""> Commodities</a></li>
         <li><a routerLink="/notifications" (click)="closeMenu()"><img src="assets/img/bell.svg" alt=""> Notifications</a></li>
         <li class="mob-menu-divider"></li>

@@ -17,19 +17,10 @@ import { AuthService } from '../core/auth.service';
           <div class="logo-container" [routerLink]="currentUser() ? ['/dashboard'] : ['/']">
             <div class="logo">
               <img src="assets/img/baimsfarmerhub-logo-white.png" alt="Logo" style="width:60px;" />
-              <!-- <span class="logo-icon">🌾</span>
-               <div class="logo-text">
-                <span class="logo-main">BAIMS</span>
-                <span class="logo-sub">Farmer Hub</span>
-              </div> -->
             </div>
           </div>
         </div>
         <div class="header-right" *ngIf="currentUser()">
-          <button class="notification-btn">
-            <span class="bell-icon">🔔</span>
-            <span class="notification-badge" *ngIf="unreadCount() > 0">{{ unreadCount() }}</span>
-          </button>
           <button class="logout-btn" (click)="logout()">Logout</button>
         </div>
         <div class="header-right" *ngIf="!currentUser()">
@@ -52,15 +43,55 @@ import { AuthService } from '../core/auth.service';
         <button class="close-btn" (click)="toggleMenu()">✕</button>
       </div>
       <ul class="nav-links">
-        <li><a routerLink="/dashboard" (click)="closeMenu()">🏠 Dashboard</a></li>
-        <li><a routerLink="/profile" (click)="closeMenu()">👤 My Profile</a></li>
-        <li *ngIf="currentUser()?.status === 'verified'"><a routerLink="/farmer-id" (click)="closeMenu()">🪪 Farmer ID</a></li>
-        <li *ngIf="currentUser()?.status === 'verified'"><a routerLink="/farm-records" (click)="closeMenu()">📊 Farm Records</a></li>
-        <li><a routerLink="/notifications" (click)="closeMenu()">🔔 Notifications</a></li>
+        <li>
+          <a routerLink="/dashboard" (click)="closeMenu()">
+            <img src="assets/img/home.svg" alt="Logo" style="width:25px"/> 
+            Dashboard
+          </a>
+        </li>
+        <li>
+          <a routerLink="/profile" (click)="closeMenu()">
+            <img src="assets/img/user-black.svg" alt="Profile" style="width:25px"/>
+            My Profile
+          </a>
+        </li>
+        <li *ngIf="currentUser()?.status === 'verified'">
+          <a routerLink="/farmer-id" (click)="closeMenu()">
+            <img src="assets/img/id.svg" alt="ID" style="width:25px"/>
+            Farmer ID
+          </a>
+        </li>
+        <li *ngIf="currentUser()?.status === 'verified'">
+          <a routerLink="/farm-records" (click)="closeMenu()">
+            <img src="assets/img/chart.svg" alt="Farm" style="width:25px"/>
+            Farm Records
+          </a>
+        </li>
+        <li>
+          <a routerLink="/notifications" (click)="closeMenu()">
+            <img src="assets/img/bell.svg" style="width:25px"/>
+            Notifications
+          </a>
+        </li>
         <li class="nav-divider"></li>
-        <li><a routerLink="/calendar" (click)="closeMenu()">📅 Planting Calendar</a></li>
-        <li><a routerLink="/weather" (click)="closeMenu()">🌤️ Weather</a></li>
-        <li><a routerLink="/resources" (click)="closeMenu()">📚 Resources</a></li>
+        <li>
+          <a routerLink="/calendar" (click)="closeMenu()">
+            <img src="assets/img/calendar.svg" style="width:25px"/> 
+            Planting Calendar
+          </a>
+        </li>
+        <li>
+          <a routerLink="/weather" (click)="closeMenu()">
+            <img src="assets/img/weather.svg" style="width:25px"/> 
+            Weather
+          </a>
+        </li>
+        <li>
+          <a routerLink="/resources" (click)="closeMenu()">
+            <img src="assets/img/resources.svg" style="width:25px"/> 
+            Resources
+          </a>
+        </li>
       </ul>
     </nav>
 
@@ -230,7 +261,9 @@ import { AuthService } from '../core/auth.service';
       transition: left 0.3s ease;
       overflow-y: auto;
     }
-
+    .mobile-nav .nav-links a{
+      display:flex;align-items:center; gap:8px;
+    }
     .mobile-nav.open {
       left: 0;
     }

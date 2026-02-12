@@ -217,6 +217,14 @@ export class DataService {
         phone: '501-822-2054',
         website: 'www.nemo.org.bz',
         address: 'Belmopan'
+      },
+      {
+        id: '8',
+        category: 'Academy',
+        name: 'Belize Agri Academy',
+        phone: '(501) 822-2241 / 42',
+        website: 'https://agribel.bz/',
+        address: 'H.M. Queen Elizabeth II Blvd., Belmopan City, Belize C.A'
       }
     ];
   }
