@@ -69,6 +69,19 @@ const App = {
       if (e.target.closest('.nav-overlay')) {
         this.closeMenu();
       }
+      if (e.target.closest('.top-nav-menu-btn')) {
+        this.toggleMobMenu();
+      }
+      if (e.target.closest('.mob-menu-close')) {
+        this.closeMobMenu();
+      }
+      if (e.target.closest('.mob-menu-overlay')) {
+        this.closeMobMenu();
+      }
+      if (e.target.closest('.mob-menu-links .logout-link')) {
+        e.preventDefault();
+        this.logout();
+      }
       if (e.target.closest('.logout-btn')) {
         this.logout();
       }
@@ -145,9 +158,28 @@ const App = {
     }, 1500);
   },
 
+  toggleMobMenu() {
+    const menu = document.querySelector('.mob-menu');
+    const overlay = document.querySelector('.mob-menu-overlay');
+    if (menu && overlay) {
+      menu.classList.toggle('open');
+      overlay.classList.toggle('open');
+    }
+  },
+
+  closeMobMenu() {
+    const menu = document.querySelector('.mob-menu');
+    const overlay = document.querySelector('.mob-menu-overlay');
+    if (menu && overlay) {
+      menu.classList.remove('open');
+      overlay.classList.remove('open');
+    }
+  },
+
   updateUI() {
     this.updateHeader();
     this.updateBottomNav();
+    this.updateMobMenu();
   },
 
   updateHeader() {
@@ -267,8 +299,113 @@ const App = {
     topNav.innerHTML = `
       ${backButton}
       <h1 class="top-nav-title">${title}</h1>
-      <div class="top-nav-placeholder"></div>
+      <button class="top-nav-menu-btn" aria-label="Open menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
     `;
+  },
+
+  updateMobMenu() {
+    let overlay = document.querySelector('.mob-menu-overlay');
+    let menu = document.querySelector('.mob-menu');
+
+    if (!overlay) {
+      overlay = document.createElement('div');
+      overlay.className = 'mob-menu-overlay';
+      document.body.appendChild(overlay);
+    }
+
+    if (!menu) {
+      menu = document.createElement('nav');
+      menu.className = 'mob-menu';
+      document.body.appendChild(menu);
+    }
+
+    let headerHtml = '';
+    let linksHtml = '';
+
+    if (this.currentUser) {
+      const initials = this.getUserInitials();
+      const statusClass = 'status-' + this.currentUser.status;
+      headerHtml = `
+        <div class="mob-menu-header">
+          <div class="mob-menu-user">
+            <div class="mob-menu-avatar">${initials}</div>
+            <div class="mob-menu-user-info">
+              <div class="mob-menu-name">${this.currentUser.name}</div>
+              <div class="mob-menu-status ${statusClass}">${this.currentUser.status}</div>
+            </div>
+          </div>
+          <button class="mob-menu-close" aria-label="Close menu">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>`;
+
+      if (this.currentUser.status === 'verified') {
+        linksHtml = `
+          <ul class="mob-menu-links">
+            <li><a href="dashboard.html"><img src="assets/img/home.svg" alt=""> Dashboard</a></li>
+            <li><a href="profile.html"><img src="assets/img/user-black.svg" alt=""> My Profile</a></li>
+            <li><a href="farmer-id.html"><img src="assets/img/id.svg" alt=""> Farmer ID</a></li>
+            <li><a href="farm-records.html"><img src="assets/img/farm.svg" alt=""> Farm Records</a></li>
+            <li><a href="commodities.html"><img src="assets/img/commodities.svg" alt=""> Commodities</a></li>
+            <li><a href="notifications.html"><img src="assets/img/bell.svg" alt=""> Notifications</a></li>
+            <li class="mob-menu-divider"></li>
+            <li><a href="calendar.html"><img src="assets/img/calendar.svg" alt=""> Planting Calendar</a></li>
+            <li><a href="weather.html"><img src="assets/img/weather.svg" alt=""> Weather</a></li>
+            <li><a href="resources.html"><img src="assets/img/resources.svg" alt=""> Resources</a></li>
+            <li class="mob-menu-divider"></li>
+            <li><a href="#" class="logout-link">Logout</a></li>
+          </ul>`;
+      } else {
+        linksHtml = `
+          <ul class="mob-menu-links">
+            <li><a href="dashboard.html"><img src="assets/img/home.svg" alt=""> Dashboard</a></li>
+            <li><a href="profile.html"><img src="assets/img/user-black.svg" alt=""> My Profile</a></li>
+            <li><a href="notifications.html"><img src="assets/img/bell.svg" alt=""> Notifications</a></li>
+            <li class="mob-menu-divider"></li>
+            <li><a href="calendar.html"><img src="assets/img/calendar.svg" alt=""> Planting Calendar</a></li>
+            <li><a href="weather.html"><img src="assets/img/weather.svg" alt=""> Weather</a></li>
+            <li><a href="resources.html"><img src="assets/img/resources.svg" alt=""> Resources</a></li>
+            <li class="mob-menu-divider"></li>
+            <li><a href="#" class="logout-link">Logout</a></li>
+          </ul>`;
+      }
+    } else {
+      headerHtml = `
+        <div class="mob-menu-header">
+          <div class="mob-menu-brand">
+            <span class="mob-menu-brand-icon">&#x1F33E;</span>
+            <span class="mob-menu-brand-text">BAIMS Farmer Hub</span>
+          </div>
+          <button class="mob-menu-close" aria-label="Close menu">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>`;
+
+      linksHtml = `
+        <ul class="mob-menu-links">
+          <li><a href="index.html"><img src="assets/img/home.svg" alt=""> Home</a></li>
+          <li><a href="weather.html"><img src="assets/img/weather.svg" alt=""> Weather</a></li>
+          <li><a href="calendar.html"><img src="assets/img/calendar.svg" alt=""> Planting Calendar</a></li>
+          <li><a href="resources.html"><img src="assets/img/resources.svg" alt=""> Resources</a></li>
+          <li class="mob-menu-divider"></li>
+          <li><a href="login.html"><img src="assets/img/user-black.svg" alt=""> Login</a></li>
+          <li><a href="register.html"><img src="assets/img/user-black.svg" alt=""> Register</a></li>
+        </ul>`;
+    }
+
+    menu.innerHTML = headerHtml + linksHtml;
   },
 
   showToast(title, message, type = 'info') {
