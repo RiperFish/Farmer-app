@@ -19,6 +19,8 @@ export interface Farm {
   district: string;
   village: string;
   totalAcres: number;
+  latitude?: number;
+  longitude?: number;
   plots: Plot[];
 }
 

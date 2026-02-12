@@ -235,6 +235,8 @@ export class DataService {
       district: 'Cayo',
       village: 'San Ignacio',
       totalAcres: 25,
+      latitude: 17.1560,
+      longitude: -89.0700,
       plots: [
         {
           id: 'P1',
@@ -262,6 +264,52 @@ export class DataService {
         }
       ]
     };
+  }
+
+  getFarmerFarms(farmerId: string): Farm[] {
+    return [
+      this.getFarmData(farmerId),
+      {
+        id: 'F002',
+        farmerId: farmerId,
+        name: 'Martinez Riverside Plot',
+        district: 'Cayo',
+        village: 'Santa Elena',
+        totalAcres: 12,
+        latitude: 17.1590,
+        longitude: -89.0580,
+        plots: [
+          {
+            id: 'P4',
+            name: 'River Field',
+            acres: 12,
+            cropType: 'Rice',
+            plantingDate: new Date('2024-07-01'),
+            harvestDate: new Date('2024-11-20'),
+            status: 'active'
+          }
+        ]
+      },
+      {
+        id: 'F003',
+        farmerId: farmerId,
+        name: 'Uncle Pedro\'s Farm',
+        district: 'Cayo',
+        village: 'Bullet Tree Falls',
+        totalAcres: 18,
+        latitude: 17.1830,
+        longitude: -89.0830,
+        plots: [
+          {
+            id: 'P5',
+            name: 'West Pasture',
+            acres: 18,
+            cropType: 'Citrus',
+            status: 'active'
+          }
+        ]
+      }
+    ];
   }
 
   getNotifications(farmerId: string): Notification[] {

@@ -39,8 +39,9 @@
             "outputPath": "dist",
             "polyfills": ["zone.js"],
             "scripts": [],
-            "styles": ["src/global_styles.css"],
-            "tsConfig": "tsconfig.app.json"
+            "styles": ["node_modules/leaflet/dist/leaflet.css", "src/global_styles.css"],
+            "tsConfig": "tsconfig.app.json",
+            "allowedCommonJsDependencies": ["leaflet"]
           }
         },
         "serve": {

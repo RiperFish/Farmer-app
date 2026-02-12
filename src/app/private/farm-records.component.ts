@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../core/auth.service';
 import { DataService } from '../core/data.service';
 import { Farm } from '../models/user.model';
+import * as L from 'leaflet';
 
 @Component({
   selector: 'app-farm-records',
@@ -11,7 +12,6 @@ import { Farm } from '../models/user.model';
   template: `
     <div class="page-container">
       <div class="page-header">
-        <!-- <h1 class="page-title">📊 Farm Records</h1> -->
         <p class="page-subtitle">View your registered farm and plot information</p>
       </div>
 
@@ -42,6 +42,20 @@ import { Farm } from '../models/user.model';
         </div>
       </div>
 
+      <div class="map-section" *ngIf="farms.length > 0">
+        <h2 class="section-title">Farm Locations</h2>
+        <div class="map-card card">
+          <div #mapContainer class="map-container"></div>
+          <div class="map-legend">
+            <div class="legend-item" *ngFor="let f of farms">
+              <span class="legend-dot"></span>
+              <span class="legend-label">{{ f.name }}</span>
+              <span class="legend-detail">{{ f.village }} -- {{ f.totalAcres }} acres</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="plots-section">
         <h2 class="section-title">Plot Details</h2>
         <div class="plots-list">
@@ -55,7 +69,6 @@ import { Farm } from '../models/user.model';
 
             <div class="plot-info">
               <div class="info-item">
-                
                 <div class="info-content">
                   <div class="info-label">Crop Type</div>
                   <div class="info-value">{{ plot.cropType }}</div>
@@ -63,7 +76,6 @@ import { Farm } from '../models/user.model';
               </div>
 
               <div class="info-item">
-                
                 <div class="info-content">
                   <div class="info-label">Area</div>
                   <div class="info-value">{{ plot.acres }} acres</div>
@@ -71,7 +83,6 @@ import { Farm } from '../models/user.model';
               </div>
 
               <div class="info-item" *ngIf="plot.plantingDate">
-               
                 <div class="info-content">
                   <div class="info-label">Planting Date</div>
                   <div class="info-value">{{ plot.plantingDate | date:'mediumDate' }}</div>
@@ -79,7 +90,6 @@ import { Farm } from '../models/user.model';
               </div>
 
               <div class="info-item" *ngIf="plot.harvestDate">
-                
                 <div class="info-content">
                   <div class="info-label">Expected Harvest</div>
                   <div class="info-value">{{ plot.harvestDate | date:'mediumDate' }}</div>
@@ -195,6 +205,55 @@ import { Farm } from '../models/user.model';
       font-size: 18px;
       font-weight: 700;
       color: #2e7d32;
+    }
+
+    .map-section {
+      margin-bottom: 24px;
+    }
+
+    .map-card {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .map-container {
+      width: 100%;
+      height: 280px;
+      z-index: 0;
+    }
+
+    .map-legend {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      border-top: 1px solid #e8e8e8;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #2e7d32;
+      flex-shrink: 0;
+    }
+
+    .legend-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .legend-detail {
+      font-size: 12px;
+      color: #888;
     }
 
     .plots-section {
@@ -373,11 +432,19 @@ import { Farm } from '../models/user.model';
       .overview-grid {
         grid-template-columns: repeat(3, 1fr);
       }
+
+      .map-container {
+        height: 380px;
+      }
     }
   `]
 })
-export class FarmRecordsComponent implements OnInit {
+export class FarmRecordsComponent implements OnInit, AfterViewInit, OnDestroy {
+  @ViewChild('mapContainer') mapContainer!: ElementRef;
+
   farm: Farm | null = null;
+  farms: Farm[] = [];
+  private map: L.Map | null = null;
 
   constructor(
     private authService: AuthService,
@@ -388,7 +455,86 @@ export class FarmRecordsComponent implements OnInit {
     const user = this.authService.currentUser();
     if (user && user.farmerId) {
       this.farm = this.dataService.getFarmData(user.farmerId);
+      this.farms = this.dataService.getFarmerFarms(user.farmerId);
     }
+  }
+
+  ngAfterViewInit() {
+    if (this.farms.length > 0) {
+      this.initMap();
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.map) {
+      this.map.remove();
+      this.map = null;
+    }
+  }
+
+  private initMap() {
+    const validFarms = this.farms.filter(f => f.latitude && f.longitude);
+    if (validFarms.length === 0) return;
+
+    const centerLat = validFarms.reduce((sum, f) => sum + f.latitude!, 0) / validFarms.length;
+    const centerLng = validFarms.reduce((sum, f) => sum + f.longitude!, 0) / validFarms.length;
+
+    this.map = L.map(this.mapContainer.nativeElement, {
+      center: [centerLat, centerLng],
+      zoom: 13,
+      zoomControl: true,
+      attributionControl: true
+    });
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors',
+      maxZoom: 18
+    }).addTo(this.map);
+
+    const farmIcon = L.divIcon({
+      className: 'farm-marker',
+      html: `<div style="
+        width: 32px;
+        height: 32px;
+        background: #2e7d32;
+        border: 3px solid #fff;
+        border-radius: 50% 50% 50% 0;
+        transform: rotate(-45deg);
+        box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      "><div style="
+        transform: rotate(45deg);
+        color: #fff;
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 1;
+      ">F</div></div>`,
+      iconSize: [32, 32],
+      iconAnchor: [16, 32],
+      popupAnchor: [0, -32]
+    });
+
+    validFarms.forEach(f => {
+      const totalPlots = f.plots.length;
+      const cropList = f.plots.map(p => p.cropType).join(', ');
+
+      L.marker([f.latitude!, f.longitude!], { icon: farmIcon })
+        .addTo(this.map!)
+        .bindPopup(`
+          <div style="font-family: inherit; min-width: 160px;">
+            <div style="font-weight: 700; font-size: 14px; color: #2e7d32; margin-bottom: 6px;">${f.name}</div>
+            <div style="font-size: 12px; color: #666; margin-bottom: 4px;">${f.village}, ${f.district}</div>
+            <div style="font-size: 12px; color: #333; margin-bottom: 2px;"><strong>${f.totalAcres}</strong> acres -- <strong>${totalPlots}</strong> plot${totalPlots > 1 ? 's' : ''}</div>
+            <div style="font-size: 11px; color: #888;">Crops: ${cropList}</div>
+          </div>
+        `);
+    });
+
+    setTimeout(() => {
+      this.map?.invalidateSize();
+    }, 100);
   }
 
   getProgress(plot: any): number {
