@@ -223,6 +223,7 @@ export class DataService {
         category: 'Academy',
         name: 'Belize Agri Academy',
         phone: '(501) 822-2241 / 42',
+        email: 'info@agriculture.gov.bz',
         website: 'https://agribel.bz/',
         address: 'H.M. Queen Elizabeth II Blvd., Belmopan City, Belize C.A'
       }
