@@ -179,9 +179,131 @@ import { AuthService } from '../core/auth.service';
             </div>
           </div>
 
-          
-
         </div>
+      </div>
+
+      <div class="field-illustration">
+        <svg viewBox="0 0 400 140" preserveAspectRatio="xMidYMax slice" class="field-svg">
+          <defs>
+            <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#d4edda"/>
+              <stop offset="100%" stop-color="#a8d5b5"/>
+            </linearGradient>
+            <linearGradient id="hillGrad1" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#6abf69"/>
+              <stop offset="100%" stop-color="#4a9e4a"/>
+            </linearGradient>
+            <linearGradient id="hillGrad2" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#5aad5a"/>
+              <stop offset="100%" stop-color="#3d8c3d"/>
+            </linearGradient>
+            <linearGradient id="fieldGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#4caf50"/>
+              <stop offset="100%" stop-color="#2e7d32"/>
+            </linearGradient>
+          </defs>
+
+          <rect width="400" height="140" fill="url(#skyGrad)"/>
+
+          <ellipse cx="200" cy="95" rx="260" ry="50" fill="url(#hillGrad1)" opacity="0.6"/>
+          <ellipse cx="100" cy="105" rx="180" ry="45" fill="url(#hillGrad2)" opacity="0.5"/>
+          <ellipse cx="320" cy="100" rx="160" ry="40" fill="url(#hillGrad1)" opacity="0.5"/>
+
+          <rect x="0" y="100" width="400" height="40" fill="url(#fieldGrad)"/>
+
+          <path d="M0 105 Q50 95 100 105 Q150 115 200 100 Q250 90 300 105 Q350 115 400 100 L400 140 L0 140Z" fill="#3d8c3d" opacity="0.7"/>
+
+          <g transform="translate(30,50)">
+            <line x1="0" y1="50" x2="0" y2="10" stroke="#2e7d32" stroke-width="2.5"/>
+            <path d="M0 30 Q-12 20 -8 10 Q-4 15 0 12" fill="#43a047"/>
+            <path d="M0 25 Q12 15 8 5 Q4 10 0 8" fill="#388e3c"/>
+            <path d="M0 38 Q-10 28 -6 20 Q-3 25 0 22" fill="#4caf50"/>
+            <path d="M0 15 Q10 8 7 0 Q3 5 0 3" fill="#2e7d32"/>
+            <ellipse cx="1" cy="6" rx="3" ry="5" fill="#c8a415" opacity="0.9"/>
+          </g>
+
+          <g transform="translate(65,58)">
+            <line x1="0" y1="42" x2="0" y2="8" stroke="#388e3c" stroke-width="2"/>
+            <path d="M0 28 Q-10 18 -6 10 Q-3 15 0 12" fill="#43a047"/>
+            <path d="M0 22 Q10 12 7 5 Q3 9 0 7" fill="#2e7d32"/>
+            <path d="M0 35 Q-8 26 -5 19 Q-2 23 0 20" fill="#4caf50"/>
+            <path d="M0 14 Q8 7 5 1 Q2 5 0 3" fill="#388e3c"/>
+            <ellipse cx="0" cy="5" rx="2.5" ry="4" fill="#daa520" opacity="0.85"/>
+          </g>
+
+          <g transform="translate(105,55)">
+            <line x1="0" y1="45" x2="0" y2="5" stroke="#2e7d32" stroke-width="2.5"/>
+            <path d="M0 32 Q-14 22 -9 12 Q-5 17 0 14" fill="#43a047"/>
+            <path d="M0 26 Q14 16 9 6 Q5 11 0 8" fill="#388e3c"/>
+            <path d="M0 40 Q-11 30 -7 22 Q-3 27 0 24" fill="#66bb6a"/>
+            <path d="M0 18 Q11 10 7 2 Q3 7 0 5" fill="#2e7d32"/>
+            <ellipse cx="1" cy="3" rx="3" ry="5" fill="#c8a415" opacity="0.9"/>
+          </g>
+
+          <g transform="translate(150,62)">
+            <line x1="0" y1="38" x2="0" y2="10" stroke="#388e3c" stroke-width="2"/>
+            <path d="M0 26 Q-9 17 -6 9 Q-3 13 0 11" fill="#4caf50"/>
+            <path d="M0 20 Q9 11 6 4 Q3 8 0 6" fill="#43a047"/>
+            <path d="M0 33 Q-7 24 -4 17 Q-2 21 0 18" fill="#66bb6a"/>
+          </g>
+
+          <g transform="translate(185,52)">
+            <line x1="0" y1="48" x2="0" y2="6" stroke="#2e7d32" stroke-width="2.5"/>
+            <path d="M0 34 Q-13 24 -8 14 Q-4 19 0 16" fill="#388e3c"/>
+            <path d="M0 28 Q13 18 8 8 Q4 13 0 10" fill="#43a047"/>
+            <path d="M0 42 Q-10 32 -6 24 Q-3 29 0 26" fill="#4caf50"/>
+            <path d="M0 20 Q10 12 6 4 Q3 8 0 6" fill="#2e7d32"/>
+            <ellipse cx="0" cy="4" rx="3" ry="5" fill="#daa520" opacity="0.85"/>
+          </g>
+
+          <g transform="translate(230,60)">
+            <line x1="0" y1="40" x2="0" y2="10" stroke="#388e3c" stroke-width="2"/>
+            <path d="M0 28 Q-10 18 -7 10 Q-3 14 0 12" fill="#43a047"/>
+            <path d="M0 22 Q10 12 7 5 Q3 9 0 7" fill="#4caf50"/>
+            <path d="M0 35 Q-8 26 -5 19 Q-2 23 0 20" fill="#66bb6a"/>
+            <path d="M0 15 Q8 8 5 2 Q2 5 0 4" fill="#2e7d32"/>
+            <ellipse cx="1" cy="4" rx="2.5" ry="4.5" fill="#c8a415" opacity="0.9"/>
+          </g>
+
+          <g transform="translate(270,54)">
+            <line x1="0" y1="46" x2="0" y2="7" stroke="#2e7d32" stroke-width="2.5"/>
+            <path d="M0 33 Q-12 23 -8 13 Q-4 18 0 15" fill="#388e3c"/>
+            <path d="M0 27 Q12 17 8 7 Q4 12 0 9" fill="#43a047"/>
+            <path d="M0 40 Q-9 31 -6 23 Q-3 28 0 25" fill="#4caf50"/>
+            <path d="M0 19 Q9 11 6 3 Q3 7 0 5" fill="#2e7d32"/>
+            <ellipse cx="0" cy="4" rx="3" ry="5" fill="#daa520" opacity="0.85"/>
+          </g>
+
+          <g transform="translate(310,60)">
+            <line x1="0" y1="40" x2="0" y2="10" stroke="#388e3c" stroke-width="2"/>
+            <path d="M0 28 Q-10 19 -6 11 Q-3 15 0 13" fill="#4caf50"/>
+            <path d="M0 22 Q10 13 6 5 Q3 9 0 7" fill="#43a047"/>
+            <path d="M0 34 Q-8 25 -5 18 Q-2 22 0 20" fill="#66bb6a"/>
+          </g>
+
+          <g transform="translate(350,50)">
+            <line x1="0" y1="50" x2="0" y2="8" stroke="#2e7d32" stroke-width="2.5"/>
+            <path d="M0 36 Q-13 26 -8 16 Q-4 21 0 18" fill="#388e3c"/>
+            <path d="M0 30 Q13 20 8 10 Q4 15 0 12" fill="#43a047"/>
+            <path d="M0 44 Q-10 34 -6 26 Q-3 31 0 28" fill="#4caf50"/>
+            <path d="M0 22 Q10 14 6 6 Q3 10 0 8" fill="#2e7d32"/>
+            <ellipse cx="1" cy="5" rx="3" ry="5" fill="#c8a415" opacity="0.9"/>
+          </g>
+
+          <g transform="translate(380,58)">
+            <line x1="0" y1="42" x2="0" y2="10" stroke="#388e3c" stroke-width="2"/>
+            <path d="M0 30 Q-9 20 -6 12 Q-3 16 0 14" fill="#43a047"/>
+            <path d="M0 24 Q9 14 6 6 Q3 10 0 8" fill="#4caf50"/>
+            <path d="M0 36 Q-7 27 -4 20 Q-2 24 0 22" fill="#66bb6a"/>
+          </g>
+
+          <g transform="translate(15,68)">
+            <line x1="0" y1="32" x2="0" y2="10" stroke="#388e3c" stroke-width="2"/>
+            <path d="M0 22 Q-8 14 -5 7 Q-2 11 0 9" fill="#4caf50"/>
+            <path d="M0 17 Q8 9 5 3 Q2 6 0 5" fill="#43a047"/>
+            <path d="M0 28 Q-6 20 -4 14 Q-2 17 0 15" fill="#66bb6a"/>
+          </g>
+        </svg>
       </div>
 
       <div class="action-buttons">
@@ -442,6 +564,10 @@ import { AuthService } from '../core/auth.service';
     .mob-farm-footer {
       display: none;
     }
+
+    .field-illustration {
+      display: none;
+    }
     
     @media (max-width: 768px) {
       .id-card-wrapper {
@@ -579,6 +705,23 @@ import { AuthService } from '../core/auth.service';
       .mob-farm-svg {
         width: 100%;
         height: 100%;
+      }
+
+      .field-illustration {
+        display: block;
+        position: fixed;
+        bottom: 56px;
+        left: 0;
+        right: 0;
+        height: 120px;
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      .field-svg {
+        width: 100%;
+        height: 100%;
+        display: block;
       }
 
       .action-buttons { display: none; }
