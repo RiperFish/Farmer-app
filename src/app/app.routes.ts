@@ -19,6 +19,10 @@ export const routes: Routes = [
     loadComponent: () => import('./public/resources.component').then(m => m.ResourcesComponent)
   },
   {
+    path: 'ongoing-projects',
+    loadComponent: () => import('./public/ongoing-projects.component').then(m => m.OngoingProjectsComponent)
+  },
+  {
     path: 'login',
     loadComponent: () => import('./auth/login.component').then(m => m.LoginComponent)
   },
