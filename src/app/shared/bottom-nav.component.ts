@@ -191,8 +191,7 @@ export class BottomNavComponent {
   ) { }
 
   isAuthPage(): boolean {
-    const path = this.router.url;
-    return path === '/login' || path === '/register';
+    return false;
   }
 
   isVerified(): boolean {
