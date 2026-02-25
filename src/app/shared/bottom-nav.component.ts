@@ -20,9 +20,7 @@ import { AuthService } from '../core/auth.service';
          <span class="nav-label">Weather</span>
         </a>
         <a routerLink="/ongoing-projects" routerLinkActive="active" class="nav-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="width:28px">
-            <path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+          <img src="assets/img/projects.svg" alt="Login" style="width:28px"/>
           <span class="nav-label">Projects</span>
         </a>
         <a routerLink="/resources" routerLinkActive="active" class="nav-item">

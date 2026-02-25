@@ -67,6 +67,12 @@ import { AuthService } from '../core/auth.service';
             Farm Records
           </a>
         </li>
+        <li *ngIf="currentUser()?.status === 'verified'">
+          <a routerLink="/ongoing-projects" (click)="closeMenu()">
+            <img src="assets/img/projects.svg" alt="Projects" style="width:25px"/>
+            Ongoing Projects
+          </a>
+        </li>
         <li>
           <a routerLink="/notifications" (click)="closeMenu()">
             <img src="assets/img/bell.svg" style="width:25px"/>

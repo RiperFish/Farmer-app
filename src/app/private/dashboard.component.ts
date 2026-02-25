@@ -36,6 +36,10 @@ import { WeatherData } from '../models/public.model';
          <img src="assets/img/commodities.svg" style="width:44px"/>
           <div class="action-text">Commodities</div>
         </a>
+        <a routerLink="/ongoing-projects" class="action-card card" *ngIf="currentUser()?.status === 'verified'">
+          <img src="assets/img/projects.svg" style="width:44px"/>
+          <div class="action-text">Ongoing Projects</div>
+        </a>
         <a routerLink="/notifications" class="action-card card">
           <img src="assets/img/bell.svg" style="width:44px"/>
           <div class="action-text">Notifications</div>
@@ -321,7 +325,7 @@ import { WeatherData } from '../models/public.model';
 
     @media (min-width: 768px) {
       .quick-actions {
-        grid-template-columns: repeat(5, 1fr);
+        grid-template-columns: repeat(6, 1fr);
       }
     }
     @media (max-width: 480px) {

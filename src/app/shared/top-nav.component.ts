@@ -53,6 +53,7 @@ import { AuthService } from '../core/auth.service';
         <li><a routerLink="/weather" (click)="closeMenu()"><img src="assets/img/weather.svg" alt=""> Weather</a></li>
         <li><a routerLink="/calendar" (click)="closeMenu()"><img src="assets/img/calendar.svg" alt=""> Planting Calendar</a></li>
         <li><a routerLink="/resources" (click)="closeMenu()"><img src="assets/img/resources.svg" alt=""> Resources</a></li>
+        <li><a routerLink="/ongoing-projects" (click)="closeMenu()"><img src="assets/img/projects.svg" alt=""> Ongoing Projects</a></li>
         <li class="mob-menu-divider"></li>
         <li><a routerLink="/login" (click)="closeMenu()"><img src="assets/img/user-black.svg" alt=""> Login</a></li>
         <li><a routerLink="/register" (click)="closeMenu()"><img src="assets/img/user-black.svg" alt=""> Register</a></li>
@@ -64,6 +65,7 @@ import { AuthService } from '../core/auth.service';
         <li><a routerLink="/farmer-id" (click)="closeMenu()"><img src="assets/img/id.svg" alt=""> Farmer ID</a></li>
         <li><a routerLink="/farm-records" (click)="closeMenu()"><img src="assets/img/chart.svg" alt=""> Farm Records</a></li>
         <li><a routerLink="/commodities" (click)="closeMenu()"><img src="assets/img/commodities.svg" alt=""> Commodities</a></li>
+        <li><a routerLink="/ongoing-projects" (click)="closeMenu()"><img src="assets/img/projects.svg" alt=""> Ongoing Projects</a></li>
         <li><a routerLink="/notifications" (click)="closeMenu()"><img src="assets/img/bell.svg" alt=""> Notifications</a></li>
         <li class="mob-menu-divider"></li>
         <li><a routerLink="/calendar" (click)="closeMenu()"><img src="assets/img/calendar.svg" alt=""> Planting Calendar</a></li>
@@ -81,6 +83,7 @@ import { AuthService } from '../core/auth.service';
         <li><a routerLink="/calendar" (click)="closeMenu()"><img src="assets/img/calendar.svg" alt=""> Planting Calendar</a></li>
         <li><a routerLink="/weather" (click)="closeMenu()"><img src="assets/img/weather.svg" alt=""> Weather</a></li>
         <li><a routerLink="/resources" (click)="closeMenu()"><img src="assets/img/resources.svg" alt=""> Resources</a></li>
+        <li><a routerLink="/ongoing-projects" (click)="closeMenu()"><img src="assets/img/projects.svg" alt=""> Ongoing Projects</a></li>
         <li class="mob-menu-divider"></li>
         <li><a class="logout-link" (click)="logout()">Logout</a></li>
       </ul>
@@ -365,6 +368,7 @@ export class TopNavComponent {
     '/calendar': 'Planting Calendar',
     '/resources': 'Resources',
     '/login': 'Login',
+    '/ongoing-projects': 'Ongoing Projects',
     '/register': 'Register',
     '/dashboard': 'Dashboard',
     '/profile': 'My Profile',

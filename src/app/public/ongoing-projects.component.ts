@@ -25,11 +25,6 @@ interface Project {
   imports: [CommonModule],
   template: `
     <div class="projects-container">
-      <header class="page-header">
-        <h1 class="page-title">Ongoing Projects</h1>
-        <p class="page-subtitle">Government and NGO initiatives supporting Belizean farmers</p>
-      </header>
-
       <div class="filter-section">
         <div class="filter-buttons">
           <button
@@ -128,6 +123,7 @@ interface Project {
     }
 
     .filter-section {
+      margin-top: 16px;
       margin-bottom: 32px;
     }
 
