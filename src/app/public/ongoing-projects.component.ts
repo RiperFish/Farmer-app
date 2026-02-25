@@ -1,6 +1,5 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
 
 interface Project {
   id: string;
@@ -17,6 +16,8 @@ interface Project {
   contactEmail: string;
   contactPhone: string;
   location: string;
+  coverage: string;
+  applicationUrl: string;
 }
 
 @Component({
@@ -72,6 +73,12 @@ interface Project {
                 </svg>
                 <span>{{ project.budget }}</span>
               </div>
+              <div class="meta-item">
+                <svg class="meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>{{ project.coverage }}</span>
+              </div>
             </div>
 
             <div class="project-footer">
@@ -81,9 +88,12 @@ interface Project {
                 </svg>
                 <span>{{ project.organization }}</span>
               </div>
-              <button class="contact-btn" (click)="viewDetails(project)">
-                Learn More
-              </button>
+              <a [href]="project.applicationUrl" target="_blank" class="contact-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="width: 16px; height: 16px;">
+                  <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Download Application
+              </a>
             </div>
           </div>
         </div>
@@ -307,6 +317,9 @@ interface Project {
     }
 
     .contact-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       padding: 10px 20px;
       background: #2d7a3e;
       color: white;
@@ -317,6 +330,7 @@ interface Project {
       cursor: pointer;
       transition: all 0.3s ease;
       white-space: nowrap;
+      text-decoration: none;
     }
 
     .contact-btn:hover {
@@ -430,7 +444,9 @@ export class OngoingProjectsComponent {
       imageUrl: 'https://images.pexels.com/photos/2132171/pexels-photo-2132171.jpeg?auto=compress&cs=tinysrgb&w=800',
       contactEmail: 'climate@agriculture.gov.bz',
       contactPhone: '223-1234',
-      location: 'Nationwide'
+      location: 'Nationwide',
+      coverage: 'All Districts',
+      applicationUrl: '#'
     },
     {
       id: '2',
@@ -446,7 +462,9 @@ export class OngoingProjectsComponent {
       imageUrl: 'https://images.pexels.com/photos/2131784/pexels-photo-2131784.jpeg?auto=compress&cs=tinysrgb&w=800',
       contactEmail: 'irrigation@cdb.org',
       contactPhone: '227-5432',
-      location: 'Cayo, Orange Walk'
+      location: 'Cayo, Orange Walk',
+      coverage: 'Cayo, Orange Walk',
+      applicationUrl: '#'
     },
     {
       id: '3',
@@ -462,7 +480,9 @@ export class OngoingProjectsComponent {
       imageUrl: 'https://images.pexels.com/photos/3856033/pexels-photo-3856033.jpeg?auto=compress&cs=tinysrgb&w=800',
       contactEmail: 'grants@best.org.bz',
       contactPhone: '223-6789',
-      location: 'All Districts'
+      location: 'All Districts',
+      coverage: 'Nationwide (Age 18-35)',
+      applicationUrl: '#'
     },
     {
       id: '4',
@@ -478,7 +498,9 @@ export class OngoingProjectsComponent {
       imageUrl: 'https://images.pexels.com/photos/4886690/pexels-photo-4886690.jpeg?auto=compress&cs=tinysrgb&w=800',
       contactEmail: 'digitalag@iadb.org',
       contactPhone: '227-8901',
-      location: 'Stann Creek, Toledo'
+      location: 'Stann Creek, Toledo',
+      coverage: 'Stann Creek, Toledo',
+      applicationUrl: '#'
     },
     {
       id: '5',
@@ -494,7 +516,9 @@ export class OngoingProjectsComponent {
       imageUrl: 'https://images.pexels.com/photos/1459339/pexels-photo-1459339.jpeg?auto=compress&cs=tinysrgb&w=800',
       contactEmail: 'organic@bopa.bz',
       contactPhone: '223-4567',
-      location: 'Cayo, Toledo'
+      location: 'Cayo, Toledo',
+      coverage: 'Cayo, Toledo',
+      applicationUrl: '#'
     },
     {
       id: '6',
@@ -510,7 +534,9 @@ export class OngoingProjectsComponent {
       imageUrl: 'https://images.pexels.com/photos/2132180/pexels-photo-2132180.jpeg?auto=compress&cs=tinysrgb&w=800',
       contactEmail: 'roads@infrastructure.gov.bz',
       contactPhone: '227-2345',
-      location: 'Orange Walk, Corozal'
+      location: 'Orange Walk, Corozal',
+      coverage: 'Orange Walk, Corozal',
+      applicationUrl: '#'
     },
     {
       id: '7',
@@ -526,7 +552,9 @@ export class OngoingProjectsComponent {
       imageUrl: 'https://images.pexels.com/photos/4749134/pexels-photo-4749134.jpeg?auto=compress&cs=tinysrgb&w=800',
       contactEmail: 'training@fao.org',
       contactPhone: '223-7890',
-      location: 'All Districts'
+      location: 'All Districts',
+      coverage: 'All Districts',
+      applicationUrl: '#'
     },
     {
       id: '8',
@@ -542,7 +570,9 @@ export class OngoingProjectsComponent {
       imageUrl: 'https://images.pexels.com/photos/5750089/pexels-photo-5750089.jpeg?auto=compress&cs=tinysrgb&w=800',
       contactEmail: 'microfinance@bcul.bz',
       contactPhone: '227-3456',
-      location: 'Nationwide'
+      location: 'Nationwide',
+      coverage: 'All Districts',
+      applicationUrl: '#'
     },
     {
       id: '9',
@@ -558,13 +588,13 @@ export class OngoingProjectsComponent {
       imageUrl: 'https://images.pexels.com/photos/6197118/pexels-photo-6197118.jpeg?auto=compress&cs=tinysrgb&w=800',
       contactEmail: 'solar@bse.bz',
       contactPhone: '223-5678',
-      location: 'Cayo, Belize'
+      location: 'Cayo, Belize',
+      coverage: 'Cayo, Belize District',
+      applicationUrl: '#'
     }
   ];
 
   filteredProjects = signal<Project[]>(this.projects);
-
-  constructor(private router: Router) {}
 
   filterByCategory(category: string) {
     this.selectedCategory.set(category);
@@ -575,9 +605,5 @@ export class OngoingProjectsComponent {
         this.projects.filter(p => p.category === category)
       );
     }
-  }
-
-  viewDetails(project: Project) {
-    alert(`Project: ${project.title}\n\nContact Information:\nEmail: ${project.contactEmail}\nPhone: ${project.contactPhone}\nLocation: ${project.location}\n\nThis would open a detailed view with application forms and full project information.`);
   }
 }
